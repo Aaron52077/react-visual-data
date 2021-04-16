@@ -1,0 +1,69 @@
+{
+  "name": "data-visual-platform",
+  "version": "2.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "4.6.2",
+    "antd-img-crop": "^3.9.0",
+    "axios": "^0.19.2",
+    "copy-text-to-clipboard": "^2.2.0",
+    "crypto-js": "^4.0.0",
+    "echarts": "^4.8.0",
+    "mockjs": "^1.1.0",
+    "rc-color-picker": "^1.2.6",
+    "react": "^16.13.1",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dnd": "^14.0.2",
+    "react-dnd-html5-backend": "^14.0.0",
+    "react-dom": "^16.13.1",
+    "react-grid-layout": "^1.0.0",
+    "react-redux": "^7.2.0",
+    "react-rnd": "^10.2.4",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "react-sortable-hoc": "^1.11.0",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "size-sensor": "^1.0.1",
+    "xlsx": "^0.16.9"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired --max-old-space-size=2048 build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  },
+  "devDependencies": {
+    "@monaco-editor/react": "^3.3.1",
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0-alpha.0",
+    "less": "^3.11.1",
+    "less-loader": "^7.2.1",
+    "react-app-polyfill": "^1.0.6",
+    "react-app-rewired": "^2.1.6",
+    "styled-components": "^5.1.1"
+  }
+}

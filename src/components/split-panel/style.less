@@ -1,0 +1,80 @@
+@prefix: ~"drag-drawer";
+@drag-drawer-trigger-height: 100px;
+@drag-drawer-trigger-width: 6px;
+
+.resizer {
+  position: relative;
+  background: var(--datav-panel-border-color);
+  z-index: 1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+  &:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+  }
+  &.horizontal {
+    height: 11px;
+    margin: -5px 0;
+    border-top: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 5px solid rgba(255, 255, 255, 0);
+    cursor: row-resize;
+    width: 100%;
+    &:hover {
+      border-top: 5px solid var(--datav-panel-border-color);
+      border-bottom: 5px solid var(--datav-panel-border-color);
+      .@{prefix}-move-trigger {
+        visibility: visible;
+      }
+    }
+  }
+  &.vertical {
+    width: 11px;
+    margin: 0 -5px;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    cursor: col-resize;
+    &:hover {
+      border-left: 5px solid var(--datav-panel-border-color);
+      border-right: 5px solid var(--datav-panel-border-color);
+      .@{prefix}-move-trigger {
+        visibility: visible;
+      }
+    }
+  }
+  &.disabled {
+    cursor: not-allowed;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+}
+
+.@{prefix}-move-trigger {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  height: @drag-drawer-trigger-height;
+  width: @drag-drawer-trigger-width;
+  background: rgb(243, 243, 243);
+  transform: translate(-50%, -50%);
+  border-radius: ~"4px / 6px";
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  line-height: @drag-drawer-trigger-height;
+  visibility: hidden;
+  cursor: col-resize;
+  z-index: 999;
+  &-point {
+    display: inline-block;
+    width: 50%;
+    transform: translateX(50%);
+    i {
+      display: block;
+      border-bottom: 1px solid rgb(192, 192, 192);
+      padding-bottom: 2px;
+    }
+  }
+}
