@@ -3,9 +3,9 @@
 <p align="center">
   <a href="https://wuli-admin.gitee.io/react-wuli-admin/#/workspace/fullscreen" target="_blank">大屏设计器</a>
 </p>
-<h1 align= "center">
+<p align= "center">
     <a href="https://wuli-admin.gitee.io/react-wuli-admin/#/workspace/fullscreen" target="_blank">报表设计器</a>
-</h1>
+</p>
 <p align="center">
   <a href="https://wuli-admin.gitee.io/react-wuli-admin/#/workspace/form-render" target="_blank">动态表单schema</a>
 </p>
