@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -13,10 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Step Node.js 12
+      - name: Step Node.js 14
         uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Install
         run: yarn install
@@ -28,7 +28,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_dir: ./dist # 部署打包后的 dist 目录
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DEADV_DEPLOY_PRIVATE_KEY }}
           BRANCH: gh-pages
           FOLDER: website
           GIT_CONFIG_NAME: Aaron52077
