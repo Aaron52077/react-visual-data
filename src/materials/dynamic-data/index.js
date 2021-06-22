@@ -1,9 +1,9 @@
-import React, { Fragment, useRef, useEffect, createContext } from "react";
-import { Modal, Drawer, Space, Button, Divider, Row, Col, Select, Form } from "antd";
-import { connect } from "react-redux";
-import { MonacoEditor } from "~components";
-import { useSet } from "~common/hooks";
-import { echartBarAPI } from "@/api";
+import React, { Fragment, useRef, useEffect, createContext } from 'react';
+import { Modal, Drawer, Space, Button, Divider, Row, Col, Select, Form } from 'antd';
+import { connect } from 'react-redux';
+import { MonacoEditor } from '~components';
+import { useSet } from '~common/hooks';
+import { echartBarAPI } from '@/api';
 
 const { Option } = Select;
 const Compose = createContext();
@@ -21,11 +21,10 @@ const layout = {
  * @param {value} 数据
  * @param {onChange} 通过刷新数据改变
  */
-const DataSource = ({ name, value, options, onChange, api, sql }) => {
+const DataSource = ({ cname, name, value, options, onChange, api, sql }) => {
   const codeRef = useRef();
-  const [form] = Form.useForm();
   const [state, dispath] = useSet({
-    typeOf: "json",
+    typeOf: 'json',
     visible: false,
     visible1: false,
     disabled: true,
@@ -44,7 +43,7 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
   }, []);
 
   const handleOk = () => {
-    echartBarAPI({ code: "// try to write code somewhere 😈" }).then((res) => {
+    echartBarAPI({ code: '// try to write code somewhere 😈' }).then((res) => {
       dispath({
         disabled: false,
         code: res.data
@@ -76,7 +75,7 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
 
   return (
     <Compose.Provider value={{ state, dispath }}>
-      <Form {...layout} form={form} style={{ marginTop: 5 }}>
+      <Form {...layout} style={{ marginTop: 5 }}>
         <Form.Item label="数据源类型">
           <Select value={state.typeOf} onChange={handleChange}>
             <Option value="json">JSON数据</Option>
@@ -84,9 +83,14 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
             <Option value="sql">MySQL数据库</Option>
           </Select>
         </Form.Item>
-        {state.typeOf === "json" && (
+        {state.typeOf === 'json' && (
           <Fragment>
-            <MonacoEditor ref={codeRef} height={options.height} language="json" value={value.data} />
+            <MonacoEditor
+              ref={codeRef}
+              height={options.height}
+              language="json"
+              value={value.data}
+            />
             <Space size="small" style={{ marginTop: 10 }}>
               <Button
                 type="primary"
@@ -106,6 +110,7 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
                     dataType: state.typeOf,
                     data: codeRef.current.getValue()
                   });
+
                   onChange(name, _value);
                 }}
               >
@@ -115,13 +120,15 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
           </Fragment>
         )}
 
-        {state.typeOf === "api" && (
+        {state.typeOf === 'api' && (
           <Form.Item label="数据模型">
             <Select
               placeholder="请选择数据模型"
               defaultValue={state.apiValue}
               showSearch
-              filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
               onChange={onChangeApi}
             >
               {state.apiList.map((item) => (
@@ -157,13 +164,15 @@ const DataSource = ({ name, value, options, onChange, api, sql }) => {
           </Form.Item>
         )}
 
-        {state.typeOf === "sql" && (
+        {state.typeOf === 'sql' && (
           <Form.Item label="数据模型">
             <Select
               placeholder="请选择数据模型"
               defaultValue={state.sqlValue}
               showSearch
-              filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
               onChange={onChangeSql}
             >
               {state.sqlList.map((item) => (

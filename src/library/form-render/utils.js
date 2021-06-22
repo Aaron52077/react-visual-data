@@ -134,9 +134,11 @@ export function isFunction(fn) {
 export const convertValue = (item, formData, rootValue) => {
   if (typeof item === "function") {
     return item(formData, rootValue);
-  } else if (typeof item === "string" && isFunction(item) !== false) {
-    const _item = isFunction(item);
+  }
+
+  if (typeof item === "string" && isFunction(item) !== false) {
     try {
+      const _item = isFunction(item);
       return evaluateString(_item, formData, rootValue);
     } catch (error) {
       console.error(`happen at ${item}：${error.message}`);
@@ -153,8 +155,8 @@ function isKey(value, object) {
   if (Array.isArray(value)) {
     return false;
   }
-  const type = typeof value;
-  if (type === "number" || type === "boolean" || value == null) {
+
+  if (typeof value === "number" || typeof value === "boolean" || value == null) {
     return true;
   }
   return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || (object != null && value in Object(object));
@@ -172,19 +174,19 @@ function toKey(value) {
     return value;
   }
   const result = `${value}`;
-  return result == "0" && 1 / value == -INFINITY ? "-0" : result;
+  return result == "0" && 1 / value == -Infinity ? "-0" : result;
 }
 
 export function baseGet(object, path) {
   path = castPath(path, object);
 
-  let index = 0;
-  const length = path.length;
+  let _index = 0;
+  const _pathLength = path.length;
 
-  while (object != null && index < length) {
-    object = object[toKey(path[index++])];
+  while (object != null && _index < _pathLength) {
+    object = object[toKey(path[_index++])];
   }
-  return index && index == length ? object : undefined;
+  return _index && _index == _pathLength ? object : undefined;
 }
 
 // 计算单个表达式的hidden值

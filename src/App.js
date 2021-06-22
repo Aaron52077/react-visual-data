@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import store, { persistor } from "./store";
 import Router from "./router";
+
 import "./styles/format.less";
 
 class App extends PureComponent {

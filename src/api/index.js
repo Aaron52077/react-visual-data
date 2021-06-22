@@ -1,5 +1,23 @@
 import fetch from "~utils/http";
 
+/**
+ * @description 账户登录
+ */
+export function accountIn(param) {
+  return fetch({
+    url: "/user/login",
+    method: "post",
+    data: param
+  });
+}
+
+export function getMeunList() {
+  return fetch({
+    url: "/menu/list",
+    method: "post"
+  });
+}
+
 export function echartBarAPI() {
   return fetch({
     url: "/echart/bar",
@@ -31,6 +49,13 @@ export function dataVApiList() {
 export function dataVSqlList() {
   return fetch({
     url: "/datav/sql",
+    method: "get"
+  });
+}
+
+export function dataVOpenApi() {
+  return fetch({
+    url: "/datav/openapi",
     method: "get"
   });
 }

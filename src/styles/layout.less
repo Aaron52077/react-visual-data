@@ -1,0 +1,162 @@
+.gc-collapsed {
+  font-size: 20px;
+  line-height: 64px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--datav-main-hover-color);
+  }
+}
+
+.gc-logo {
+  height: 32px;
+  background: var(--datav-border-color);
+  margin: 16px;
+}
+
+.gc-layout {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__hd {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    .gc-breadcrumb {
+      flex: 1;
+    }
+  }
+
+  &__bd {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .user-avatar {
+    margin: 0 15px;
+  }
+
+  .user-signout {
+    display: inline-block;
+    margin-right: 15px;
+    height: 75%;
+  }
+}
+
+.back-top {
+  right: 50px;
+
+  .ant-back-top-content {
+    background: var(--datav-main-click-color);
+    opacity: 1;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px 1px rgba(69, 65, 78, 0.1);
+  }
+}
+
+.sidebar-container {
+  user-select: none;
+  position: relative;
+  z-index: 2;
+
+  .ant-menu-inline-collapsed {
+    width: 60px;
+
+    .ant-menu-submenu .ant-menu-submenu-title,
+    .ant-menu-item {
+      padding: 0 20px !important;
+
+      .anticon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.gc-page {
+  position: relative;
+  padding: 12px 15px 0;
+  width: 100%;
+  height: 100%;
+  .dashboard-banner {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 0;
+    bottom: 0;
+    background-color: #23242d;
+    -webkit-filter: brightness(0.8);
+    filter: brightness(0.8);
+    video {
+      object-fit: cover;
+    }
+  }
+  .dashboard-typography {
+    position: relative;
+    padding: 25px 30px;
+  }
+}
+
+.gc-exp {
+  background: var(--datav-panel-item-bg);
+}
+
+.design-wapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  transition: all linear 500ms;
+  &__bd {
+    position: relative;
+    height: calc(100vh - 64px - 59px - 32px);
+    .design-body {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background-color: var(--datav-panel-color);
+      background-size: cover;
+      background-position: 0 0, 5px 5px;
+      transform-origin: left top;
+      box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+    }
+    .design-body-container {
+      position: relative;
+      background-image: linear-gradient(45deg, #404040 25%, transparent 0, transparent 75%, #404040 0),
+        linear-gradient(45deg, #404040 25%, transparent 0, transparent 75%, #404040 0);
+      background-color: #4a4a4a;
+      background-size: 10px 10px;
+      background-position: 0 0, 5px 5px;
+    }
+    .design-size {
+      position: absolute;
+      right: 0;
+      bottom: -24px;
+      font-size: 12px;
+      color: var(--datav-font-color);
+      white-space: nowrap;
+    }
+  }
+  &__ft {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 32px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--datav-gui-bg);
+    z-index: 999;
+  }
+}

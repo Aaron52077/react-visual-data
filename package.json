@@ -3,6 +3,19 @@
   "version": "2.0.0",
   "private": true,
   "homepage": ".",
+  "author": "Aaron52077",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:wuli-admin/datav-pro.git"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired --max-old-space-size=2048 build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -20,7 +33,6 @@
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
     "react-dom": "^16.13.1",
-    "react-grid-layout": "^1.0.0",
     "react-redux": "^7.2.0",
     "react-rnd": "^10.2.4",
     "react-router-dom": "^5.1.2",
@@ -30,17 +42,27 @@
     "redux-actions": "^2.6.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "size-sensor": "^1.0.1",
     "xlsx": "^0.16.9"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired --max-old-space-size=2048 build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@monaco-editor/react": "^3.3.1",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0-alpha.0",
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "husky": "^6.0.0",
+    "less": "^3.11.1",
+    "less-loader": "^7.2.1",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
+    "react-app-polyfill": "^1.0.6",
+    "react-app-rewired": "^2.1.6",
+    "styled-components": "^5.1.1"
   },
   "browserslist": {
     "production": [
@@ -56,14 +78,13 @@
       "ie 11"
     ]
   },
-  "devDependencies": {
-    "@monaco-editor/react": "^3.3.1",
-    "babel-plugin-import": "^1.13.3",
-    "customize-cra": "^1.0.0-alpha.0",
-    "less": "^3.11.1",
-    "less-loader": "^7.2.1",
-    "react-app-polyfill": "^1.0.6",
-    "react-app-rewired": "^2.1.6",
-    "styled-components": "^5.1.1"
+  "lint-staged": {
+    "src/**/*.{js,jsx,json}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{less}": [
+      "prettier --write"
+    ]
   }
 }

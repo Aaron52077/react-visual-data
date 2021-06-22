@@ -5,8 +5,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import { isEqual, debounce } from "lodash";
-import { bind, clear } from "size-sensor";
 import { onEvent, offEvent } from "~utils";
+import { resizeSensor } from "~utils/resize-sensor";
 
 export default class VEchartsCore extends Component {
   constructor(props) {
@@ -59,17 +59,16 @@ export default class VEchartsCore extends Component {
     this.echartsLib.getInstanceByDom(this.echartsElement) ||
     this.echartsLib.init(this.echartsElement, this.props.theme, this.props.opts);
 
-  // dispose echarts and clear size-sensor
+  // dispose echarts
   dispose = () => {
     if (this.echartsElement) {
       try {
-        clear(this.echartsElement);
+        // dispose echarts instance
+        this.echartsLib.dispose(this.echartsElement);
+        offEvent(window, "resize", this.resizeHandler);
       } catch (e) {
         console.warn(e);
       }
-      // dispose echarts instance
-      this.echartsLib.dispose(this.echartsElement);
-      offEvent(window, "resize", this.resizeHandler);
     }
   };
 
@@ -84,7 +83,7 @@ export default class VEchartsCore extends Component {
     // on resize
     onEvent(window, "resize", this.resizeHandler);
     if (this.echartsElement) {
-      bind(this.echartsElement, () => {
+      resizeSensor(this.echartsElement, () => {
         try {
           echartObj.resize();
         } catch (e) {
@@ -130,11 +129,10 @@ export default class VEchartsCore extends Component {
   render() {
     const { style, className } = this.props;
     const newStyle = { width: "100%", height: "100%", ...style };
-    // for render
     return (
       <div
-        ref={(e) => {
-          this.echartsElement = e;
+        ref={(el) => {
+          this.echartsElement = el;
         }}
         style={newStyle}
         className={cx("gc-echarts-react", className)}

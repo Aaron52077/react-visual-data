@@ -49,13 +49,13 @@ const DragHandle = SortableHandle(() => (
 const SortableItem = connect((state) => ({
   mode: state.component.mode,
   parmas: state.form.parmas,
-  activeKey: state.component.activeKey
+  selected: state.component.selected
 }))(
-  SortableElement(({ value, labelColor, onClickItem, mode, parmas, activeKey, dispatch }) => {
+  SortableElement(({ value, labelColor, onClickItem, mode, parmas, selected, dispatch }) => {
     const [formData, setFormData] = useState(null);
     const { formState, dispathFormState } = useContext(Compose);
     const classNames = cx("form-item form-item__border", {
-      "is-active": activeKey === value.uniqueId && mode === "development"
+      "is-active": selected === value.uniqueId && mode === "development"
     });
 
     const onValueChange = (data) => {
@@ -87,7 +87,7 @@ const SortableItem = connect((state) => ({
 
     return (
       <Col span={value.data.halfWidth ? 12 : 24} className={classNames} onClick={onItemClick}>
-        {activeKey === value.uniqueId && mode === "development" && <DragHandle />}
+        {selected === value.uniqueId && mode === "development" && <DragHandle />}
         <SchemaRender
           cname={value.type}
           schema={currentSchema}
@@ -192,7 +192,7 @@ function SortableComponent({ value, mode, dependencies, conditions, dispatch }) 
   const onItemClick = (event, key) => {
     event.stopPropagation();
     if (mode === "preview") return;
-    dispatch({ type: "component/activeKey", data: key });
+    dispatch({ type: "component/selected", data: key });
   };
 
   useEffect(() => {

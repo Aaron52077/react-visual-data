@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { IFrameSimple } from "~components";
 
-const IframeTemplate = ({ value, mode, location }) => {
+const IframeTpl = ({ value, mode, location }) => {
   const { data } = value.dataConfig;
   if (!data) return "请输入iframe的地址";
 
@@ -21,4 +21,4 @@ const IframeTemplate = ({ value, mode, location }) => {
 
 export default connect((state) => ({
   mode: state.component.mode
-}))(withRouter(IframeTemplate));
+}))(withRouter(IframeTpl));

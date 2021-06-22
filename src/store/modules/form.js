@@ -17,7 +17,10 @@ export default handleActions(
   {
     "form/dependencies": (state, action) => ({ ...state, dependencies: action.data }),
     "form/conditions": (state, action) => ({ ...state, conditions: action.data }),
-    "form/parmas": (state, action) => ({ ...state, parmas: action.data })
+    "form/parmas": (state, action) => ({ ...state, parmas: action.data }),
+    "form/resetState": () => {
+      return initState;
+    }
   },
   initState
 );

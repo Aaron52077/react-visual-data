@@ -7,7 +7,7 @@ import { DEFINE_BACKGROUND } from "~common/constants";
 
 const lists = chunk(DEFINE_BACKGROUND, 9);
 
-const DefineImage = ({ name, value, onChange }) => {
+export default ({ name, value, onChange }) => {
   const [visible, setVisible] = useState(false);
   const [image, setImage] = useState("background-1.png");
   const [page, setPage] = useState(1);
@@ -82,5 +82,3 @@ const DefineImage = ({ name, value, onChange }) => {
     </>
   );
 };
-
-export default DefineImage;

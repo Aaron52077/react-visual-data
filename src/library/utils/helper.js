@@ -355,3 +355,30 @@ export async function poll(fn, validate, interval = 2500) {
   };
   return new Promise(resolver);
 }
+
+export class SimpleMap {
+  list = [];
+
+  has(key) {
+    const resolved = this.list.find((item) => item.key === key);
+    return !!resolved;
+  }
+
+  set(key, value) {
+    this.list.push({ key, value });
+  }
+
+  get(key) {
+    const resolved = this.list.find((item) => item.key === key);
+    return resolved ? resolved.value : null;
+  }
+
+  delete(key) {
+    const idx = this.list.findIndex((item) => item.key === key);
+    ~idx && this.list.splice(idx, 1);
+  }
+
+  dispose() {
+    this.list.splice(0, this.list.length);
+  }
+}

@@ -6,18 +6,25 @@ import Loading from "../auto-loading";
 function CodePanel(props, ref) {
   const editorRef = useRef();
   const [code, setCode] = useState("// try to write code somewhere 😈 \n");
-  let { value, width, height, readOnly = false, language = "json" } = props;
+  let { value, width, height, readOnly = false, language = "json", strict = true } = props;
 
   // you can configure the locales
   monaco.config({ "vs/nls": { availableLanguages: { "*": "zh-cn" } } });
 
   useImperativeHandle(ref, () => ({
-    getValue: () => JSON.parse(editorRef.current.getValue())
+    getValue: () => {
+      if (strict) return JSON.parse(editorRef.current.getValue());
+      return editorRef.current.getValue();
+    }
   }));
 
   useEffect(() => {
     try {
-      setCode(JSON.stringify(value, null, 4));
+      if (strict === true) {
+        setCode(JSON.stringify(value, null, 4));
+      } else {
+        setCode(value);
+      }
     } catch (e) {
       // ignore
       throw new Error(e);
@@ -28,7 +35,7 @@ function CodePanel(props, ref) {
     <MonacoEditor
       width={converLayout(width)}
       height={converLayout(height)}
-      theme="dark"
+      theme="vs-dark"
       language={language}
       loading={<Loading />}
       value={code}

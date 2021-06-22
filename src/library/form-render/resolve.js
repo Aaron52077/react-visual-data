@@ -1,5 +1,5 @@
 import { cloneDeep } from "~utils";
-import { isEmpty, deepMergeObj } from "~utils/helper";
+import { isEmpty } from "~utils/helper";
 import { isFunction } from "./utils";
 
 // 获取当前字段默认值
@@ -52,6 +52,7 @@ function schemaResolve(schema, data) {
     if (component) {
       return def ? def : value;
     }
+
     const subs = properties || {};
     let ret = {};
 
@@ -63,7 +64,7 @@ function schemaResolve(schema, data) {
       });
     }
 
-    return deepMergeObj(ret, data);
+    return ret;
   }
 
   if (type === "array") {

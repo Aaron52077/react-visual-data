@@ -3,8 +3,8 @@
  * more eg: https://github.com/streamich/react-use
  */
 import { useReducer, useContext, useRef, useEffect, useState, createContext, useImperativeHandle } from "react";
-import { bind, clear } from "size-sensor";
 import { onEvent, offEvent, debounce } from "~utils";
+import { resizeSensor } from "~utils/resize-sensor";
 
 export const Ctx = createContext(() => {});
 export const StoreCtx = createContext({});
@@ -91,11 +91,10 @@ function observerDomResize(dom, callback) {
 // 自动监听视窗大小容器自适应
 export const useAutoResize = (ref) => {
   const [state, setState] = useState({ width: 0, height: 0 });
-
   const domRef = useRef(null);
 
   const initWH = () => {
-    if (!domRef.current) return;
+    if (!domRef.current) return state;
     const { clientWidth, clientHeight } = domRef.current;
     setState({ width: clientWidth, height: clientHeight });
   };
@@ -108,12 +107,11 @@ export const useAutoResize = (ref) => {
 
     const domObserver = observerDomResize(domRef.current, debounceSetWHHandler);
 
-    // bind size
     if (domRef.current) {
-      bind(domRef.current, (element) => {
+      resizeSensor(domRef.current, () => {
         try {
           const resizeHandler = debounce(() => {
-            const { clientWidth, clientHeight } = element;
+            const { clientWidth, clientHeight } = domRef.current;
             setState({ width: clientWidth, height: clientHeight });
           }, 100);
 
@@ -129,14 +127,6 @@ export const useAutoResize = (ref) => {
     return () => {
       domObserver.disconnect();
       domObserver.takeRecords();
-      // clear size
-      if (domRef.current) {
-        try {
-          clear(domRef.current);
-        } catch (e) {
-          console.warn(`卸载元素dom节点失败, ${e}`);
-        }
-      }
       offEvent(window, "resize", debounceSetWHHandler);
     };
   }, []);

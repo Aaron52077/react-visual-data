@@ -1,27 +1,19 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { InputNumber } from "antd";
 import fetcher from "~materials/hoc";
 
 const DimensionSize = (props) => {
   const { width, height } = window.screen;
-
-  const rootValue = useMemo(() => {
-    return props.value
-      ? props.value
-      : {
-          width,
-          height
-        };
-  }, [props.value]);
+  const [size, setSize] = useState({ width, height });
 
   useEffect(() => {
-    props.onChange(props.name, rootValue);
+    setSize(props.value);
   }, []);
 
   const onWidthChange = (e) => {
     props.onChange(
       props.name,
-      Object.assign(rootValue, {
+      Object.assign(size, {
         width: parseFloat(e.target.value)
       })
     );
@@ -30,7 +22,7 @@ const DimensionSize = (props) => {
   const onHeightChange = (e) => {
     props.onChange(
       props.name,
-      Object.assign(rootValue, {
+      Object.assign(size, {
         height: parseFloat(e.target.value)
       })
     );
@@ -44,8 +36,7 @@ const DimensionSize = (props) => {
         disabled={props.disabled || props.readOnly}
         defaultValue={width}
         min={0}
-        max={width}
-        value={rootValue.width}
+        value={size.width}
         onBlur={onWidthChange}
       />
       <div className="gc-flex-middle">x</div>
@@ -55,8 +46,7 @@ const DimensionSize = (props) => {
         disabled={props.disabled || props.readOnly}
         defaultValue={height}
         min={0}
-        max={height}
-        value={rootValue.height}
+        value={size.height}
         onBlur={onHeightChange}
       />
     </div>

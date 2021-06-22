@@ -1,11 +1,7 @@
-export { default as SchemaRender } from "../form-render";
+export { default as SchemaRender } from '../form-render';
 
-export { default as AxureScreen } from "./core/screen";
+export { default as AxureScreen } from './core';
 
-export { default as AxureGrid } from "./core/grid";
+export { default as AxureScreenParser } from './compiler';
 
-export { default as AxureScreenParser } from "./compiler/screen";
-
-export { default as AxureGridParser } from "./compiler/grid";
-
-export { default as AxureParser } from "./compiler/parser";
+export { default as AxureParser } from './parser';
