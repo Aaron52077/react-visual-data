@@ -6,7 +6,7 @@ import { useDocumentTitle } from '~common/hooks';
 
 const { TabPane } = Tabs;
 
-const schema_json = {
+const SCHEMA_JSON = {
   type: 'object',
   properties: {
     case1: {
@@ -362,7 +362,7 @@ function FormRenderers() {
               <SchemaRender
                 ref={formRef}
                 cname="form-demo"
-                schema={schema_json}
+                schema={SCHEMA_JSON}
                 formData={formData}
                 verify={verify}
                 onChange={onFromChange}
@@ -382,7 +382,7 @@ function FormRenderers() {
               }
             >
               <TabPane tab="配置" key="config">
-                <MonacoEditor height={770} language="json" value={schema_json} readOnly />
+                <MonacoEditor height={770} language="json" value={SCHEMA_JSON} readOnly />
               </TabPane>
               <TabPane tab="数据" key="data">
                 <MonacoEditor height={770} language="json" value={formData} readOnly />
