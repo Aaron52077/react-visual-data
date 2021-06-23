@@ -1,6 +1,3 @@
-/**
- * core 编辑器渲染核心代码
- */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { DndProvider } from 'react-dnd';
