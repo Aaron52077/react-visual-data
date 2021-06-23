@@ -29,7 +29,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.DEADV_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: website
           GIT_CONFIG_NAME: Aaron52077
           GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
