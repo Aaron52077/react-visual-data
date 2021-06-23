@@ -41,7 +41,7 @@ jobs:
         with:
           source-repo: 'git@github.com:Aaron52077/react-visual-data.git'
           destination-repo: 'git@gitee.com:wuli-admin/react-wuli-admin.git'
-   reload-pages:
+  reload-pages:
     needs: sync
     runs-on: ubuntu-latest
     
