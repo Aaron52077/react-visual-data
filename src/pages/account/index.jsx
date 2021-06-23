@@ -1,22 +1,19 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
-import { Form, Input, Button, message, Tooltip } from "antd";
-import { connect } from "react-redux";
-import { IconFont } from "~components";
-import { aesEncrypt } from "~utils";
-import { accountIn, getMeunList } from "@/api";
-import { useDocumentTitle } from "~common/hooks";
-import "../../styles/account.less";
+import React, { useEffect } from 'react';
+import { Form, Input, Button, message, Tooltip } from 'antd';
+import { connect } from 'react-redux';
+import { IconFont } from '~components';
+import { aesEncrypt } from '~utils';
+import { accountIn, getMeunList } from '@/api';
+import { useDocumentTitle } from '~common/hooks';
+import '../../styles/account.less';
 
 const LoginPage = (props) => {
   const [form] = Form.useForm();
   const { dispatch, history } = props;
-  useDocumentTitle("DataV Pro 登录");
-  /**
-   * 登录
-   */
+  useDocumentTitle('DataV Pro 登录');
+
   const onLoginHandle = async (values) => {
-    // 密码加密算法
     const params = {
       username: values.username,
       password: aesEncrypt(values.password)
@@ -26,32 +23,32 @@ const LoginPage = (props) => {
     const meunList = await getMeunList();
 
     if (data.access_token) {
-      dispatch({ type: "app/accessToken", data: data.access_token });
-      dispatch({ type: "app/refreshToken", data: data.refresh_token });
-      dispatch({ type: "app/routes", data: meunList.data });
-      dispatch({ type: "app/userInfo", data: data });
-      dispatch({ type: "app/routerPath", data: "/dashboard" });
-      message.success("登录成功");
-      history.replace("/dashboard");
+      dispatch({ type: 'app/accessToken', data: data.access_token });
+      dispatch({ type: 'app/refreshToken', data: data.refresh_token });
+      dispatch({ type: 'app/routes', data: meunList.data });
+      dispatch({ type: 'app/userInfo', data: data });
+      dispatch({ type: 'app/routerPath', data: '/dashboard' });
+      message.success('登录成功');
+      history.replace('/dashboard');
     } else {
-      message.error("登录验证失败");
+      message.error('登录验证失败');
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
 
   useEffect(() => {
     // TODO：优先清空存储的token
-    dispatch({ type: "app/resetState" });
+    dispatch({ type: 'app/resetState' });
   }, []);
 
   return (
     <div
       className="gc-login"
       style={{
-        backgroundImage: "url(./static/component/bg.jpg)"
+        backgroundImage: 'url(./static/component/bg.jpg)'
       }}
     >
       <div className="gc-login__bd">
@@ -61,20 +58,27 @@ const LoginPage = (props) => {
             form={form}
             name="control-hooks"
             initialValues={{
-              username: "admin",
-              password: "111111"
+              username: 'admin',
+              password: '111111'
             }}
             onFinish={onLoginHandle}
             onFinishFailed={onFinishFailed}
           >
-            <Form.Item name="username" rules={[{ required: true, message: "请输入用户名!" }]}>
+            <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
               <Input prefix={<IconFont antd={true} type="UserOutlined" />} />
             </Form.Item>
-            <Form.Item name="password" rules={[{ required: true, message: "请输入密码!" }]}>
-              <Input.Password prefix={<IconFont antd={true} type="LockOutlined" />} allowClear={true} />
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
+              <Input.Password
+                prefix={<IconFont antd={true} type="LockOutlined" />}
+                allowClear={true}
+              />
             </Form.Item>
             <Form.Item>
-              <Tooltip placement="right" title="数据基于mockjs开发无需验证，任意帐号体验即可" destroyTooltipOnHide>
+              <Tooltip
+                placement="right"
+                title="数据基于mockjs开发无需验证，任意帐号体验即可"
+                destroyTooltipOnHide
+              >
                 <Button type="primary" htmlType="submit" block>
                   登录
                 </Button>
