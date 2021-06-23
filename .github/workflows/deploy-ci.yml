@@ -1,23 +1,15 @@
 name: Develop CI
-
-on:
-  push:
-    branches:
-      - main
-
+on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Step Node.js 14
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-
       - name: Install
         run: yarn install
 
@@ -28,16 +20,14 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_dir: ./dist
-          GITHUB_TOKEN: ${{ secrets.DEADV_DEPLOY_PRIVATE_KEY }}
+          GITHUB_TOKEN: ${{ secrets.DEADV_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: gh-pages
           GIT_CONFIG_NAME: Aaron52077
           GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
   sync:
     needs: deploy
     runs-on: ubuntu-latest
-
     steps:
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@master
@@ -57,4 +47,5 @@ jobs:
           gitee-username: Aaron52077
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: wuli-admin/react-wuli-admin
-          branch: master
+          branch: master,
+          https: true
