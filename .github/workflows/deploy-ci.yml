@@ -18,11 +18,8 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install
-        run: yarn install
-
       - name: Build
-        run: yarn build
+        run: yarn && yarn build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
