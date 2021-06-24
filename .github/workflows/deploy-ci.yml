@@ -25,16 +25,14 @@ jobs:
         run: yarn build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          publish_dir: ./dist
-          GITHUB_TOKEN: ${{ secrets.DEADV_DEPLOY_PRIVATE_KEY }}
+          GITHUB_TOKEN: ${{ secrets.DEADV_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: gh-pages
+          FOLDER: dist
           GIT_CONFIG_NAME: Aaron52077
           GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
-
   sync:
     runs-on: ubuntu-latest
 
