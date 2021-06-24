@@ -57,5 +57,5 @@ jobs:
           gitee-username: Aaron52077
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: wuli-admin/react-wuli-admin
-          branch: master,
+          branch: gh-pages,
           https: true
