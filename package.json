@@ -78,13 +78,19 @@
       "ie 11"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,json}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write --ignore-unknown"
     ],
     "src/**/*.{less}": [
-      "prettier --write"
+      "prettier --write --ignore-unknown"
     ]
   }
 }
