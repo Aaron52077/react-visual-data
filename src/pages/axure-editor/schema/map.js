@@ -1,5 +1,5 @@
 import { BASE_CONF } from './default.js';
-import { PROVONCESCITYNAME, PROVONCESCITY } from '~materials/constants';
+import { PROVONCESCITYNAME, PROVONCESCITY } from '~packages/constants';
 
 export default [
   {
@@ -23,7 +23,7 @@ export default [
               type: 'object',
               title: '高级属性',
               description: '图表组件属性说明',
-              displayType: 'column',
+              displayType: 'row',
               properties: {
                 unit: {
                   title: '单位',
@@ -48,6 +48,13 @@ export default [
                 labelTextColor: {
                   title: 'label文字颜色',
                   component: 'color'
+                },
+                customColors: {
+                  title: '自定义颜色',
+                  component: 'colorGroup',
+                  options: {
+                    label: '可增加多个配色项，依次映射数值从小到大的颜色'
+                  }
                 }
               }
             }

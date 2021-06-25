@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react";
-import FieldFactory from "./factory";
-import { mapping as defaultMapping, widgets as defaultWidgets } from "~materials";
-import "./atom.less";
+import React, { forwardRef } from 'react';
+import FieldFactory from './factory';
+import { mapping as defaultMapping, widgets as defaultWidgets } from '~packages';
+import './atom.less';
 
 const Factorys = forwardRef(({ mapping = {}, widgets = {}, ...rest }, ref) => {
   return (

@@ -470,5 +470,26 @@ export default [
         ]
       });
     }
+  },
+  {
+    url: '/datav/sql',
+    timeout: 200,
+    method: 'get',
+    response: () => {
+      return resultSuccess({
+        'data|3-8': [
+          {
+            id: '@zip()',
+            name: '测试@increment()',
+            data: {
+              id: '@id()',
+              name: '@string(5)',
+              v1: '@natural(0, 10086)',
+              v2: '@float(0, 10086, 1, 2)'
+            }
+          }
+        ]
+      });
+    }
   }
 ];

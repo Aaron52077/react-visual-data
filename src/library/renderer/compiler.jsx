@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import generator from './generator';
-import { getField } from '~materials';
+import { getField } from '~packages';
 
 const GeneratorField = ({ value }) => {
   const [show, setShow] = useState(true);

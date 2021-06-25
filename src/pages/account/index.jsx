@@ -6,9 +6,9 @@ import { IconFont } from '~components';
 import { aesEncrypt } from '~utils';
 import { accountIn, getMeunList } from '@/api';
 import { useDocumentTitle } from '~common/hooks';
-import '../../styles/account.less';
+import './styles.less';
 
-const LoginPage = (props) => {
+const LoginAuth = (props) => {
   const [form] = Form.useForm();
   const { dispatch, history } = props;
   useDocumentTitle('DataV Pro 登录');
@@ -104,4 +104,4 @@ const LoginPage = (props) => {
   );
 };
 
-export default connect((state) => state.app)(LoginPage);
+export default connect((state) => state.app)(LoginAuth);

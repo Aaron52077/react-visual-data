@@ -1,4 +1,4 @@
-import { suid, cloneDeep } from '~utils';
+import { guid, cloneDeep } from '~utils';
 import { isEmpty, deepMergeObj } from '~utils/helper';
 
 /**
@@ -10,7 +10,7 @@ import { isEmpty, deepMergeObj } from '~utils/helper';
 export function generatorField(fields, type = 'field', opts = {}) {
   let options;
   // 唯一标识uniqueTag
-  const uniqueId = suid();
+  const uniqueId = guid();
 
   options = cloneDeep(opts);
   options.uniqueId = uniqueId;

@@ -5,9 +5,9 @@ import React, { useMemo, useCallback } from 'react';
 import cx from 'classnames';
 import { connect } from 'react-redux';
 import generator from './generator';
-import { getField } from '~materials';
+import { getField } from '~packages';
 import { converLayout } from '~utils/helper';
-import { suid } from '~utils';
+import { guid } from '~utils';
 
 const GeneratorField = ({ mode, value, onRowValueChange }) => {
   const { width, height, background, ...rest } = value.data;
@@ -46,7 +46,7 @@ const GeneratorField = ({ mode, value, onRowValueChange }) => {
     () => ({
       value: value.data,
       type: value.type,
-      uniqueId: suid(),
+      uniqueId: guid(),
       options: value.data.config || {},
       onChange: (val, level) => {
         if (!onRowValueChange) return;

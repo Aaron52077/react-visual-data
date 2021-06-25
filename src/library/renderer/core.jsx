@@ -5,7 +5,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import cx from 'classnames';
 import { Rnd } from 'react-rnd';
 import { connect } from 'react-redux';
-import { getField } from '~materials';
+import { getField } from '~packages';
 import { useStore, useTools } from '~common/hooks';
 import { throttle } from '~utils';
 import { round, converLayout } from '~utils/helper';

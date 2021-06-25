@@ -3,8 +3,8 @@
  * @module 通用工具方法
  * Created by Aaron 2019-4-30.
  * */
-import CryptoJS from "crypto-js";
-const aseKey = CryptoJS.enc.Utf8.parse("1234567812345678");
+import CryptoJS from 'crypto-js';
+const aseKey = CryptoJS.enc.Utf8.parse('1234567812345678');
 
 /**
  * ASE加密函数
@@ -36,7 +36,7 @@ export function aesDecrypt(str) {
  */
 export function pathToParam(url) {
   url = url == null ? window.location.href : url;
-  const search = url.substring(url.lastIndexOf("?") + 1);
+  const search = url.substring(url.lastIndexOf('?') + 1);
   const obj = {};
   const reg = /([^?&=]+)=([^?&=]*)/g;
   search.replace(reg, (rs, $1, $2) => {
@@ -61,12 +61,12 @@ export function pathToMosaic(url, params) {
       queryString.push(`${key}=${value}`);
     }
   });
-  const qStr = queryString.join("&");
-  if (url.indexOf("?") < 0) {
+  const qStr = queryString.join('&');
+  if (url.indexOf('?') < 0) {
     url += `?${qStr}`;
-  } else if (url.endsWith("&")) {
+  } else if (url.endsWith('&')) {
     url += qStr;
-  } else if (url.endsWith("?")) {
+  } else if (url.endsWith('?')) {
     url += `${qStr}`;
   } else {
     url += `&${qStr}`;
@@ -77,7 +77,7 @@ export function pathToMosaic(url, params) {
 // 深度克隆对象
 export function cloneDeep(obj) {
   let clone = obj;
-  if (obj && typeof obj === "object") {
+  if (obj && typeof obj === 'object') {
     clone = new obj.constructor();
     Object.getOwnPropertyNames(obj).forEach((prop) => (clone[prop] = cloneDeep(obj[prop])));
   }
@@ -97,7 +97,7 @@ export const onEvent = (function () {
   } else {
     return function (element, event, handler) {
       if (element && event && handler) {
-        element.attachEvent("on" + event, handler);
+        element.attachEvent('on' + event, handler);
       }
     };
   }
@@ -116,7 +116,7 @@ export const offEvent = (function () {
   } else {
     return function (element, event, handler) {
       if (element && event) {
-        element.detachEvent("on" + event, handler);
+        element.detachEvent('on' + event, handler);
       }
     };
   }
@@ -126,11 +126,11 @@ export const offEvent = (function () {
  * @description 格式化文件大小
  */
 export function readFileSize(value) {
-  if (value === null || value === "") {
-    return "0B";
+  if (value === null || value === '') {
+    return '0B';
   }
   value = parseFloat(value);
-  const units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
   const formatter = (value, power) => {
     return (value / Math.pow(1024, power)).toFixed(2) + units[power];
   };
@@ -145,9 +145,9 @@ export function dateToStr(date, cFormat) {
   if (arguments.length === 0) {
     return null;
   }
-  if (typeof date != "object") return "";
+  if (typeof date != 'object') return '';
 
-  cFormat = cFormat || "yyyy-MM-dd";
+  cFormat = cFormat || 'yyyy-MM-dd';
   var formatObj = {
     M: date.getMonth() + 1,
     d: date.getDate(),
@@ -156,7 +156,7 @@ export function dateToStr(date, cFormat) {
     s: date.getSeconds()
   };
   cFormat = cFormat.replace(/(M+|d+|h+|m+|s+)/g, (result) => {
-    return ((result.length > 1 ? "0" : "") + formatObj[result.slice(-1)]).slice(-2);
+    return ((result.length > 1 ? '0' : '') + formatObj[result.slice(-1)]).slice(-2);
   });
   return cFormat.replace(/(y+)/g, (result) => {
     return date.getFullYear().toString().slice(-result.length);
@@ -167,10 +167,10 @@ export function dateToStr(date, cFormat) {
  * unix时间格式化
  */
 export function unixToStr(data, cFormat) {
-  var val = `${data}` || "";
-  val = val.replace(/@1/g, "");
-  val = val.replace(/@2/g, "");
-  cFormat = cFormat || "yyyy-MM-dd hh:mm";
+  var val = `${data}` || '';
+  val = val.replace(/@1/g, '');
+  val = val.replace(/@2/g, '');
+  cFormat = cFormat || 'yyyy-MM-dd hh:mm';
   var result = (val.length < 12 ? parseInt(val) * 1000 : parseInt(val)) || 0;
   return dateToStr(new Date(result), cFormat);
 }
@@ -231,14 +231,14 @@ export function throttle(fn, wait = 100) {
 }
 
 // 异步加载js、css
-export function loadScript(url, type = "js") {
+export function loadScript(url, type = 'js') {
   let flag = false,
-    insert = type === "js" ? "body" : "head";
+    insert = type === 'js' ? 'body' : 'head';
 
   return new Promise((resolve) => {
     const insertNode = document.getElementsByTagName(insert)[0];
     Array.from(insertNode.children).forEach((ele) => {
-      if ((ele.src || "").indexOf(url) !== -1) {
+      if ((ele.src || '').indexOf(url) !== -1) {
         flag = true;
         resolve();
       }
@@ -248,13 +248,13 @@ export function loadScript(url, type = "js") {
     if (flag) return;
 
     let script;
-    if (type === "js") {
-      script = document.createElement("script");
-      script.type = "text/javascript";
+    if (type === 'js') {
+      script = document.createElement('script');
+      script.type = 'text/javascript';
       script.src = url;
-    } else if (type === "css") {
-      script = document.createElement("link");
-      script.rel = "stylesheet";
+    } else if (type === 'css') {
+      script = document.createElement('link');
+      script.rel = 'stylesheet';
       script.href = url;
     }
 
@@ -266,18 +266,6 @@ export function loadScript(url, type = "js") {
 }
 
 /**
- * 生成字符串 mock token
- */
-export function guid() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === "x" ? r : (r & 0x3) | 0x8;
-
-    return v.toString(16);
-  });
-}
-
-/**
  * 基于时间戳的 uuid
  * @return uniqueId
  */
@@ -285,88 +273,8 @@ export function uuid() {
   return (+new Date()).toString(36);
 }
 
-export const suid = (() => {
-  const heyStack = "0123456789abcdefghijklmnopqrstuvwxyz";
+export const guid = (() => {
+  const heyStack = '0123456789abcdefghijklmnopqrstuvwxyz';
   const randomInt = () => Math.floor(Math.random() * Math.floor(heyStack.length));
-  return (length = 10) => Array.from({ length }, () => heyStack[randomInt()]).join("");
+  return (length = 10) => Array.from({ length }, () => heyStack[randomInt()]).join('');
 })();
-
-/**
- * hex转rbg格式
- * @param {*} color 颜色
- * @param {*} opacity 透明度
- */
-export function hexToRgb(color, opacity) {
-  let newColor = "rgba(";
-  // 判断是三位还是六位
-  if (color.length === 4) {
-    let arry = [];
-
-    for (let i = 1; i < color.length; i++) {
-      arry.push(parseInt("0x" + color[i] + color[i]));
-    }
-
-    arry.forEach((item) => {
-      newColor += item + ", ";
-    });
-
-    newColor += opacity / 100 + ")";
-    return newColor;
-  } else {
-    let arry = [];
-
-    for (let i = 1; i < color.length; i += 2) {
-      arry.push(parseInt("0x" + color.slice(i, i + 2)));
-    }
-
-    arry.forEach((item) => {
-      newColor += item + ", ";
-    });
-    newColor += opacity / 100 + ")";
-    return newColor;
-  }
-}
-
-/**
- * @param {*} rgba 转 hex 16进制(ex: #000000)
- */
-export function rgbToHex(rgba) {
-  let str = rgba.slice(5, rgba.length - 1),
-    arry = str.split(","),
-    opa = Number(arry[3].trim()) * 100,
-    strHex = "#",
-    r = Number(arry[0].trim()),
-    g = Number(arry[1].trim()),
-    b = Number(arry[2].trim());
-
-  strHex += ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-  return { color: strHex, opacity: opa };
-}
-
-/**
- * @param {*} rgba 验证是否为rgba格式
- */
-export function isRgba(rgba) {
-  let str = rgba.slice(5, rgba.length - 1),
-    arry = str.split(","),
-    status = true,
-    reg = /^rgba\(\d{1,3}(\,\s{0,1}\d{1,3}){2}\,\s{0,1}(0|(0(\.\d{1,2}))|1)\)$/;
-
-  arry.forEach((item, index) => {
-    if (index == arry.length - 1) {
-      if (Number(item.trim()) < 0 || Number(item.trim()) > 1) {
-        status = false;
-      }
-    } else {
-      if (Number(item.trim()) < 0 || Number(item.trim()) > 255) {
-        status = false;
-      }
-    }
-  });
-
-  if (reg.test(rgba) && status) {
-    return true;
-  } else {
-    return false;
-  }
-}

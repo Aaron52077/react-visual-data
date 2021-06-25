@@ -187,12 +187,6 @@ const SCHEMA_JSON = {
           format: 'crop',
           displayType: 'row',
           action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
-        },
-        excel: {
-          title: 'excel上传',
-          component: 'uploadExcel',
-          displayType: 'row',
-          action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76'
         }
       }
     },
@@ -290,11 +284,7 @@ function FormRenderers() {
       multipleSelect: ['旅行达人', '工作狂'],
       boxes: [],
       backgroundImage1: '',
-      backgroundImage2: '',
-      excel: {
-        header: null,
-        results: null
-      }
+      backgroundImage2: ''
     },
     modal: {
       obj1: {
