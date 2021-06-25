@@ -2,7 +2,7 @@
 
 #### 介绍
 
-🎉 基于 reactjs 开发的可视化大屏设计器项目https://wuli-admin.gitee.io/react-wuli-admin/#/dashboard
+🎉 基于 reactjs 开发的可视化大屏设计器项目https://wuli-admin.gitee.io/react-visual-data/#/dashboard
 
 #### 参与贡献
 
