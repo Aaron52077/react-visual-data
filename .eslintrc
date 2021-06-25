@@ -16,8 +16,6 @@
   "parser": "babel-eslint",
   "rules": {
     "func-names": [2, "never"],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "arrow-parens": 0,
     "prettier/prettier": "error",
     // 关闭react默认的props-type验证
     "react/prop-types": [0],

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Typography, Divider } from 'antd';
-import { Typing } from '~components';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Typography, Divider } from "antd";
+import { Typing } from "~components";
 
 const { Title, Paragraph } = Typography;
 const { VERSION, TIMESTAMP } = window.appConfig;
@@ -10,20 +10,14 @@ const Dashboard = () => {
   return (
     <div className="gc-page">
       <div className="dashboard-banner">
-        <video
-          autoPlay={true}
-          loop={true}
-          poster="./static/component/banner.jpg"
-          width="100%"
-          height="100%"
-        >
-          <source src="./static/component/banner-video.mp4" type="video/mp4" />
+        <video autoPlay={true} loop={true} poster="./static/banner.jpg" width="100%" height="100%">
+          <source src="./static/banner-video.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="dashboard-typography">
         <Typography>
           <Divider />
-          <Title>DataV Pro 数据可视化 V2</Title>
+          <Title>DataV Pro 数据可视化</Title>
           <Paragraph>
             <Typing
               delay={30}
@@ -67,7 +61,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <Link to={`/workspace/design?v=${VERSION}&t=${TIMESTAMP}`} target="_blank">
-                  大屏版本v2 立即前往
+                  大屏版本 立即前往
                 </Link>
               </li>
             </ul>

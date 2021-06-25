@@ -1,41 +1,83 @@
 .gc-login {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-color: var(--datav-panel-title-bg);
-  background-position: center;
+  height: 100vh;
   overflow: hidden;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: -42%;
+    background-image: url(/static/login-bg.svg);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    content: "";
+  }
   &__bd {
     position: relative;
-    width: 360px;
-    max-width: 100%;
+    display: flex;
     padding: 180px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+    @media screen and (min-width: 480px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
+    @media screen and (min-width: 1200px) {
+      width: 60%;
+    }
+  }
+  &__form {
+    margin-left: -50px;
+  }
+  &__lt {
+    flex: 1;
+    .lt-img {
+      width: 60%;
+    }
+    p {
+      padding: 15px;
+      font-size: 16px;
+      color: #fff;
+    }
+  }
+  &__rt {
+    margin: 0 0 0 100px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
   }
   &__title {
-    padding: 15px 0;
-    font-size: 20px;
+    padding: 10px 0 20px;
+    font-size: 24px;
     color: #fff;
     text-align: center;
   }
   &__footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     padding: 1em 0;
-    &--copyright {
-      margin-bottom: 10px;
-      font-size: 12px;
-      line-height: 12px;
-      text-align: center;
+  }
+  &__copyright {
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #fff;
+    text-align: center;
+    a {
       color: #fff;
     }
-    &--options {
-      font-size: 12px;
-      line-height: 12px;
-      text-align: center;
+  }
+  &__options {
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    a {
+      color: #fff;
+      margin: 0 1em;
     }
   }
   .ant-input-affix-wrapper {
