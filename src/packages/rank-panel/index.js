@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useAutoResize } from '~common/hooks';
 
 const defaultConfig = {
@@ -249,12 +248,7 @@ const ScrollRankPanel = forwardRef(({ config = {}, style }, ref) => {
   );
 });
 
-ScrollRankPanel.propTypes = {
-  config: PropTypes.object,
-  style: PropTypes.object
-};
-
-const VRankPanel = ({ options, schema }) => {
+export default ({ options, schema }) => {
   const { data } = schema;
 
   const option = useMemo(() => {
@@ -266,5 +260,3 @@ const VRankPanel = ({ options, schema }) => {
 
   return <ScrollRankPanel config={option} />;
 };
-
-export default VRankPanel;
