@@ -26,7 +26,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2
         env:
-          PERSONAL_TOKEN: ${{ secrets.DEADV_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.DATEV_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./dist
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@main
         with:
-          gitee-username: Aaron52077
+          gitee-username: chao_code520@163.com
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: wuli-admin/react-visual-data
           branch: gh-pages,

@@ -52,28 +52,6 @@ export const useDebounce = (action, ms = 500) => {
 // 基于redux的实现，类似于class component的setState 适用于复杂对象模式
 export const useSet = (initState) => useReducer((state, action) => ({ ...state, ...action }), initState);
 
-// 持久化存储 sessionStorage
-export const useStorage = (initState = {}, key = "_root_storage") => {
-  const getStorage = () => {
-    const searchStr = sessionStorage.getItem(key);
-    if (searchStr) {
-      try {
-        return JSON.parse(searchStr);
-      } catch (error) {
-        return initState;
-      }
-    }
-    return initState;
-  };
-
-  const [data, setData] = useState(getStorage());
-  const setStorage = (query) => {
-    setData(query);
-    sessionStorage.setItem(key, JSON.stringify(query));
-  };
-  return [data, setStorage];
-};
-
 function observerDomResize(dom, callback) {
   const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
