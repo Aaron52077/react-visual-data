@@ -13,6 +13,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "prefer-arrow-callback": true,
     "prettier/prettier": "error",
     // 关闭react默认的props-type验证
     "react/prop-types": [0],
