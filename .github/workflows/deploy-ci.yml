@@ -29,6 +29,8 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.DATAV_TOKEN }}
           BRANCH: gh-pages
           FOLDER: dist,
+          GIT_CONFIG_NAME: Aaron52077
+          GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
   sync:
     needs: deploy
