@@ -40,19 +40,14 @@
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0",
-    "xlsx": "^0.16.9"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@monaco-editor/react": "^3.3.1",
-    "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.3",
     "customize-cra": "^1.0.0-alpha.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
     "husky": "^6.0.0",
     "less": "^3.11.1",
     "less-loader": "^7.2.1",
