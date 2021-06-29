@@ -1,51 +1,57 @@
 export default {
-  setCookie(name, value, days) {
-    var Days = days || 7;
-    var exp = new Date();
+  setCookie(key, value, days) {
+    const Days = days || 7;
+    const exp = new Date();
     if (Days && !isNaN(parseInt(Days))) {
       exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-      document.cookie = name + "=" + escape(value) + ";path=/;expires=" + exp.toGMTString();
+      document.cookie = key + "=" + escape(value) + ";path=/;expires=" + exp.toGMTString();
     }
   },
-  getCookie(name) {
-    var arrStr = document.cookie.split(";");
-    for (var i = 0; i < arrStr.length; i++) {
-      var temp = arrStr[i].split("=");
-      if (temp[0].trim() === name) return unescape(temp[1]);
+  getCookie(key) {
+    const arrStr = document.cookie.split(";");
+    for (let i = 0; i < arrStr.length; i++) {
+      const temp = arrStr[i].split("=");
+      if (temp[0].trim() === key) return unescape(temp[1]);
     }
   },
-  delCookie(name) {
-    document.cookie = name + "=;expires=" + new Date(0).toGMTString();
+  removeCookie(key) {
+    document.cookie = key + "=;expires=" + new Date(0).toGMTString();
   },
-  getSession(name) {
-    if (!name) return;
-    return window.sessionStorage.getItem(name);
+  setSession(key, value) {
+    if (!key) return;
+    window.sessionStorage.setItem(key, JSON.stringify(value));
   },
-  setSession(name, content) {
-    if (!name) return;
-    if (typeof content !== "string") {
-      content = JSON.stringify(content);
+  getSession(key) {
+    if (!key) return;
+    const value = window.sessionStorage.getItem(key);
+
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return null;
     }
-    window.sessionStorage.setItem(name, content);
   },
-  removeSession(name) {
-    if (!name) return;
-    window.sessionStorage.removeItem(name);
+  removeSession(key) {
+    if (!key) return;
+    window.sessionStorage.removeItem(key);
   },
-  getLocal(name) {
-    if (!name) return;
-    return window.localStorage.getItem(name);
+  setLocal(key, value) {
+    if (!key) return;
+    window.localStorage.setItem(key, JSON.stringify(value));
   },
-  setLocal(name, content) {
-    if (!name) return;
-    if (typeof content !== "string") {
-      content = JSON.stringify(content);
+  getLocal(key) {
+    if (!key) return;
+    const value = window.localStorage.getItem(key);
+
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return null;
     }
-    window.localStorage.setItem(name, content);
   },
-  removeLocal(name) {
-    if (!name) return;
-    window.localStorage.removeItem(name);
+  removeLocal(key) {
+    if (!key) return;
+    window.localStorage.removeItem(key);
   },
   /**
    * Clear all localStorage and sessionStorage

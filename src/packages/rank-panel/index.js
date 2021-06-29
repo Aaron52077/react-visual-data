@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState, forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useAutoResize } from '~common/hooks';
+import React, { useEffect, useRef, useState, forwardRef, useMemo } from "react";
+import { useAutoResize } from "~common/hooks";
 
 const defaultConfig = {
   data: [],
   rowNum: 5,
   waitTime: 2000,
-  carousel: 'single',
-  unit: '',
+  carousel: "single",
+  unit: "",
   sort: true
 };
 
@@ -17,9 +16,9 @@ function interceptor(gen) {
   // 处理 return 之后 resume 的问题
   let stop = false;
 
-  if (typeof gen === 'function') gen = gen();
+  if (typeof gen === "function") gen = gen();
 
-  if (!gen || typeof gen.next !== 'function') return () => ({});
+  if (!gen || typeof gen.next !== "function") return () => ({});
 
   Promise.resolve().then(() => {
     destroyed || next(gen.next());
@@ -163,7 +162,7 @@ const ScrollRankPanel = forwardRef(({ config = {}, style }, ref) => {
 
     if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
-    const animationNum = carousel === 'single' ? 1 : rowNum;
+    const animationNum = carousel === "single" ? 1 : rowNum;
 
     let rows = rowsData.slice(animationIndex);
     rows.push(...rowsData.slice(0, animationIndex));
@@ -227,11 +226,7 @@ const ScrollRankPanel = forwardRef(({ config = {}, style }, ref) => {
   return (
     <div className="gc-scroll-ranking-board" style={style} ref={domRef}>
       {rows.map((item, i) => (
-        <div
-          className="row-item"
-          key={item.toString() + item.scroll}
-          style={{ height: `${heights[i]}px` }}
-        >
+        <div className="row-item" key={item.toString() + item.scroll} style={{ height: `${heights[i]}px` }}>
           <div className="ranking-info">
             <div className="rank">No.{item.ranking}</div>
             <div className="info-name" dangerouslySetInnerHTML={{ __html: item.name }} />
@@ -249,12 +244,7 @@ const ScrollRankPanel = forwardRef(({ config = {}, style }, ref) => {
   );
 });
 
-ScrollRankPanel.propTypes = {
-  config: PropTypes.object,
-  style: PropTypes.object
-};
-
-const VRankPanel = ({ options, schema }) => {
+export default ({ options, schema }) => {
   const { data } = schema;
 
   const option = useMemo(() => {
@@ -266,5 +256,3 @@ const VRankPanel = ({ options, schema }) => {
 
   return <ScrollRankPanel config={option} />;
 };
-
-export default VRankPanel;

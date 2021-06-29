@@ -6,7 +6,7 @@ import { useDocumentTitle } from "~common/hooks";
 import storage from "~utils/storage";
 
 function PanelPreview(props) {
-  let schemaConfig = JSON.parse(storage.getLocal("schema_screen_config") || {});
+  let schemaConfig = storage.getLocal("schema_screen_config") || {};
   const {
     backgroundMode,
     backgroundColor,

@@ -7,13 +7,16 @@
   "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
   "plugins": ["react", "prettier"],
   "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "parser": "babel-eslint",
   "rules": {
-    "prefer-arrow-callback": true,
+    "prefer-arrow-callback": [0],
+    "func-names": [2, "never"],
     "prettier/prettier": "error",
     // 关闭react默认的props-type验证
     "react/prop-types": [0],

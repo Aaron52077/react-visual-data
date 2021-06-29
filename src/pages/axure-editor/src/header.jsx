@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Modal, Space, Button, Typography, Badge, message, Tooltip } from 'antd';
-import copyTOClipboard from 'copy-text-to-clipboard';
-import { connect } from 'react-redux';
-import { useTools, useStore } from '~common/hooks';
-import { uuid } from '~utils';
-import { generatorField, getFieldConf, getFieldOrderBy, orderBy } from '~renderer/utils';
-import { IconFont, MonacoEditor } from '~components';
-import storage from '~utils/storage';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Modal, Space, Button, Typography, Badge, message, Tooltip } from "antd";
+import copyTOClipboard from "copy-text-to-clipboard";
+import { connect } from "react-redux";
+import { useTools, useStore } from "~common/hooks";
+import { uuid } from "~utils";
+import { generatorField, getFieldConf, getFieldOrderBy, orderBy } from "~renderer/utils";
+import { IconFont, MonacoEditor } from "~components";
+import storage from "~utils/storage";
 
 const FieldActionsConf = ({ selected, dispatch }) => {
   const { state, setState } = useTools();
@@ -32,16 +32,16 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       redo: []
     });
 
-    dispatch({ type: 'component/selected', data: '-' });
+    dispatch({ type: "component/selected", data: "-" });
   };
 
   // TODO: 复制
   const handleCopy = () => {
     const curFieldConf = getFieldConf(state.components, selected);
-    const { components, fieldId } = generatorField(state.components, 'field', curFieldConf);
+    const { components, fieldId } = generatorField(state.components, "field", curFieldConf);
     setState({ components: components });
 
-    dispatch({ type: 'component/selected', data: fieldId });
+    dispatch({ type: "component/selected", data: fieldId });
   };
 
   // TODO: 删除
@@ -49,7 +49,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
     const { index, components } = getFieldOrderBy(state.components, selected);
     let fieldId;
     if (components.length === 1) {
-      fieldId = '-';
+      fieldId = "-";
     } else if (index > 0) {
       fieldId = components[index - 1].uniqueId;
     } else {
@@ -58,7 +58,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
     components.splice(index, 1);
     setState({ components: components });
 
-    dispatch({ type: 'component/selected', data: fieldId });
+    dispatch({ type: "component/selected", data: fieldId });
   };
 
   // TODO: 上移，与前一个元素交换顺序
@@ -70,7 +70,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       setState({ components: results });
     } else {
       message.destroy();
-      message.warning('图层已经置顶，无法上移');
+      message.warning("图层已经置顶，无法上移");
     }
   };
 
@@ -83,7 +83,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       setState({ components: results });
     } else {
       message.destroy();
-      message.warning('图层已经置底，无法下移');
+      message.warning("图层已经置底，无法下移");
     }
   };
 
@@ -99,7 +99,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       setState({ components: components });
     } else {
       message.destroy();
-      message.warning('图层已经置顶');
+      message.warning("图层已经置顶");
     }
   };
 
@@ -115,7 +115,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       setState({ components: components });
     } else {
       message.destroy();
-      message.warning('图层已经置底');
+      message.warning("图层已经置底");
     }
   };
 
@@ -131,7 +131,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       4
     );
     copyTOClipboard(displaySchemaString);
-    message.info('复制成功');
+    message.info("复制成功");
   };
 
   return (
@@ -161,16 +161,12 @@ const FieldActionsConf = ({ selected, dispatch }) => {
         </div>
       </div>
       <Space className="gc-design__hd--action">
-        <Button
-          disabled={selected === '-'}
-          icon={<IconFont antd={true} type="CopyOutlined" />}
-          onClick={handleCopy}
-        >
+        <Button disabled={selected === "-"} icon={<IconFont antd={true} type="CopyOutlined" />} onClick={handleCopy}>
           复制
         </Button>
 
         <Button
-          disabled={selected === '-'}
+          disabled={selected === "-"}
           icon={<IconFont antd={true} type="DeleteOutlined" />}
           onClick={handleDelete}
         >
@@ -179,29 +175,25 @@ const FieldActionsConf = ({ selected, dispatch }) => {
         <Button icon={<IconFont antd={true} type="ClearOutlined" />} onClick={handleClear}>
           清空
         </Button>
-        <Button
-          disabled={selected === '-'}
-          icon={<IconFont antd={true} type="SwapLeftOutlined" />}
-          onClick={handleUp}
-        >
+        <Button disabled={selected === "-"} icon={<IconFont antd={true} type="SwapLeftOutlined" />} onClick={handleUp}>
           上一层
         </Button>
         <Button
-          disabled={selected === '-'}
+          disabled={selected === "-"}
           icon={<IconFont antd={true} type="SwapRightOutlined" />}
           onClick={handleDown}
         >
           下一层
         </Button>
         <Button
-          disabled={selected === '-'}
+          disabled={selected === "-"}
           icon={<IconFont antd={true} type="VerticalAlignTopOutlined" />}
           onClick={handleTop}
         >
           置顶
         </Button>
         <Button
-          disabled={selected === '-'}
+          disabled={selected === "-"}
           icon={<IconFont antd={true} type="VerticalAlignBottomOutlined" />}
           onClick={handleBottom}
         >
@@ -229,10 +221,10 @@ const FieldActionsConf = ({ selected, dispatch }) => {
         </div>
         <Space className="gc-design__hd--save">
           <Button
-            href={'/#/fullscreen/preview/' + uuid()}
+            href={"/#/fullscreen/preview/" + uuid()}
             target="_blank"
             onClick={() => {
-              storage.setLocal('schema_screen_config', {
+              storage.setLocal("schema_screen_config", {
                 page: state.page,
                 components: state.components
               });
