@@ -1,30 +1,28 @@
 /**
  * 基于rnd的核心拖拽方案
  */
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
-import cx from 'classnames';
-import { Rnd } from 'react-rnd';
-import { connect } from 'react-redux';
-import { getField } from '~packages';
-import { useStore, useTools } from '~common/hooks';
-import { throttle } from '~utils';
-import { round, converLayout } from '~utils/helper';
-import generator from './generator';
+import React, { useMemo, useState, useEffect, useCallback } from "react";
+import cx from "classnames";
+import { Rnd } from "react-rnd";
+import { connect } from "react-redux";
+import { getField } from "~packages";
+import { useStore, useTools } from "~common/hooks";
+import { throttle } from "~utils";
+import { round, converLayout } from "~utils/helper";
+import generator from "./generator";
 
 // TODO：ui和组件拔插模式
 const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
   const { width, height, background, left, top, isHidden, isLock, ...rest } = value.data;
   const [locations, setLocations] = useState({ left: left, top: top });
-  const [show, setShow] = useState(true);
   const { setState } = useTools();
   const { view } = useStore();
 
-  const classNames = cx('gc-field animate__animated', {
+  const classNames = cx("gc-field animate__animated", {
     [`animate__${rest.animateType}`]: rest.animateType,
     [`animate__${rest.animateSpeed}`]: rest.animateSpeed,
     [`animate__${rest.animateRepeat}`]: rest.animateRepeat,
-    [`animate__delay-${rest.animateTime}s`]: rest.animateTime,
-    'is-hidden': !show
+    [`animate__delay-${rest.animateTime}s`]: rest.animateTime
   });
 
   const isSelect = useMemo(() => {
@@ -44,21 +42,19 @@ const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
     e.stopPropagation();
     if (isSelect) return;
 
-    setState({ tabsKey: 'base' });
+    setState({ tabsKey: "base" });
     // TODO: 获取当前用户点击的key
-    dispatch({ type: 'component/selected', data: value.uniqueId });
+    dispatch({ type: "component/selected", data: value.uniqueId });
   };
 
   const overwriteStyle = {
-    borderStyle: rest.borderStyle || 'solid',
-    borderColor: isSelect ? '#2681ff' : 'transparent',
+    borderStyle: rest.borderStyle || "solid",
+    borderColor: isSelect ? "#2681ff" : "transparent",
     background,
     borderRadius: rest.borderRadius,
     borderWidth: rest.borderWidth || 2,
     boxShadow: rest.shadowColor
-      ? `${rest.shadowColor} ${rest.shadowWidth || 0} ${rest.shadowOffset || 0} ${
-          rest.shadowOffset || 0
-        }`
+      ? `${rest.shadowColor} ${rest.shadowWidth || 0} ${rest.shadowOffset || 0} ${rest.shadowOffset || 0}`
       : rest.shadowWidth
   };
 
@@ -151,7 +147,7 @@ const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
       onResizeStop={onStopPropagation}
       onClick={handleClick}
     >
-      <div className={cx('grid-line', { 'is-active': isSelect })}>
+      <div className={cx("grid-line", { "is-active": isSelect })}>
         <div className="grid-line-top"></div>
         <div className="grid-line-left"></div>
         <div className="grid-line-label">
