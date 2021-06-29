@@ -35,15 +35,3 @@ jobs:
           GIT_CONFIG_NAME: Aaron52077
           GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
-  sync:
-    needs: deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Sync to Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
-        with:
-          source-repo: "git@github.com:Aaron52077/react-visual-data.git"
-          destination-repo: "git@gitee.com:wuli-admin/react-visual-data.git"
