@@ -16,19 +16,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - name: Step Node.js 14
+        uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: "14"
+
+      - name: Install
+        run: yarn install
 
       - name: Build
-        run: yarn && yarn build
+        run: yarn build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        env:
-          PERSONAL_TOKEN: ${{ secrets.DATAV_TOKEN }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.DEADV_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dist,
+          FOLDER: dist
           GIT_CONFIG_NAME: Aaron52077
           GIT_CONFIG_EMAIL: chao_code520@163.com
           COMMIT_MESSAGE: gh-pages deploy
