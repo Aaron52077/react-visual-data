@@ -24,13 +24,12 @@ jobs:
         run: yarn && yarn build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v2
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         env:
-          PERSONAL_TOKEN: ${{ secrets.DATEV_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.DATAV_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
-        with:
-          forceOrphan: true
+          FOLDER: dist,
+          COMMIT_MESSAGE: gh-pages deploy
   sync:
     needs: deploy
     runs-on: ubuntu-latest
