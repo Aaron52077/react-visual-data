@@ -1,4 +1,4 @@
-import { BASE_CONF, BASE_DATA_CONF } from "./default.js";
+import { BASE_DATA_CONF } from "./default.js";
 
 export default [
   {

@@ -1,0 +1,184 @@
+{
+  "bar": [
+    {
+      "name": "柱状图",
+      "icon": "bar",
+      "type": "bar"
+    },
+    {
+      "name": "多系列柱图",
+      "icon": "bar-crosswise",
+      "type": "bar-crosswise"
+    },
+    {
+      "name": "横向柱图",
+      "icon": "bar-series",
+      "type": "bar-series"
+    },
+    {
+      "name": "堆积柱状图",
+      "icon": "bar-heap",
+      "type": "bar-heap"
+    },
+    {
+      "name": "正负柱图",
+      "icon": "bar-contrast",
+      "type": "bar-contrast"
+    },
+    {
+      "name": "双向柱图",
+      "icon": "bar-bothway",
+      "type": "bar-bothway"
+    },
+    {
+      "name": "山峰柱状图",
+      "icon": "bar-alien",
+      "type": "bar-alien"
+    }
+  ],
+  "line": [
+    {
+      "name": "折线图",
+      "icon": "line",
+      "type": "line"
+    },
+    {
+      "name": "阶梯线图",
+      "icon": "step-line",
+      "type": "step-line"
+    },
+    {
+      "name": "双Y轴折线",
+      "icon": "line-middle",
+      "type": "line-middle"
+    },
+    {
+      "name": "线柱混搭",
+      "icon": "line-bar",
+      "type": "line-bar"
+    },
+    {
+      "name": "3D折线图",
+      "icon": "line",
+      "type": "line3D"
+    }
+  ],
+  "pie": [
+    {
+      "name": "饼图",
+      "icon": "pie",
+      "type": "pie"
+    },
+    {
+      "name": "环形饼图",
+      "icon": "pie-nested",
+      "type": "pie-nested"
+    },
+    {
+      "name": "玫瑰饼图",
+      "icon": "pie-rose",
+      "type": "pie-rose"
+    },
+    {
+      "name": "嵌套饼图",
+      "icon": "pie-nested",
+      "type": "pie-double"
+    },
+    {
+      "name": "轮播饼图",
+      "icon": "pie-play",
+      "type": "pie-play"
+    }
+  ],
+  "datav": [
+    {
+      "name": "iframe",
+      "icon": "iframe",
+      "type": "iframe"
+    },
+    {
+      "name": "边框1",
+      "icon": "border-box",
+      "type": "border1"
+    },
+    {
+      "name": "边框2",
+      "icon": "border-box",
+      "type": "border2"
+    },
+    {
+      "name": "边框3",
+      "icon": "border-box",
+      "type": "border3"
+    },
+    {
+      "name": "边框4",
+      "icon": "border-box",
+      "type": "border4"
+    },
+    {
+      "name": "边框5",
+      "icon": "border-box",
+      "type": "border5"
+    },
+    {
+      "name": "边框6",
+      "icon": "border-box",
+      "type": "border6"
+    },
+    {
+      "name": "边框7",
+      "icon": "border-box",
+      "type": "border7"
+    },
+    {
+      "name": "边框8",
+      "icon": "border-box",
+      "type": "border8"
+    },
+    {
+      "name": "边框9",
+      "icon": "border-box",
+      "type": "border9"
+    },
+    {
+      "name": "装饰1",
+      "icon": "bubble",
+      "type": "decoration1"
+    },
+    {
+      "name": "装饰2",
+      "icon": "bubble",
+      "type": "decoration2"
+    },
+    {
+      "name": "装饰3",
+      "icon": "bubble",
+      "type": "decoration3"
+    },
+    {
+      "name": "装饰4",
+      "icon": "bubble",
+      "type": "decoration4"
+    }
+  ],
+  "map": [
+    {
+      "name": "中国地图",
+      "icon": "china-map",
+      "type": "china-map"
+    },
+    {
+      "name": "区域地图",
+      "icon": "map-province",
+      "type": "map-city"
+    }
+  ],
+  "other": [
+    {
+      "name": "词云图",
+      "icon": "word-cloud",
+      "type": "wordCloud"
+    }
+  ]
+}

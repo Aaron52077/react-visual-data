@@ -1,13 +1,14 @@
-import React, { useEffect, forwardRef, useRef, useMemo, useLayoutEffect } from "react";
+import React, { useEffect, forwardRef, useRef, useMemo, useLayoutEffect, useCallback } from "react";
 import { Space, Button, Tooltip, message } from "antd";
-import { useDrop } from "react-dnd";
 import { connect } from "react-redux";
 import { IconFont, Scrollbar, SketchRuler } from "~components";
+import { cloneDeep } from "~utils";
 import { generatorField } from "~renderer/utils";
 import { useAutoResize } from "~hooks/useAutoResize";
 import { useView, useDesigner } from "~hooks/useDesigner";
-import { THICK, DIMENSION, DRAGGABLE_COMPONENT } from "../constants";
+import { THICK, DIMENSION } from "../constants";
 import { round, deepMergeObj } from "~utils/helper";
+import { componentMarket } from "../data";
 
 /**
  * 设计器容器大小
@@ -67,6 +68,34 @@ function Wrapper(props, ref) {
     return width ? Math.floor((width / view.width) * 100) / 100 : 1;
   }, [width, view.width]);
 
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      try {
+        const name = event.dataTransfer.getData("text");
+        const findComponent = componentMarket.find((item) => item.type === name);
+        if (findComponent) {
+          let configs = cloneDeep(findComponent);
+          configs.data.left = event.nativeEvent.offsetX - configs.data.width / 2;
+          configs.data.top = event.nativeEvent.offsetY - configs.data.height / 2;
+
+          const { components, fieldId } = generatorField(state.components, "field", configs);
+          setState({ tabsKey: "base", components: components });
+          props.dispatch({ type: "component/selected", data: fieldId });
+        }
+      } catch (error) {
+        console.log(`组件创建失败，${error}`);
+      }
+    },
+    [state.components]
+  );
+
   const handleLine = (lines) => {
     setView({ lines });
   };
@@ -108,45 +137,6 @@ function Wrapper(props, ref) {
     });
   };
 
-  const onNodeChange = (item) => {
-    try {
-      const { components, fieldId } = generatorField(state.components, "field", item);
-      setState({ tabsKey: "base", components: components });
-      props.dispatch({ type: "component/selected", data: fieldId });
-    } catch (error) {
-      console.log(`组件创建失败，${error}`);
-    }
-  };
-
-  // 处理组件拖拽落下事件
-  const [, dropRef] = useDrop({
-    accept: [DRAGGABLE_COMPONENT],
-    collect: (monitor) => ({
-      isOver: monitor.isOver()
-    }),
-    drop: (item, monitor) => {
-      if (monitor.canDrop()) {
-        // 拖动操作正在进行时，返回指针的最后记录的{x，y}client 偏移量。 如果没有拖动项目，则返回 null
-        const currentMouseOffset = monitor.getClientOffset();
-        // 返回当前拖动操作开始时指针的{x，y} client 偏移量。 如果没有拖动项目，则返回 null
-        const sourceMouseOffset = monitor.getInitialClientOffset();
-        // 返回当前拖动操作开始时 drag source 组件的根DOM节点的{x，y}client 偏移量。 如果没有拖动项目，则返回 null
-        const sourceElementOffset = monitor.getInitialSourceClientOffset();
-        const { top, left } = containerRef.current.getValues();
-        const diffX = sourceMouseOffset.x - sourceElementOffset.x;
-        const diffY = sourceMouseOffset.y - sourceElementOffset.y;
-        const x = currentMouseOffset.x - diffX + left;
-        const y = currentMouseOffset.y - diffY + top;
-
-        // 组件完成新建工作
-        const options = deepMergeObj(item.component, { data: { left: x, top: y } });
-        onNodeChange(options);
-      } else {
-        message.info("实验数据建立中，请稍后再尝试添加节点");
-      }
-    }
-  });
-
   return (
     <div className="gc-design__wrapper">
       {/* 刻度尺 */}
@@ -170,9 +160,9 @@ function Wrapper(props, ref) {
             containerRef.current = el;
           }}
         >
-          <div className="canvas-container design-pannable" style={containerStyle} tabIndex="-1">
-            <div className="design-body" ref={dropRef}>
-              <div className="design-container" style={canvasStyle}>
+          <div className="canvas-container design-panel" style={containerStyle} tabIndex="-1">
+            <div className="design-body">
+              <div className="design-container" style={canvasStyle} onDragOver={handleDragOver} onDrop={handleDrop}>
                 <div
                   className="bg-container"
                   style={{

@@ -23,11 +23,6 @@ export const DIMENSION = {
 
 export const FORM_ID = "__form__";
 
-/*
- * 以下是拖拽相关
- */
-export const DRAGGABLE_COMPONENT = "COMPONENT";
-
 /**
  * 动画效果
  */

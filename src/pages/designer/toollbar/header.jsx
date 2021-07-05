@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Modal, Space, Button, Typography, Badge, message, Tooltip } from "antd";
 import copyTOClipboard from "copy-text-to-clipboard";
 import { connect } from "react-redux";

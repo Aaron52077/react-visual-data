@@ -6,7 +6,7 @@ import DATAV_CONF from "./datav";
 import OTHER_CONF from "./other";
 
 // if you should all configs.
-const condition = [BAR_CONF, LINE_CONF, PIE_CONF, MAP_CONF, OTHER_CONF, DATAV_CONF].flat(1);
+export const componentMarket = [BAR_CONF, LINE_CONF, PIE_CONF, MAP_CONF, OTHER_CONF, DATAV_CONF].flat(1);
 
 export default {
   bar: BAR_CONF,
@@ -14,6 +14,5 @@ export default {
   pie: PIE_CONF,
   map: MAP_CONF,
   datav: DATAV_CONF,
-  other: OTHER_CONF,
-  collection: condition
+  other: OTHER_CONF
 };

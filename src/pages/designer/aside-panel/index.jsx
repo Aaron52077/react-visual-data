@@ -1,123 +1,74 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
+import React, { Fragment, useRef, useState, useEffect, useCallback } from "react";
 import { Collapse, Tree, Select, Card, Col, Row } from "antd";
-import { DragSource } from "react-dnd";
-import { IconFont, Scrollbar, SplitPanel } from "~components";
 import { connect } from "react-redux";
+import { IconFont, Scrollbar, SplitPanel } from "~components";
 import { useDesigner, useView } from "~hooks/useDesigner";
-import collections from "../data";
-import { DRAGGABLE_COMPONENT } from "../constants";
+import designerList from "./designer-market.json";
 
 /**
  * 配置项汇总
  */
-const { collection } = collections;
+// const { collection } = designerList;
 const { VERSION } = window.appConfig;
 
-function FieldCard(props) {
-  const { node = {}, connectDragPreview, connectDragSource } = props;
-
-  return connectDragPreview(
-    connectDragSource(
-      <div className="silder-item">
-        <Card
-          hoverable
-          cover={node.icon ? <img alt="AutoComplete" src={`./static/component/${node.icon}.png`} /> : null}
-          bodyStyle={{
-            padding: "10px 5px",
-            fontSize: 12
-          }}
-        >
-          <Card.Meta description={node.name} />
-        </Card>
-      </div>
-    )
-  );
-}
-
-const FieldProvider = DragSource(
-  DRAGGABLE_COMPONENT,
-  {
-    /**
-     * 开始拖拽时触发当前函数
-     */
-    beginDrag: (props) => ({
-      component: props.node
-    })
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
-  })
-)(FieldCard);
-
-/**
- * 分类组件栏
- * @param {*} list 组件列表
- */
-const SubEnumField = ({ list }) => {
-  return (
-    <Row gutter={10}>
-      {list.map((ele, idx) => {
-        return (
-          <Col span={12} key={`${idx}`}>
-            <FieldProvider node={ele} />
-          </Col>
-        );
-      })}
-    </Row>
-  );
-};
+const designerTotal = Object.values(designerList).flat(1);
 
 /**
  * 枚举组件
  * @param {*} value 搜索值
  */
-const EnumFields = ({ value }) => {
-  const componentTools = useRef([
+const FieldEnum = ({ value }) => {
+  const componentEnum = useRef([
     {
       key: "bar",
       name: "柱状图",
       icon: "BarChartOutlined",
-      list: collections.bar
+      list: designerList.bar
     },
     {
       key: "line",
       name: "线形图",
       icon: "LineChartOutlined",
-      list: collections.line
+      list: designerList.line
     },
     {
       key: "pie",
       name: "饼状图",
       icon: "PieChartOutlined",
-      list: collections.pie
+      list: designerList.pie
     },
     {
       key: "map",
       name: "地图",
       icon: "HeatMapOutlined",
-      list: collections.map
+      list: designerList.map
     },
     {
       key: "other",
       name: "其他图表",
       icon: "FundOutlined",
-      list: collections.other
+      list: designerList.other
     },
     {
       key: "datav",
       name: "辅助组件",
       icon: "WindowsOutlined",
-      list: collections.datav
+      list: designerList.datav
     }
   ]).current;
-  const displayField = collection.filter((ele) => ele.name === value);
+
+  const displayField = designerTotal.filter((ele) => ele.name === value);
+
+  const handleDragStart = useCallback((ev, name) => {
+    ev.dataTransfer.setData("text", name);
+    const node = ev.target.childNodes[0];
+    ev.dataTransfer.setDragImage(node, node.clientWidth / 2, node.clientHeight / 2);
+  }, []);
 
   return displayField && displayField.length === 0 ? (
     <div className="silder-tab">
       <Collapse defaultActiveKey="bar" expandIconPosition="right" accordion>
-        {componentTools.map((item) => (
+        {componentEnum.map((item) => (
           <Collapse.Panel
             header={
               <Fragment>
@@ -127,13 +78,59 @@ const EnumFields = ({ value }) => {
             }
             key={item.key}
           >
-            <SubEnumField list={item.list} />
+            <Row gutter={10}>
+              {item.list.map((node, idx) => {
+                return (
+                  <Col span={12} key={`${idx}`}>
+                    <div
+                      className="silder-item"
+                      draggable={true}
+                      onDragStart={(event) => handleDragStart(event, node.type)}
+                    >
+                      <Card
+                        hoverable
+                        cover={
+                          node.icon ? (
+                            <img alt="AutoComplete" draggable={false} src={`./static/component/${node.icon}.png`} />
+                          ) : null
+                        }
+                        bodyStyle={{
+                          padding: "10px 5px",
+                          fontSize: 12
+                        }}
+                      >
+                        <Card.Meta description={node.name} />
+                      </Card>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
           </Collapse.Panel>
         ))}
       </Collapse>
     </div>
   ) : (
-    <SubEnumField list={displayField} />
+    <Row gutter={10}>
+      {displayField.map((node, idx) => {
+        return (
+          <Col span={12} key={`${idx}`}>
+            <div className="silder-item">
+              <Card
+                hoverable
+                cover={node.icon ? <img alt="AutoComplete" src={`./static/component/${node.icon}.png`} /> : null}
+                bodyStyle={{
+                  padding: "10px 5px",
+                  fontSize: 12
+                }}
+              >
+                <Card.Meta description={node.name} />
+              </Card>
+            </div>
+          </Col>
+        );
+      })}
+    </Row>
   );
 };
 
@@ -205,7 +202,7 @@ const FieldMarkets = ({ selected, dispatch }) => {
                 onChange={onChange}
                 filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
               >
-                {collection.map((item) => {
+                {designerTotal.map((item) => {
                   return (
                     <Select.Option value={item.name} key={item.name}>
                       {item.name}
@@ -213,7 +210,7 @@ const FieldMarkets = ({ selected, dispatch }) => {
                   );
                 })}
               </Select>
-              <EnumFields value={cname} />
+              <FieldEnum value={cname} />
             </Card>
           </Scrollbar>
         </div>

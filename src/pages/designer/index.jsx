@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { Designer } from "~renderer";
 import { Ctx, StoreCtx } from "~hooks/useDesigner";
 import { useDocumentTitle } from "~hooks/useDocumentTitle";
 import { useSet } from "~hooks/useSet";
 import { mergeFieldConfig, setLevelPath } from "~renderer/utils";
-import AxureLayoutAside from "./src/aside";
-import AxureLayoutHeader from "./src/header";
-import AxureLayoutContent from "./src/wrapper";
-import AxureLayoutField from "./src/setting";
+import DesignerAside from "./aside-panel";
+import DesignerHeader from "./toollbar/header";
+import DesignerContent from "./canvas-graph";
+import DesignerField from "./configuration-panel";
 import { dataVScreen, dataVApiList } from "@/api";
 import { pathToParam, loadScript } from "~utils";
 
@@ -55,6 +53,7 @@ function DataProvider(props) {
     },
     isShowReferLine: true
   });
+
   // 异步多接口请求
   const storageData = async () => {
     try {
@@ -83,7 +82,7 @@ function DataProvider(props) {
     props.dispatch({ type: "component/mode", data: "development" });
     props.dispatch({ type: "component/querys", data: pathToParam() });
     loadScript("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css", "css");
-    fetchData();
+    // fetchData();
     storageData();
   }, []);
 
@@ -96,19 +95,17 @@ function DataProvider(props) {
   return (
     <Ctx.Provider value={{ state, setState }}>
       <StoreCtx.Provider value={{ view, setView }}>
-        <AxureLayoutHeader />
+        <DesignerHeader />
         <section className="gc-design__bd">
-          <DndProvider backend={HTML5Backend}>
-            <AxureLayoutAside />
-            <AxureLayoutContent {...state.page}>
-              {state.components.length > 0
-                ? state.components.map((prop) => (
-                    <Designer value={prop} key={prop.uniqueId} onValueChange={onValueChange} />
-                  ))
-                : null}
-            </AxureLayoutContent>
-            <AxureLayoutField />
-          </DndProvider>
+          <DesignerAside />
+          <DesignerContent {...state.page}>
+            {state.components.length > 0
+              ? state.components.map((prop) => (
+                  <Designer value={prop} key={prop.uniqueId} onValueChange={onValueChange} />
+                ))
+              : null}
+          </DesignerContent>
+          <DesignerField />
         </section>
       </StoreCtx.Provider>
     </Ctx.Provider>

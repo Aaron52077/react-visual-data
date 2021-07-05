@@ -3,7 +3,6 @@
  */
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import cx from "classnames";
-import { Rnd } from "react-rnd";
 import { connect } from "react-redux";
 import { getField } from "~packages";
 import { useView, useDesigner } from "~hooks/useDesigner";
@@ -53,6 +52,10 @@ const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
   };
 
   const overwriteStyle = {
+    width,
+    height,
+    left,
+    top,
     borderStyle: rest.borderStyle || "solid",
     borderColor: isSelect ? "#2681ff" : "transparent",
     background,
@@ -134,24 +137,7 @@ const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
   );
 
   return (
-    <Rnd
-      className={classNames}
-      size={{ width: converLayout(width), height: converLayout(height) }}
-      position={{ x: left, y: top }}
-      id={value.uniqueId}
-      bounds="body"
-      dragAxis="both"
-      style={overwriteStyle}
-      disableDragging={isEditing}
-      enableResizing={!isEditing}
-      scale={view.scale}
-      onDragStart={onStopPropagation}
-      onDrag={onDragHandle}
-      onDragStop={onDragStopHandle}
-      onResize={onResizeHandle}
-      onResizeStop={onStopPropagation}
-      onClick={handleClick}
-    >
+    <div className={classNames} style={overwriteStyle}>
       <div className={cx("grid-line", { "is-active": isSelect })}>
         <div className="grid-line-top"></div>
         <div className="grid-line-left"></div>
@@ -160,7 +146,7 @@ const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
         </div>
       </div>
       {getSubField(fieldProps)}
-    </Rnd>
+    </div>
   );
 };
 
