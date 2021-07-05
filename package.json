@@ -57,6 +57,17 @@
     "react-app-rewired": "^2.1.6",
     "styled-components": "^5.1.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,less}": [
+      "prettier --write"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -69,14 +80,6 @@
       "last 1 firefox version",
       "last 1 safari version",
       "ie 11"
-    ]
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json}": [
-      "prettier --write"
-    ],
-    "src/**/*.{less}": [
-      "prettier --write"
     ]
   }
 }
