@@ -1,11 +1,11 @@
 import React from "react";
 import { SchemaRender } from "~renderer";
-import { useTools } from "~common/hooks";
-import { DIMENSION } from "~common/constants";
+import { useDesigner } from "~hooks/useDesigner";
+import { DIMENSION } from "../constants";
 import { pageSchema } from "../schema";
 
 const PageSetting = () => {
-  const { state, setState } = useTools();
+  const { state, setState } = useDesigner();
 
   const onValueChange = (value) => {
     const { pageSize } = value.page;

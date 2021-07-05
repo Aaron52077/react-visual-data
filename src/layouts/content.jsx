@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { AutoLoading, Scrollbar } from "~components";
 import routerList from "@/router/router-map";
 
-import { useDocumentTitle } from "~common/hooks";
+import { useDocumentTitle } from "~hooks/useDocumentTitle";
 
 function getMenuByProperty(list, key, value) {
   let stack = [];

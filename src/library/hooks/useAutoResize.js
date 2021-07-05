@@ -1,56 +1,6 @@
-/**
- * Updated by Aaron on 2020-06-10.
- * more eg: https://github.com/streamich/react-use
- */
-import { useReducer, useContext, useRef, useEffect, useState, createContext, useImperativeHandle } from "react";
-import { onEvent, offEvent, debounce } from "~utils";
+import { useRef, useEffect, useState, useImperativeHandle } from "react";
 import { resizeSensor } from "~utils/resize-sensor";
-
-export const Ctx = createContext(() => {});
-export const StoreCtx = createContext({});
-
-export const useTools = () => {
-  return useContext(Ctx);
-};
-
-export const useStore = () => {
-  return useContext(StoreCtx);
-};
-
-export function useDocumentTitle(title) {
-  const prevTitleRef = useRef(title);
-  useEffect(() => {
-    document.title = title;
-    return () => {
-      // eslint-disable-next-line
-      document.title = prevTitleRef.current;
-    };
-  }, [title]);
-}
-
-export function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]); // Only re-run if value changes
-
-  return ref.current;
-}
-
-export const useDebounce = (action, ms = 500) => {
-  const debouncedAction = useRef(null);
-
-  useEffect(() => {
-    if (!debouncedAction.current) {
-      debouncedAction.current = debounce(action, ms);
-    }
-  }, []);
-
-  return debouncedAction.current;
-};
-
-// 基于redux的实现，类似于class component的setState 适用于复杂对象模式
-export const useSet = (initState) => useReducer((state, action) => ({ ...state, ...action }), initState);
+import { onEvent, offEvent, debounce } from "~utils";
 
 function observerDomResize(dom, callback) {
   const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
@@ -111,7 +61,3 @@ export const useAutoResize = (ref) => {
 
   return { ...state, domRef, initWH };
 };
-
-export function composeProviders(...providers) {
-  return ({ children }) => providers.reduce((prev, Provider) => <Provider>{prev}</Provider>, children);
-}

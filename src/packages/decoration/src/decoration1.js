@@ -1,7 +1,7 @@
-import React, { useMemo, useRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { useAutoResize } from '~common/hooks';
-import { uuid } from '~utils';
+import React, { useMemo, useRef, forwardRef } from "react";
+import PropTypes from "prop-types";
+import { useAutoResize } from "~hooks/useAutoResize";
+import { uuid } from "~utils";
 
 const svgWH = [100, 100];
 
@@ -10,7 +10,7 @@ const Decoration = forwardRef(({ children, style, waitTime = 3 }, ref) => {
 
   const polygonIdRef = useRef(`decoration-polygon-${uuid()}`);
 
-  const mergedColor = ['rgba(3, 166, 224, 0.8)', 'rgba(3, 166, 224, 0.5)'];
+  const mergedColor = ["rgba(3, 166, 224, 0.8)", "rgba(3, 166, 224, 0.5)"];
 
   const svgScale = useMemo(() => {
     const [w, h] = svgWH;
@@ -79,7 +79,7 @@ const Decoration = forwardRef(({ children, style, waitTime = 3 }, ref) => {
             key={i}
             href={`#${polygonIdRef.current}`}
             stroke={mergedColor[1]}
-            fill={Math.random() > 0.4 ? 'transparent' : mergedColor[0]}
+            fill={Math.random() > 0.4 ? "transparent" : mergedColor[0]}
           >
             <animateTransform
               attributeName="transform"

@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-const openMenu = keyframes`
+const openRuler = keyframes`
   from {
     opacity: 0;
     transform: scale(0.8);
@@ -10,7 +10,8 @@ const openMenu = keyframes`
     transform: scale(1);
   }
 `;
-const closeMenu = keyframes`
+
+const closeRuler = keyframes`
   from {
     opacity: 1;
     transform: scale(1);
@@ -33,11 +34,11 @@ export const StyleMenu = styled.div`
   padding: 6px 0;
   transition: opacity 0.2s ease-in-out;
   transform-origin: 0 0;
-  animation: ${openMenu} 0.2s;
+  animation: ${openRuler} 0.2s;
   animation-fill-mode: forwards;
   z-index: 999;
   &.hide-menu {
-    animation: ${closeMenu} 0.1s;
+    animation: ${closeRuler} 0.1s;
     animation-fill-mode: forwards;
     z-index: -9999;
   }

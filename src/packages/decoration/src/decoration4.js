@@ -1,11 +1,11 @@
-import React, { useRef, forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, forwardRef, useMemo } from "react";
+import PropTypes from "prop-types";
 
-import { useAutoResize } from '~common/hooks';
-import { uuid } from '~utils';
-import { hexToRgb } from '../../utils';
+import { useAutoResize } from "~hooks/useAutoResize";
+import { uuid } from "~utils";
+import { hexToRgb } from "../../utils";
 
-const defaultColor = ['#2783ce', '#2cf7fe'];
+const defaultColor = ["#2783ce", "#2cf7fe"];
 const segment = 30;
 const sectorAngle = Math.PI / 3;
 const ringNum = 3;
@@ -28,11 +28,9 @@ const BorderBox = forwardRef(({ children, style }, ref) => {
     const angleGap = sectorAngle / segment;
     const r = width / 4;
     let lastEndPoints = getCircleRadianPoint(x, y, r, startAngle);
-    return new Array(segment).fill('').map((_, i) => {
-      const endPoints = getCircleRadianPoint(x, y, r, startAngle - (i + 1) * angleGap).map((_) =>
-        _.toFixed(5)
-      );
-      const d = `M${lastEndPoints.join(',')} A${r}, ${r} 0 0 0 ${endPoints.join(',')}`;
+    return new Array(segment).fill("").map((_, i) => {
+      const endPoints = getCircleRadianPoint(x, y, r, startAngle - (i + 1) * angleGap).map((_) => _.toFixed(5));
+      const d = `M${lastEndPoints.join(",")} A${r}, ${r} 0 0 0 ${endPoints.join(",")}`;
       lastEndPoints = endPoints;
       return d;
     });
@@ -40,9 +38,7 @@ const BorderBox = forwardRef(({ children, style }, ref) => {
 
   function calcPathColor() {
     const colorGap = 100 / (segment - 1);
-    return new Array(segment)
-      .fill(defaultColor[0])
-      .map((_, i) => hexToRgb(defaultColor[0], 100 - i * colorGap));
+    return new Array(segment).fill(defaultColor[0]).map((_, i) => hexToRgb(defaultColor[0], 100 - i * colorGap));
   }
 
   function calcCircleR() {
@@ -53,24 +49,24 @@ const BorderBox = forwardRef(({ children, style }, ref) => {
   function calcSplitLinePoints() {
     const angleGap = Math.PI / 6;
     const r = width / 2;
-    return new Array(6).fill('').map((_, i) => {
+    return new Array(6).fill("").map((_, i) => {
       const startAngle = angleGap * (i + 1);
       const endAngle = startAngle + Math.PI;
       const startPoint = getCircleRadianPoint(x, y, r, startAngle);
       const endPoint = getCircleRadianPoint(x, y, r, endAngle);
-      return `${startPoint.join(',')} ${endPoint.join(',')}`;
+      return `${startPoint.join(",")} ${endPoint.join(",")}`;
     });
   }
 
   function calcArcD() {
     const angleGap = Math.PI / 6;
     const r = width / 2 - 1;
-    return new Array(4).fill('').map((_, i) => {
+    return new Array(4).fill("").map((_, i) => {
       const startAngle = angleGap * (3 * i + 1);
       const endAngle = startAngle + angleGap;
       const startPoint = getCircleRadianPoint(x, y, r, startAngle);
       const endPoint = getCircleRadianPoint(x, y, r, endAngle);
-      return `M${startPoint.join(',')} A${x}, ${y} 0 0 1 ${endPoint.join(',')}`;
+      return `M${startPoint.join(",")} A${x}, ${y} 0 0 1 ${endPoint.join(",")}`;
     });
   }
 
@@ -84,10 +80,7 @@ const BorderBox = forwardRef(({ children, style }, ref) => {
     };
   }
 
-  const { pathD, pathColor, circleR, splitLinePoints, arcD } = useMemo(calcSVGData, [
-    width,
-    height
-  ]);
+  const { pathD, pathColor, circleR, splitLinePoints, arcD } = useMemo(calcSVGData, [width, height]);
 
   return (
     <div className="gc-containers" style={style} ref={domRef}>
@@ -104,15 +97,7 @@ const BorderBox = forwardRef(({ children, style }, ref) => {
           </radialGradient>
         </defs>
         {circleR.map((r, i) => (
-          <circle
-            key={i}
-            r={r}
-            cx={x}
-            cy={y}
-            stroke={defaultColor[1]}
-            strokeWidth="0.5"
-            fill="transparent"
-          />
+          <circle key={i} r={r} cx={x} cy={y} stroke={defaultColor[1]} strokeWidth="0.5" fill="transparent" />
         ))}
         <circle r="1" cx={x} cy={y} stroke="transparent" fill={`url(#${gradientId})`}>
           <animate attributeName="r" values={`1;${x}`} dur="2s" repeatCount="indefinite"></animate>

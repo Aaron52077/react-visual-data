@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useDocumentTitle } from "~common/hooks";
+import { useDocumentTitle } from "~hooks/useDocumentTitle";
 import { loadScript } from "~utils";
 
 const rows = {

@@ -3,9 +3,9 @@ import { Collapse, Tree, Select, Card, Col, Row } from "antd";
 import { DragSource } from "react-dnd";
 import { IconFont, Scrollbar, SplitPanel } from "~components";
 import { connect } from "react-redux";
-import { useTools, useStore } from "~common/hooks";
+import { useDesigner, useView } from "~hooks/useDesigner";
 import collections from "../data";
-import { DRAGGABLE_COMPONENT } from "~common/constants";
+import { DRAGGABLE_COMPONENT } from "../constants";
 
 /**
  * 配置项汇总
@@ -147,8 +147,8 @@ const FieldMarkets = ({ selected, dispatch }) => {
       children: []
     }
   ]);
-  const { state, setState } = useTools();
-  const { view } = useStore();
+  const { state, setState } = useDesigner();
+  const { view } = useView();
 
   useEffect(() => {
     let treeList = state.components.map((m) => {

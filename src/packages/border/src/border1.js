@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { useAutoResize } from '~common/hooks';
+import React, { forwardRef } from "react";
+import { useAutoResize } from "~hooks/useAutoResize";
 
-export default forwardRef(({ children, style, backgroundColor = 'transparent' }, ref) => {
+export default forwardRef(({ children, style, backgroundColor = "transparent" }, ref) => {
   const { width, height, domRef } = useAutoResize(ref);
 
   return (
@@ -9,24 +9,18 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
       <svg className="gc-position" width={width} height={height}>
         <polygon
           fill={backgroundColor}
-          points={`10, 27 10, ${height - 27} 13, ${height - 24} 13, ${height - 21} 24, ${
-            height - 11
-          }
+          points={`10, 27 10, ${height - 27} 13, ${height - 24} 13, ${height - 21} 24, ${height - 11}
         38, ${height - 11} 41, ${height - 8} 73, ${height - 8} 75, ${height - 10} 81, ${height - 10}
-        85, ${height - 6} ${width - 85}, ${height - 6} ${width - 81}, ${height - 10} ${
-            width - 75
-          }, ${height - 10}
+        85, ${height - 6} ${width - 85}, ${height - 6} ${width - 81}, ${height - 10} ${width - 75}, ${height - 10}
         ${width - 73}, ${height - 8} ${width - 41}, ${height - 8} ${width - 38}, ${height - 11}
         ${width - 24}, ${height - 11} ${width - 13}, ${height - 21} ${width - 13}, ${height - 24}
         ${width - 10}, ${height - 27} ${width - 10}, 27 ${width - 13}, 25 ${width - 13}, 21
         ${width - 24}, 11 ${width - 38}, 11 ${width - 41}, 8 ${width - 73}, 8 ${width - 75}, 10
-        ${width - 81}, 10 ${
-            width - 85
-          }, 6 85, 6 81, 10 75, 10 73, 8 41, 8 38, 11 24, 11 13, 21 13, 24`}
+        ${width - 81}, 10 ${width - 85}, 6 85, 6 81, 10 75, 10 73, 8 41, 8 38, 11 24, 11 13, 21 13, 24`}
         />
       </svg>
 
-      {['left-top', 'right-top', 'left-bottom', 'right-bottom'].map((name) => (
+      {["left-top", "right-top", "left-bottom", "right-bottom"].map((name) => (
         <svg width="150px" height="150px" key={name} className={`${name} gc-position`}>
           <polygon
             fill="#235fa7"
@@ -40,10 +34,7 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
               repeatCount="indefinite"
             />
           </polygon>
-          <polygon
-            fill="#4fd2dd"
-            points="27.599999999999998,4.8 38.4,4.8 35.4,7.8 30.599999999999998,7.8"
-          >
+          <polygon fill="#4fd2dd" points="27.599999999999998,4.8 38.4,4.8 35.4,7.8 30.599999999999998,7.8">
             <animate
               attributeName="fill"
               values="#4fd2dd;#235fa7;#4fd2dd"

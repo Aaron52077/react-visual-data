@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
 /**
  * 设计器组件公用状态
@@ -8,31 +8,28 @@ import { handleActions } from 'redux-actions';
  * @param querys url传参
  * @param dependencies 联动依赖关系
  * @param api api枚举列表
- * @param sql aql枚举列表
  */
 const initState = {
-  mode: 'development',
-  selected: '-',
-  fieldType: 'component',
-  querys: {},
+  mode: "development",
+  selected: "-",
+  fieldType: "component",
   dependencies: [],
   api: [],
-  sql: []
+  querys: {}
 };
 
 export default handleActions(
   {
-    'component/mode': (state, action) => ({
+    "component/mode": (state, action) => ({
       ...state,
-      mode: ['development', 'preview'].includes(action.data) ? action.data : 'preview'
+      mode: ["development", "preview"].includes(action.data) ? action.data : "preview"
     }),
-    'component/selected': (state, action) => ({ ...state, selected: action.data }),
-    'component/fieldType': (state, action) => ({ ...state, fieldType: action.data }),
-    'component/querys': (state, action) => ({ ...state, querys: action.data }),
-    'component/dependencies': (state, action) => ({ ...state, dependencies: action.data }),
-    'component/api': (state, action) => ({ ...state, api: action.data }),
-    'component/sql': (state, action) => ({ ...state, sql: action.data }),
-    'component/resetState': () => {
+    "component/selected": (state, action) => ({ ...state, selected: action.data }),
+    "component/fieldType": (state, action) => ({ ...state, fieldType: action.data }),
+    "component/querys": (state, action) => ({ ...state, querys: action.data }),
+    "component/dependencies": (state, action) => ({ ...state, dependencies: action.data }),
+    "component/api": (state, action) => ({ ...state, api: action.data }),
+    "component/resetState": () => {
       return initState;
     }
   },

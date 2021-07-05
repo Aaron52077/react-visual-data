@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
-import { Select } from 'antd';
-import fetcher from '~packages/hoc';
-import { useTools } from '~common/hooks';
+import React, { useMemo } from "react";
+import { connect } from "react-redux";
+import { Select } from "antd";
+import fetcher from "~packages/hoc";
+import { useDesigner } from "~hooks/useDesigner";
 
 function SelectComponent({ name, value, onChange, selected }) {
-  const { state } = useTools();
+  const { state } = useDesigner();
   const options = useMemo(() => {
     return state.components.filter((v) => v.uniqueId !== selected && v.data.dependence);
   }, [selected]);
@@ -17,7 +17,7 @@ function SelectComponent({ name, value, onChange, selected }) {
 
   return (
     <Select
-      style={{ width: '100%' }}
+      style={{ width: "100%" }}
       mode="multiple"
       allowClear={true}
       placeholder="请选择联动图表"

@@ -5,10 +5,10 @@ import history from "./history";
 import AccountIn from "@/pages/account";
 import AccountOAuthIn from "@/pages/account/oauth";
 import BaseLayout from "@/layouts";
-import AxureScreen from "@/pages/designer";
+import Designer from "@/pages/designer";
 import FormRender from "@/pages/dashboard/formRender";
 import HtmlSpreadsheet from "@/pages/spreadsheet";
-import AxureScreenPanel from "@/pages/designer/preview";
+import DesignerPanel from "@/pages/designer/preview";
 import { pathToParam } from "~utils";
 
 class CreateRouter extends Component {
@@ -22,8 +22,8 @@ class CreateRouter extends Component {
           <Route path="/oauth" component={AccountOAuthIn} />
           <Route path="/form-render" component={FormRender} />
           <Route path="/spreadsheet" component={HtmlSpreadsheet} />
-          <Route path="/fullscreen/preview/:id" component={AxureScreenPanel} />
-          <Route path="/workspace/design" component={AxureScreen} />
+          <Route path="/workspace/preview/:id" component={DesignerPanel} />
+          <Route path="/workspace/design" component={Designer} />
           <Route
             path="/"
             render={() => {

@@ -1,8 +1,8 @@
-import React, { useMemo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { useAutoResize } from '~common/hooks';
+import React, { useMemo, forwardRef } from "react";
+import PropTypes from "prop-types";
+import { useAutoResize } from "~hooks/useAutoResize";
 
-const defaultColor = ['#fff', '#0de7c2'];
+const defaultColor = ["#fff", "#0de7c2"];
 const pointSideLength = 2.5;
 const halfPointSideLength = pointSideLength / 2;
 const svgWH = [200, 50];
@@ -17,9 +17,7 @@ function getPoints() {
 
   const points = new Array(rowNum)
     .fill(0)
-    .map((foo, i) =>
-      new Array(rowPoints).fill(0).map((foo, j) => [horizontalGap * (j + 1), verticalGap * (i + 1)])
-    );
+    .map((foo, i) => new Array(rowPoints).fill(0).map((foo, j) => [horizontalGap * (j + 1), verticalGap * (i + 1)]));
 
   return points.reduce((all, item) => [...all, ...item], []);
 }
@@ -79,18 +77,8 @@ const Decoration = forwardRef(({ style }, ref) => {
             width={pointSideLength * 2}
             height={pointSideLength * 2}
           >
-            <animate
-              attributeName="width"
-              values={`0;${pointSideLength * 2}`}
-              dur="2s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="height"
-              values={`0;${pointSideLength * 2}`}
-              dur="2s"
-              repeatCount="indefinite"
-            />
+            <animate attributeName="width" values={`0;${pointSideLength * 2}`} dur="2s" repeatCount="indefinite" />
+            <animate attributeName="height" values={`0;${pointSideLength * 2}`} dur="2s" repeatCount="indefinite" />
             <animate
               attributeName="x"
               values={`${rects[0][0]};${rects[0][0] - pointSideLength}`}

@@ -4,22 +4,22 @@ const BASE_CONF = {
   height: 250,
   left: 15,
   top: 15,
-  background: '',
+  background: "",
   isLock: false,
   isHidden: false,
-  remark: '',
+  remark: "",
   isCustomStyle: false,
-  borderRadius: '',
-  borderColor: '',
-  borderWidth: '',
-  borderStyle: 'solid',
+  borderRadius: "",
+  borderColor: "",
+  borderWidth: "",
+  borderStyle: "solid",
   shadowOffset: 0,
-  shadowColor: '',
+  shadowColor: "",
   shadowWidth: 0,
-  animateType: '',
-  animateTime: '',
-  animateSpeed: '',
-  animateRepeat: '',
+  animateType: "",
+  animateTime: "",
+  animateSpeed: "",
+  animateRepeat: "",
   drillDownOpen: false,
   drillDown: [],
   dependenceOpen: false,
@@ -30,10 +30,10 @@ const BASE_CONF = {
 
 // 公共数据配置项抽离
 const BASE_DATA_CONF = {
-  dataType: 'json',
-  dataSqlId: '',
+  dataType: "json",
+  dataSqlId: "",
   dataModals: {},
-  dataApiId: ''
+  dataApiId: ""
 };
 
 export { BASE_CONF, BASE_DATA_CONF };

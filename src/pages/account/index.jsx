@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { IconFont } from "~components";
 import { aesEncrypt } from "~utils";
 import { accountIn, getMeunList } from "@/api";
-import { useDocumentTitle } from "~common/hooks";
+import { useDocumentTitle } from "~hooks/useDocumentTitle";
 import "./styles.less";
 
 const LoginAuth = (props) => {

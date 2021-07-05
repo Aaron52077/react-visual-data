@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, forwardRef, useMemo } from "react";
-import { useAutoResize } from "~common/hooks";
+import { useAutoResize } from "~hooks/useAutoResize";
 
 const defaultConfig = {
   data: [],

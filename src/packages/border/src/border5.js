@@ -1,8 +1,8 @@
-import React, { useState, forwardRef } from 'react';
-import { useAutoResize } from '~common/hooks';
-import { uuid } from '~utils';
+import React, { useState, forwardRef } from "react";
+import { useAutoResize } from "~hooks/useAutoResize";
+import { uuid } from "~utils";
 
-export default forwardRef(({ children, style, backgroundColor = 'transparent' }, ref) => {
+export default forwardRef(({ children, style, backgroundColor = "transparent" }, ref) => {
   const { width, height, domRef } = useAutoResize(ref);
   const [{ gradientId, maskId }] = useState(() => {
     const id = uuid();
@@ -13,27 +13,15 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
     };
   });
 
-  const mergedColor = ['#11eefd', '#0078d2'];
+  const mergedColor = ["#11eefd", "#0078d2"];
 
   return (
     <div className="gc-containers" style={style} ref={domRef}>
       <svg className="svg-container" width={width} height={height}>
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <animate
-              attributeName="x1"
-              values="0%;100%;0%"
-              dur="10s"
-              begin="0s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="x2"
-              values="100%;0%;100%"
-              dur="10s"
-              begin="0s"
-              repeatCount="indefinite"
-            />
+            <animate attributeName="x1" values="0%;100%;0%" dur="10s" begin="0s" repeatCount="indefinite" />
+            <animate attributeName="x2" values="100%;0%;100%" dur="10s" begin="0s" repeatCount="indefinite" />
             <stop offset="0%" stopColor={mergedColor[0]}>
               <animate
                 attributeName="stop-color"
@@ -104,19 +92,13 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
               stroke="#fff"
               strokeWidth="3"
               fill="transparent"
-              points={`${width * 0.35}, ${height - 3} ${width - 3}, ${height - 3} ${width - 3}, ${
-                height * 0.35
-              }`}
+              points={`${width * 0.35}, ${height - 3} ${width - 3}, ${height - 3} ${width - 3}, ${height * 0.35}`}
             />
             <polyline
               fill="#fff"
               points={`
-                ${width * 0.92}, ${height - 3} ${width - 3}, ${height - 3} ${width - 3}, ${
-                height * 0.8
-              }
-                ${width - 9}, ${height * 0.8 + 7} ${width - 9}, ${height - 9} ${
-                width * 0.92 + 7
-              }, ${height - 9}
+                ${width * 0.92}, ${height - 3} ${width - 3}, ${height - 3} ${width - 3}, ${height * 0.8}
+                ${width - 9}, ${height * 0.8 + 7} ${width - 9}, ${height - 9} ${width * 0.92 + 7}, ${height - 9}
               `}
             />
           </mask>
@@ -127,27 +109,14 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
           points={`
           15, 9 ${width * 0.1 + 1}, 9 ${width * 0.1 + 4}, 6 ${width * 0.52 + 2}, 6
           ${width * 0.52 + 6}, 10 ${width * 0.58 - 7}, 10 ${width * 0.58 - 2}, 6
-          ${width * 0.9 + 2}, 6 ${width * 0.9 + 6}, 10 ${width - 10}, 10 ${width - 10}, ${
-            height * 0.1 - 6
-          }
-          ${width - 6}, ${height * 0.1 - 1} ${width - 6}, ${height * 0.8 + 1} ${width - 10}, ${
-            height * 0.8 + 6
-          }
-          ${width - 10}, ${height - 10} ${width * 0.92 + 7}, ${height - 10}  ${width * 0.92 + 2}, ${
-            height - 6
-          }
+          ${width * 0.9 + 2}, 6 ${width * 0.9 + 6}, 10 ${width - 10}, 10 ${width - 10}, ${height * 0.1 - 6}
+          ${width - 6}, ${height * 0.1 - 1} ${width - 6}, ${height * 0.8 + 1} ${width - 10}, ${height * 0.8 + 6}
+          ${width - 10}, ${height - 10} ${width * 0.92 + 7}, ${height - 10}  ${width * 0.92 + 2}, ${height - 6}
           11, ${height - 6} 11, ${height * 0.15 - 2} 15, ${height * 0.15 - 7}
         `}
         />
 
-        <rect
-          x="0"
-          y="0"
-          width={width}
-          height={height}
-          fill={`url(#${gradientId})`}
-          mask={`url(#${maskId})`}
-        />
+        <rect x="0" y="0" width={width} height={height} fill={`url(#${gradientId})`} mask={`url(#${maskId})`} />
       </svg>
       <div className="gc-containers">{children}</div>
     </div>

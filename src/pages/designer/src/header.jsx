@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { Modal, Space, Button, Typography, Badge, message, Tooltip } from "antd";
 import copyTOClipboard from "copy-text-to-clipboard";
 import { connect } from "react-redux";
-import { useTools, useStore } from "~common/hooks";
+import { useDesigner, useView } from "~hooks/useDesigner";
 import { uuid } from "~utils";
 import { generatorField, getFieldConf, getFieldOrderBy, orderBy } from "~renderer/utils";
 import { IconFont, MonacoEditor } from "~components";
 import storage from "~utils/storage";
 
 const FieldActionsConf = ({ selected, dispatch }) => {
-  const { state, setState } = useTools();
-  const { view, setView } = useStore();
+  const { state, setState } = useDesigner();
+  const { view, setView } = useView();
 
   const onKeyDown = (e) => {
     canUndo(e.ctrlKey || e.metaKey) && 90 === e.keyCode && (e.shiftKey ? this.redo() : this.undo());
@@ -221,7 +221,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
         </div>
         <Space className="gc-design__hd--save">
           <Button
-            href={"/#/fullscreen/preview/" + uuid()}
+            href={"/#/workspace/preview/" + uuid()}
             target="_blank"
             onClick={() => {
               storage.setLocal("schema_screen_config", {

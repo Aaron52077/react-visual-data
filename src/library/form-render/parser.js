@@ -1,5 +1,5 @@
 import getBasicField from "./getField";
-import subFieldGenerator from "./subFieldGenerator";
+import transformField from "./transformField";
 
 // 对于数组或对象类型，获取其子集schema
 function getSubSchemas(schema = {}) {
@@ -30,19 +30,8 @@ function getSubSchemas(schema = {}) {
 }
 
 function getBasicProps(settings, materials) {
-  const {
-    labelColor,
-    schema,
-    name,
-    cname,
-    cid,
-    verify,
-    displayType,
-    labelWidth,
-    formData,
-    disabled,
-    tooltip
-  } = settings;
+  const { labelColor, schema, name, cname, cid, verify, displayType, labelWidth, formData, disabled, tooltip } =
+    settings;
 
   if (!schema) return {};
 
@@ -111,7 +100,7 @@ function getBasicProps(settings, materials) {
     basicProps.getSubField = (m) => {
       const { field, props } = subItems[m.name] || {};
 
-      return subFieldGenerator({
+      return transformField({
         ...field,
         props: {
           ...props,

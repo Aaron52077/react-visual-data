@@ -1,25 +1,25 @@
-import React, { useMemo } from 'react';
-import { Tabs } from 'antd';
-import { connect } from 'react-redux';
-import cx from 'classnames';
-import { SchemaRender } from '~renderer';
-import PageLayout from './page';
-import { useTools, useStore } from '~common/hooks';
-import { getFieldConf, mergeFieldConfig, setLevelPath } from '~renderer/utils';
-import { screenToSchema } from '../schema';
+import React, { useMemo } from "react";
+import { Tabs } from "antd";
+import { connect } from "react-redux";
+import cx from "classnames";
+import { SchemaRender } from "~renderer";
+import PageLayout from "./page";
+import { useDesigner, useView } from "~hooks/useDesigner";
+import { getFieldConf, mergeFieldConfig, setLevelPath } from "~renderer/utils";
+import { screenToSchema } from "../schema";
 
 const { TabPane } = Tabs;
 
 const FieldSetConf = ({ selected }) => {
-  const { state, setState } = useTools();
-  const { view } = useStore();
+  const { state, setState } = useDesigner();
+  const { view } = useView();
 
-  const classNames = cx('gc-design__setting', {
-    'is-show': view.settingCollapsed
+  const classNames = cx("gc-design__setting", {
+    "is-show": view.settingCollapsed
   });
 
   const currentConf = useMemo(() => {
-    if (state.components.length > 0 && selected !== '-') {
+    if (state.components.length > 0 && selected !== "-") {
       try {
         // TODO: 获取物料组件配置项
         const currentField = getFieldConf(state.components, selected);
@@ -41,7 +41,7 @@ const FieldSetConf = ({ selected }) => {
     };
   }, [selected, state.tabsKey]);
 
-  if (selected === '-') {
+  if (selected === "-") {
     return (
       <div className={classNames}>
         <PageLayout />

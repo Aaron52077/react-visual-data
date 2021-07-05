@@ -5,7 +5,7 @@ import { pathToMosaic } from "~utils";
 
 import "./style.less";
 
-function IframeSimple(props) {
+function IframeWrapper(props) {
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("");
   const { className = "", src = "", data, required = false } = props;
@@ -49,4 +49,4 @@ function IframeSimple(props) {
   );
 }
 
-export default IframeSimple;
+export default IframeWrapper;

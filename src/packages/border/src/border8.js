@@ -1,8 +1,8 @@
-import React, { useRef, forwardRef } from 'react';
-import { useAutoResize } from '~common/hooks';
-import { uuid } from '~utils';
+import React, { useRef, forwardRef } from "react";
+import { useAutoResize } from "~hooks/useAutoResize";
+import { uuid } from "~utils";
 
-export default forwardRef(({ children, style, backgroundColor = 'transparent' }, ref) => {
+export default forwardRef(({ children, style, backgroundColor = "transparent" }, ref) => {
   const filterId = useRef(`border-box8-filterId-${uuid()}`).current;
 
   const { width, height, domRef } = useAutoResize(ref);
@@ -59,9 +59,7 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
           strokeLinecap="round"
           filter={`url(#${filterId})`}
           stroke="#7ce7fd"
-          d={`M ${width - 20} 5 L ${width - 15} 5 Q ${width - 5} 5 ${width - 5} 15 L ${
-            width - 5
-          } 20`}
+          d={`M ${width - 20} 5 L ${width - 15} 5 Q ${width - 5} 5 ${width - 5} 15 L ${width - 5} 20`}
         />
         <path
           strokeWidth="2"

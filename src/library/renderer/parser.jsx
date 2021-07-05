@@ -1,18 +1,12 @@
-/**
- * 下钻模态框组件解析
- */
-import React, { useMemo, useCallback } from 'react';
-import cx from 'classnames';
-import { connect } from 'react-redux';
-import generator from './generator';
-import { getField } from '~packages';
-import { converLayout } from '~utils/helper';
-import { guid } from '~utils';
+import React, { useState, useEffect } from "react";
+import cx from "classnames";
+import generator from "./generator";
+import { getField } from "~packages";
 
-const GeneratorField = ({ mode, value, onRowValueChange }) => {
-  const { width, height, background, ...rest } = value.data;
-
-  const classNames = cx('gc-field animate__animated', {
+const GeneratorField = ({ value }) => {
+  const [show, setShow] = useState(true);
+  const { width, height, background, left, top, isHidden, ...rest } = value.data;
+  const className = cx("animate__animated", {
     [`animate__${rest.animateType}`]: rest.animateType,
     [`animate__${rest.animateSpeed}`]: rest.animateSpeed,
     [`animate__${rest.animateRepeat}`]: rest.animateRepeat,
@@ -20,49 +14,49 @@ const GeneratorField = ({ mode, value, onRowValueChange }) => {
   });
 
   const overwriteStyle = {
-    width: mode === 'development' ? '100%' : 'calc((width || 1) / 12 * 90%)',
-    height: converLayout(height),
-    borderStyle: rest.borderStyle || 'solid',
-    borderColor: 'transparent',
+    position: "absolute",
+    left: left,
+    top: top,
+    padding: "5px 12px",
+    width: width,
+    height: height,
+    borderColor: "transparent",
+    borderWidth: 2,
+    borderStyle: "solid",
     background,
-    borderRadius: rest.borderRadius,
-    borderWidth: rest.borderWidth || 2,
     boxShadow: rest.shadowColor
-      ? `${rest.shadowColor} ${rest.shadowWidth || 0} ${rest.shadowOffset || 0} ${
-          rest.shadowOffset || 0
-        }`
+      ? `${rest.shadowColor} ${rest.shadowWidth || 0} ${rest.shadowOffset || 0} ${rest.shadowOffset || 0}`
       : rest.shadowWidth
   };
 
-  const getSubField = useCallback(
-    (m) => {
-      const prop = getField(value.type);
-      return generator(prop)(m);
-    },
-    [value.type]
-  );
+  useEffect(() => {
+    setShow(!isHidden);
+  }, [isHidden]);
 
-  const fieldProps = useMemo(
-    () => ({
-      value: value.data,
-      type: value.type,
-      uniqueId: guid(),
-      options: value.data.config || {},
-      onChange: (val, level) => {
-        if (!onRowValueChange) return;
-        onRowValueChange(val, level);
-      }
-    }),
-    [value.data, onRowValueChange]
-  );
+  const getSubField = (m) => {
+    const prop = getField(value.type);
+    return generator(prop)(m);
+  };
 
   return (
-    <div className={classNames} style={overwriteStyle}>
-      {getSubField(fieldProps)}
+    <div style={overwriteStyle} className={className}>
+      {show
+        ? getSubField({
+            isDevelop: false,
+            type: value.type,
+            value: value.data,
+            uniqueId: value.uniqueId,
+            options: value.data.config
+          })
+        : null}
     </div>
   );
 };
 
-export default connect((state) => ({
-  mode: state.component.mode
-}))(GeneratorField);
+const GeneratorWidget = ({ widgets = [] }) => {
+  if (widgets.length === 0) return null;
+
+  return widgets.map((item) => <GeneratorField value={item} key={item.uniqueId} />);
+};
+
+export default GeneratorWidget;

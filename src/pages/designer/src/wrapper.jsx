@@ -1,14 +1,13 @@
-import React, { useEffect, forwardRef, useRef, useMemo, useLayoutEffect } from 'react';
-import { Space, Button, Tooltip, message } from 'antd';
-import { useDrop } from 'react-dnd';
-import { connect } from 'react-redux';
-import { IconFont, Scrollbar, SketchRuler } from '~components';
-import { generatorField } from '~renderer/utils';
-import { useAutoResize } from '~common/hooks';
-import { useStore, useTools } from '~common/hooks';
-import { THICK, DIMENSION } from '~common/constants';
-import { round, deepMergeObj } from '~utils/helper';
-import { DRAGGABLE_COMPONENT } from '~common/constants';
+import React, { useEffect, forwardRef, useRef, useMemo, useLayoutEffect } from "react";
+import { Space, Button, Tooltip, message } from "antd";
+import { useDrop } from "react-dnd";
+import { connect } from "react-redux";
+import { IconFont, Scrollbar, SketchRuler } from "~components";
+import { generatorField } from "~renderer/utils";
+import { useAutoResize } from "~hooks/useAutoResize";
+import { useView, useDesigner } from "~hooks/useDesigner";
+import { THICK, DIMENSION, DRAGGABLE_COMPONENT } from "../constants";
+import { round, deepMergeObj } from "~utils/helper";
 
 /**
  * 设计器容器大小
@@ -24,8 +23,8 @@ function Wrapper(props, ref) {
     backgroundBlur,
     backgroundOpacity
   } = props;
-  const { state, setState } = useTools();
-  const { view, setView } = useStore();
+  const { state, setState } = useDesigner();
+  const { view, setView } = useView();
   const { width, height, domRef } = useAutoResize(ref);
   const containerRef = useRef(null);
 
@@ -50,7 +49,7 @@ function Wrapper(props, ref) {
   }, [width, height]);
 
   useLayoutEffect(() => {
-    if (pageSize === 'custom') {
+    if (pageSize === "custom") {
       // setView({
       //   width: props.customPageSize.width,
       //   height: props.customPageSize.height
@@ -77,8 +76,8 @@ function Wrapper(props, ref) {
   };
 
   const containerStyle = {
-    width: view.width * scale + 'px',
-    height: view.height * scale + 'px'
+    width: view.width * scale + "px",
+    height: view.height * scale + "px"
   };
 
   const canvasStyle = {
@@ -88,11 +87,11 @@ function Wrapper(props, ref) {
   };
 
   const backgroundStyles = useMemo(() => {
-    if (backgroundMode === 'custom') {
+    if (backgroundMode === "custom") {
       return backgroundImage ? `url(${backgroundImage}) 0% 0% / 100% 100%` : backgroundColor;
     }
 
-    if (backgroundMode === 'define') {
+    if (backgroundMode === "define") {
       return `url(./static/templet/${backgroundDefine}) 0% 0% / 100% 100%`;
     }
 
@@ -111,9 +110,9 @@ function Wrapper(props, ref) {
 
   const onNodeChange = (item) => {
     try {
-      const { components, fieldId } = generatorField(state.components, 'field', item);
-      setState({ tabsKey: 'base', components: components });
-      props.dispatch({ type: 'component/selected', data: fieldId });
+      const { components, fieldId } = generatorField(state.components, "field", item);
+      setState({ tabsKey: "base", components: components });
+      props.dispatch({ type: "component/selected", data: fieldId });
     } catch (error) {
       console.log(`组件创建失败，${error}`);
     }
@@ -143,7 +142,7 @@ function Wrapper(props, ref) {
         const options = deepMergeObj(item.component, { data: { left: x, top: y } });
         onNodeChange(options);
       } else {
-        message.info('实验数据建立中，请稍后再尝试添加节点');
+        message.info("实验数据建立中，请稍后再尝试添加节点");
       }
     }
   });

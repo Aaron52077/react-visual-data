@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { useAutoResize } from '~common/hooks';
+import React, { forwardRef } from "react";
+import { useAutoResize } from "~hooks/useAutoResize";
 
-export default forwardRef(({ children, style, backgroundColor = 'transparent' }, ref) => {
+export default forwardRef(({ children, style, backgroundColor = "transparent" }, ref) => {
   const { width, height, domRef } = useAutoResize(ref);
 
   return (
@@ -32,9 +32,7 @@ export default forwardRef(({ children, style, backgroundColor = 'transparent' },
         <path
           fill="transparent"
           stroke="#2cf7fe"
-          d={`M ${width - 5} ${height - 30} L ${width - 5} ${height - 5} L ${width - 30} ${
-            height - 5
-          }`}
+          d={`M ${width - 5} ${height - 30} L ${width - 5} ${height - 5} L ${width - 30} ${height - 5}`}
         />
       </svg>
       <div className="gc-containers">{children}</div>

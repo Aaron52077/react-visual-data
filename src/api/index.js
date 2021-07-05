@@ -46,13 +46,6 @@ export function dataVApiList() {
   });
 }
 
-export function dataVSqlList() {
-  return fetch({
-    url: "/datav/sql",
-    method: "get"
-  });
-}
-
 export function dataVOpenApi() {
   return fetch({
     url: "/datav/openapi",

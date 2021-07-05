@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useRef, forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useAutoResize } from '~common/hooks';
+import React, { useEffect, useState, useRef, forwardRef, useMemo } from "react";
+import PropTypes from "prop-types";
+import { useAutoResize } from "~hooks/useAutoResize";
 
 const defaultConfig = {
   columns: [],
   rows: [],
   rowNum: 5,
-  headerBGC: '#00BAFF',
-  oddRowBGC: '#003B51',
-  evenRowBGC: '#0A2732',
+  headerBGC: "#00BAFF",
+  oddRowBGC: "#003B51",
+  evenRowBGC: "#0A2732",
   waitTime: 2000,
   headerHeight: 35,
   columnWidth: [],
   align: [],
   index: false,
-  indexHeader: '#',
-  carousel: 'single',
+  indexHeader: "#",
+  carousel: "single",
   hoverPause: true
 };
 
@@ -25,9 +25,9 @@ function interceptor(gen) {
   // 处理 return 之后 resume 的问题
   let stop = false;
 
-  if (typeof gen === 'function') gen = gen();
+  if (typeof gen === "function") gen = gen();
 
-  if (!gen || typeof gen.next !== 'function') return () => ({});
+  if (!gen || typeof gen.next !== "function") return () => ({});
 
   Promise.resolve().then(() => {
     destroyed || next(gen.next());
@@ -89,9 +89,7 @@ function calcRows({ rows, index, headerBGC, rowNum }) {
     rows = rows.map((row, i) => {
       row = [...row];
 
-      const indexTag = `<span class="index" style="background-color: ${headerBGC};">${
-        i + 1
-      }</span>`;
+      const indexTag = `<span class="index" style="background-color: ${headerBGC};">${i + 1}</span>`;
 
       row.unshift(indexTag);
 
@@ -113,7 +111,7 @@ function calcRows({ rows, index, headerBGC, rowNum }) {
 function calcAligns(mergedConfig, columns) {
   const columnNum = columns.length;
 
-  let aligns = new Array(columnNum).fill('left');
+  let aligns = new Array(columnNum).fill("left");
 
   const { align } = mergedConfig;
 
@@ -227,7 +225,7 @@ const ScrollRankPanel = forwardRef(({ onClick, config = {}, style, onMouseOver }
 
     if (start) yield new Promise((resolve) => setTimeout(resolve, waitTime));
 
-    const animationNum = carousel === 'single' ? 1 : rowNum;
+    const animationNum = carousel === "single" ? 1 : rowNum;
 
     let rows = rowsData.slice(animationIndex);
     rows.push(...rowsData.slice(0, animationIndex));
@@ -267,8 +265,7 @@ const ScrollRankPanel = forwardRef(({ onClick, config = {}, style, onMouseOver }
     }
   }
 
-  const getBackgroundColor = (rowIndex) =>
-    mergedConfig[rowIndex % 2 === 0 ? 'evenRowBGC' : 'oddRowBGC'];
+  const getBackgroundColor = (rowIndex) => mergedConfig[rowIndex % 2 === 0 ? "evenRowBGC" : "oddRowBGC"];
 
   let task = {};
 

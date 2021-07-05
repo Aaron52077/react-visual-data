@@ -6,23 +6,28 @@ import cx from "classnames";
 import { Rnd } from "react-rnd";
 import { connect } from "react-redux";
 import { getField } from "~packages";
-import { useStore, useTools } from "~common/hooks";
+import { useView, useDesigner } from "~hooks/useDesigner";
 import { throttle } from "~utils";
 import { round, converLayout } from "~utils/helper";
 import generator from "./generator";
+
+import "./renderer.less";
+import "./datav.less";
 
 // TODO：ui和组件拔插模式
 const ScreenRenderer = ({ value, onValueChange, selected, dispatch }) => {
   const { width, height, background, left, top, isHidden, isLock, ...rest } = value.data;
   const [locations, setLocations] = useState({ left: left, top: top });
-  const { setState } = useTools();
-  const { view } = useStore();
+  const [show, setShow] = useState(true);
+  const { setState } = useDesigner();
+  const { view } = useView();
 
   const classNames = cx("gc-field animate__animated", {
     [`animate__${rest.animateType}`]: rest.animateType,
     [`animate__${rest.animateSpeed}`]: rest.animateSpeed,
     [`animate__${rest.animateRepeat}`]: rest.animateRepeat,
-    [`animate__delay-${rest.animateTime}s`]: rest.animateTime
+    [`animate__delay-${rest.animateTime}s`]: rest.animateTime,
+    "is-hidden": !show
   });
 
   const isSelect = useMemo(() => {

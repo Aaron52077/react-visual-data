@@ -1,8 +1,8 @@
-import React, { useMemo, forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { useAutoResize } from '~common/hooks';
+import React, { useMemo, forwardRef } from "react";
+import PropTypes from "prop-types";
+import { useAutoResize } from "~hooks/useAutoResize";
 
-const defaultColor = ['#7acaec', 'transparent'];
+const defaultColor = ["#7acaec", "transparent"];
 const pointSideLength = 7;
 const svgWH = [300, 35];
 const rowNum = 2;
@@ -17,9 +17,7 @@ function getPoints() {
 
   let points = new Array(rowNum)
     .fill(0)
-    .map((foo, i) =>
-      new Array(rowPoints).fill(0).map((foo, j) => [horizontalGap * (j + 1), verticalGap * (i + 1)])
-    );
+    .map((foo, i) => new Array(rowPoints).fill(0).map((foo, j) => [horizontalGap * (j + 1), verticalGap * (i + 1)]));
 
   return points.reduce((all, item) => [...all, ...item], []);
 }
@@ -55,8 +53,8 @@ const Decoration = forwardRef(({ style }, ref) => {
             {Math.random() > 0.6 && (
               <animate
                 attributeName="fill"
-                values={`${defaultColor.join(';')}`}
-                dur={Math.random() + 1 + 's'}
+                values={`${defaultColor.join(";")}`}
+                dur={Math.random() + 1 + "s"}
                 begin={Math.random() * 2}
                 repeatCount="indefinite"
               />

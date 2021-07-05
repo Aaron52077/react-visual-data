@@ -1,9 +1,9 @@
-import React, { useState, useMemo, forwardRef } from 'react';
-import { useAutoResize } from '~common/hooks';
-import { uuid } from '~utils';
+import React, { useState, useMemo, forwardRef } from "react";
+import { useAutoResize } from "~hooks/useAutoResize";
+import { uuid } from "~utils";
 
 export default forwardRef(
-  ({ children, style, waitTime = 3, backgroundColor = 'transparent', reverse = false }, ref) => {
+  ({ children, style, waitTime = 3, backgroundColor = "transparent", reverse = false }, ref) => {
     const { width, height, domRef } = useAutoResize(ref);
     const [{ path, gradient, mask }] = useState(() => {
       const id = uuid();
@@ -18,16 +18,12 @@ export default forwardRef(
     const pathD = useMemo(
       () =>
         reverse
-          ? `M 2.5, 2.5 L 2.5, ${height - 2.5} L ${width - 2.5}, ${height - 2.5} L ${
-              width - 2.5
-            }, 2.5 L 2.5, 2.5`
-          : `M2.5, 2.5 L${width - 2.5}, 2.5 L${width - 2.5}, ${height - 2.5} L2.5, ${
-              height - 2.5
-            } L2.5, 2.5`,
+          ? `M 2.5, 2.5 L 2.5, ${height - 2.5} L ${width - 2.5}, ${height - 2.5} L ${width - 2.5}, 2.5 L 2.5, 2.5`
+          : `M2.5, 2.5 L${width - 2.5}, 2.5 L${width - 2.5}, ${height - 2.5} L2.5, ${height - 2.5} L2.5, 2.5`,
       [width, height, reverse]
     );
 
-    const mergedColor = ['#235fa7', '#4fd2dd'];
+    const mergedColor = ["#235fa7", "#4fd2dd"];
 
     const length = useMemo(() => (width + height - 5) * 2, [width, height]);
 
@@ -43,20 +39,12 @@ export default forwardRef(
 
             <mask id={mask}>
               <circle cx="0" cy="0" r="150" fill={`url(#${gradient})`}>
-                <animateMotion
-                  dur={`${waitTime}s`}
-                  path={pathD}
-                  rotate="auto"
-                  repeatCount="indefinite"
-                />
+                <animateMotion dur={`${waitTime}s`} path={pathD} rotate="auto" repeatCount="indefinite" />
               </circle>
             </mask>
           </defs>
 
-          <polygon
-            fill={backgroundColor}
-            points={`5, 5 ${width - 5}, 5 ${width - 5} ${height - 5} 5, ${height - 5}`}
-          />
+          <polygon fill={backgroundColor} points={`5, 5 ${width - 5}, 5 ${width - 5} ${height - 5} 5, ${height - 5}`} />
 
           <use stroke={mergedColor[0]} strokeWidth="1" href={`#${path}`} />
 

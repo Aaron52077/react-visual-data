@@ -1,4 +1,4 @@
-import { ANIMATE_CSS } from "~common/constants";
+import { ANIMATE_CSS } from "../constants";
 
 export const BASE_CONF = {
   title: {

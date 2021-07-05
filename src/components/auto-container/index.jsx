@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { useAutoResize } from "~common/hooks";
+import { useAutoResize } from "~hooks/useAutoResize";
 
 import "./style.less";
 import { useEffect } from "react";
@@ -40,7 +40,7 @@ const FullScreenContainer = forwardRef(({ children, className, style, zoom = "co
   });
 
   return (
-    <div id="gc-fullscreen-container" className={className} style={style} ref={domRef}>
+    <div id="gc-designer-container" className={className} style={style} ref={domRef}>
       {children}
     </div>
   );
