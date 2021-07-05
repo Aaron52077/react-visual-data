@@ -54,6 +54,12 @@
     "react-app-rewired": "^2.1.6",
     "styled-components": "^5.1.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,json,less}": [
       "prettier --write"
