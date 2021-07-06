@@ -3,7 +3,7 @@ import { Space, Button, Tooltip, message } from "antd";
 import { connect } from "react-redux";
 import { IconFont, Scrollbar, SketchRuler } from "~components";
 import { cloneDeep } from "~utils";
-import { generatorField } from "~renderer/utils";
+import { generatorField } from "../renderer/utils";
 import { useAutoResize } from "~hooks/useAutoResize";
 import { useView, useDesigner } from "~hooks/useDesigner";
 import { THICK, DIMENSION } from "../constants";

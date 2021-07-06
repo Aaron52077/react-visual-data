@@ -1,11 +1,11 @@
-import echarts from 'echarts';
+import echarts from "echarts";
 
 export default (option, data) => {
   const { series } = data;
   const {
-    titleColor = '#ffffff',
-    detailColor = '#ffffff',
-    axisLabelColor = '#ffffff',
+    titleColor = "#ffffff",
+    detailColor = "#ffffff",
+    axisLabelColor = "#ffffff",
     axisLabelShow = true,
     titleFontSize = 12,
     axisLabelFont = 12,
@@ -18,19 +18,19 @@ export default (option, data) => {
       new echarts.graphic.LinearGradient(0, 0, 1, 0, [
         {
           offset: 0,
-          color: '#5CF9FE'
+          color: "#5CF9FE"
         },
         {
           offset: 0.17,
-          color: '#468EFD'
+          color: "#468EFD"
         },
         {
           offset: 0.9,
-          color: '#468EFD'
+          color: "#468EFD"
         },
         {
           offset: 1,
-          color: '#5CF9FE'
+          color: "#5CF9FE"
         }
       ])
     ]
@@ -39,18 +39,18 @@ export default (option, data) => {
   return {
     color: DEFAULT_COLORS,
     tooltip: {
-      formatter: '{a} <br/>{b} : {c}%'
+      formatter: "{a} <br/>{b} : {c}%"
     },
     series: [
       {
-        type: 'gauge',
-        radius: '100%',
+        type: "gauge",
+        radius: "100%",
         min: series.min || 0,
         max: series.max || 100,
         title: {
           color: titleColor,
           fontSize: titleFontSize,
-          fontStyle: 'italic'
+          fontStyle: "italic"
         },
         axisLabel: {
           show: axisLabelShow,
@@ -70,7 +70,7 @@ export default (option, data) => {
         detail: {
           fontSize: indexFontSize,
           color: detailColor,
-          formatter: '{value}'
+          formatter: "{value}"
         },
         data: [{ ...series }]
       }

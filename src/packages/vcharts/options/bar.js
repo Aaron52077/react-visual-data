@@ -1,18 +1,18 @@
-import { cloneDeep } from '~utils';
-import { DEFAULT_COLORS } from '~packages/constants';
-import { tooltipFormatter } from '~packages/vcharts/util';
+import { cloneDeep } from "~utils";
+import { DEFAULT_COLORS } from "~packages/constants";
+import { tooltipFormatter } from "~packages/vcharts/util";
 
 function calcPosition(data, inverse, position) {
-  let positionLabel = '';
+  let positionLabel = "";
   return data.reduce((arr, val) => {
     if (inverse && !position) {
-      positionLabel = val <= 0 ? 'top' : 'bottom';
+      positionLabel = val <= 0 ? "top" : "bottom";
     } else if (!inverse && !position) {
-      positionLabel = val >= 0 ? 'top' : 'bottom';
+      positionLabel = val >= 0 ? "top" : "bottom";
     } else if (inverse && position) {
-      positionLabel = val >= 0 ? 'right' : 'left';
+      positionLabel = val >= 0 ? "right" : "left";
     } else if (!inverse && position) {
-      positionLabel = val <= 0 ? 'left' : 'right';
+      positionLabel = val <= 0 ? "left" : "right";
     }
     arr.push({
       value: val,
@@ -36,33 +36,33 @@ function reverseData(data, falg) {
 export default (option, data) => {
   const { categories = [], series = [] } = data;
   const {
-    sortType = 'bar',
-    direction = 'horizontal',
+    sortType = "bar",
+    direction = "horizontal",
     inverse = false,
     showX = true,
     showY = true,
     labelFontSizeX = 12,
-    labelColor = '#ffffff',
+    labelColor = "#ffffff",
     chartContrast = false,
-    axisLineColor = '#CCC',
-    splitLineColor = '#5B5B5B',
+    axisLineColor = "#CCC",
+    splitLineColor = "#5B5B5B",
     splitLineShow = false,
-    splitLineType = 'solid',
+    splitLineType = "solid",
     legendShow = true,
     stack = false,
-    barWidth = 'auto',
+    barWidth = "auto",
     barBorderRadius = 0,
     barTitlePosition = false,
     barTextShow = false,
     barTextFont = 12,
     axisTickShow = false,
-    unit = ''
+    unit = ""
   } = option;
 
   let xAxisOpt, yAxisOpt, defaultX, defaultY;
 
   defaultX = {
-    type: 'category',
+    type: "category",
     inverse: inverse,
     axisLabel: {
       show: showX,
@@ -95,12 +95,12 @@ export default (option, data) => {
   };
 
   defaultY = {
-    type: 'value',
+    type: "value",
     inverse: inverse,
     axisLabel: {
       show: showY,
       fontSize: labelFontSizeX,
-      color: labelColor || '#fff',
+      color: labelColor || "#fff",
       formatter: function (parma) {
         if (chartContrast && parma < 0) {
           return parma * -1;
@@ -126,7 +126,7 @@ export default (option, data) => {
     }
   };
 
-  if (direction === 'vertical') {
+  if (direction === "vertical") {
     xAxisOpt = cloneDeep(defaultY);
     yAxisOpt = cloneDeep(defaultX);
   } else {
@@ -143,11 +143,11 @@ export default (option, data) => {
       containLabel: true
     },
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'line',
+        type: "line",
         lineStyle: {
-          color: '#57617B'
+          color: "#57617B"
         }
       },
       formatter: function (parma) {
@@ -165,17 +165,13 @@ export default (option, data) => {
     xAxis: xAxisOpt,
     yAxis: yAxisOpt,
     series: series.map((item, index) => {
-      let results =
-        chartContrast && index === 0 ? reverseData(item.data, chartContrast) : item.data;
+      let results = chartContrast && index === 0 ? reverseData(item.data, chartContrast) : item.data;
       return {
         name: item.name,
-        type: sortType ? sortType : 'bar',
-        stack: stack ? 'something' : '',
-        barCategoryGap: sortType === 'pictorialBar' ? '-80%' : null,
-        symbol:
-          sortType === 'pictorialBar'
-            ? 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z'
-            : null,
+        type: sortType ? sortType : "bar",
+        stack: stack ? "something" : "",
+        barCategoryGap: sortType === "pictorialBar" ? "-80%" : null,
+        symbol: sortType === "pictorialBar" ? "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z" : null,
         barWidth: barWidth,
         itemStyle: {
           barBorderRadius: barBorderRadius

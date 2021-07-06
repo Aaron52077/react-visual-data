@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 
-import { Statistic } from 'antd';
-import { IconFont } from '~components';
+import { Statistic } from "antd";
+import { IconFont } from "~components";
 
 /**
  * 方向
@@ -9,8 +9,8 @@ import { IconFont } from '~components';
  * @param {*} vertical 垂直
  */
 const direction = {
-  horizontal: 'row',
-  vertical: 'column'
+  horizontal: "row",
+  vertical: "column"
 };
 
 /**
@@ -19,8 +19,8 @@ const direction = {
  * @param {*} down 下降
  */
 const trend = {
-  up: '#3f8600',
-  down: '#cf1322'
+  up: "#3f8600",
+  down: "#cf1322"
 };
 
 /**
@@ -31,12 +31,12 @@ const trend = {
  * @param {*} value 数值
  */
 const PrefixTpl = ({ style, text, arrow, tendency }) => {
-  const { fontSize = 16, fontFamily = 'Microsoft Yahei', color = '', marginRight = 0 } = style;
+  const { fontSize = 16, fontFamily = "Microsoft Yahei", color = "", marginRight = 0 } = style;
 
   const PrefixIconConf = () => {
     return (
       <IconFont
-        type={tendency === 'down' ? 'MinusOutlined' : 'PlusOutlined'}
+        type={tendency === "down" ? "MinusOutlined" : "PlusOutlined"}
         antd={true}
         style={{ color: color, marginLeft: 5 }}
       />
@@ -62,12 +62,12 @@ const PrefixTpl = ({ style, text, arrow, tendency }) => {
  * 后缀
  */
 const SuffixTpl = ({ style, text, tendency }) => {
-  const { fontSize = 16, fontFamily = 'Microsoft Yahei', color = '', marginLeft = 0 } = style;
+  const { fontSize = 16, fontFamily = "Microsoft Yahei", color = "", marginLeft = 0 } = style;
 
   const SuffixIconConf = () => {
     return (
       <IconFont
-        type={tendency === 'down' ? 'ArrowDownOutlined' : 'ArrowUpOutlined'}
+        type={tendency === "down" ? "ArrowDownOutlined" : "ArrowUpOutlined"}
         antd={true}
         style={{ color: color, marginLeft: 5 }}
       />
@@ -91,36 +91,36 @@ const SuffixTpl = ({ style, text, tendency }) => {
 
 const VDigitalFlop = ({ options, schema }) => {
   const {
-    distributed = 'horizontal',
+    distributed = "horizontal",
     horizontalAlign,
     fontWeight,
-    fontFamily = 'Microsoft Yahei',
+    fontFamily = "Microsoft Yahei",
     fontSize = 16,
-    numberColor = '',
+    numberColor = "",
     precision = 0,
     divide = true,
     forceShowPlus = true,
-    prefix = '',
+    prefix = "",
     prefixFontSize,
     prefixFontFamily,
     prefixMargin,
     prefixColor,
-    suffix = '',
+    suffix = "",
     suffixFontSize,
     suffixFontFamily,
     suffixMargin,
     suffixColor,
-    tendency = 'up'
+    tendency = "up"
   } = options;
   const { data } = schema;
 
   let option = useMemo(() => {
     return {
       precision,
-      groupSeparator: divide ? ',' : '',
+      groupSeparator: divide ? "," : "",
       valueStyle: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         flexDirection: direction[distributed],
         fontFamily,
         fontSize,

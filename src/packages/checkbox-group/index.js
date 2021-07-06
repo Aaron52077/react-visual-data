@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Checkbox } from 'antd';
+import React, { useMemo } from "react";
+import { Checkbox } from "antd";
 
 export default (prop) => {
   const { enum: enums, enumNames } = prop.schema || {};

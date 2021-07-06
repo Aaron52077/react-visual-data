@@ -1,13 +1,15 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import app from './app';
-import component from './component';
-import form from './form';
+import app from "./app";
+import component from "./component";
+import form from "./form";
+import tab from "./tab";
 
 const rootReducer = combineReducers({
   app,
   component,
-  form
+  form,
+  tab
 });
 
 export default rootReducer;

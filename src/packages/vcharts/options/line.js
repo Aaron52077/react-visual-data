@@ -1,25 +1,25 @@
-import { DEFAULT_COLORS } from '~packages/constants';
-import { tooltipFormatter } from '~packages/vcharts/util';
+import { DEFAULT_COLORS } from "~packages/constants";
+import { tooltipFormatter } from "~packages/vcharts/util";
 
 export default (option, data) => {
   const { categories = [], series = [] } = data;
   const {
     smooth = false,
-    symbol = 'none',
+    symbol = "none",
     stack = false,
     axisLineShowX = false,
-    axisLineColorX = '#463e3e',
-    axisLabelColorX = '#ffffff',
+    axisLineColorX = "#463e3e",
+    axisLabelColorX = "#ffffff",
     axisTickShowX = false,
     axisLineShowY = false,
-    axisLabelColorY = '#463e3e',
+    axisLabelColorY = "#463e3e",
     splitLineShowY = true,
-    splitLineColorY = '#5B5B5B',
-    splitLineType = 'solid',
+    splitLineColorY = "#5B5B5B",
+    splitLineType = "solid",
     diyAxis = false,
     step = false,
-    barWidth = 'auto',
-    unit = ''
+    barWidth = "auto",
+    unit = ""
   } = option;
 
   let yAxisOpt;
@@ -27,14 +27,14 @@ export default (option, data) => {
   if (diyAxis) {
     yAxisOpt = [
       {
-        type: 'value',
+        type: "value",
         min: 0,
         axisLabel: {
           color: axisLabelColorY,
           textStyle: {
             fontSize: 12
           },
-          formatter: '{value}'
+          formatter: "{value}"
         },
         axisLine: {
           show: false
@@ -50,18 +50,18 @@ export default (option, data) => {
         }
       },
       {
-        type: 'value',
+        type: "value",
         max: 100,
         min: 0,
         interval: 16.4,
         axisLabel: {
           color: axisLabelColorY,
           textStyle: {
-            fontStyle: 'normal',
-            fontFamily: '微软雅黑',
+            fontStyle: "normal",
+            fontFamily: "微软雅黑",
             fontSize: 12
           },
-          formatter: '{value} %'
+          formatter: "{value} %"
         },
         axisLine: {
           show: axisLineShowY
@@ -80,7 +80,7 @@ export default (option, data) => {
     ];
   } else {
     yAxisOpt = {
-      type: 'value',
+      type: "value",
       min: 0,
       axisTick: {
         show: false
@@ -108,20 +108,20 @@ export default (option, data) => {
       containLabel: true
     },
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       formatter: function (parma) {
         return tooltipFormatter(parma, unit);
       }
     },
     legend: {
       show: true,
-      type: 'plain',
+      type: "plain",
       bottom: 0,
       data: series.map((item) => item.name)
     },
     xAxis: {
-      type: 'category',
-      nameLocation: 'middle',
+      type: "category",
+      nameLocation: "middle",
       nameGap: 22,
       axisLine: {
         show: axisLineShowX,
@@ -142,7 +142,7 @@ export default (option, data) => {
     series: series.map((item) => {
       return {
         name: item.name,
-        type: item.type ? item.type : 'line',
+        type: item.type ? item.type : "line",
         barWidth: barWidth,
         smooth: smooth,
         showSymbol: !1,

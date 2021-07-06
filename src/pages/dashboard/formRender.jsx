@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment } from "react";
 import { Divider, Button, Col, Row, Card, Tabs, notification } from "antd";
 import { MonacoEditor, Scrollbar } from "~components";
-import { SchemaRender } from "~renderer";
+import SchemaRender from "@/form-render";
 import { useDocumentTitle } from "~hooks/useDocumentTitle";
 
 const { TabPane } = Tabs;

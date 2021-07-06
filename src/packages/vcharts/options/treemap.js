@@ -1,15 +1,15 @@
-import { DEFAULT_COLORS } from '~packages/constants';
+import { DEFAULT_COLORS } from "~packages/constants";
 
 export default (option, data) => {
   const { series } = data;
   const {
     borderWidth = 1,
-    borderColor = '#fff',
-    hoverTextColor = 'rgba(92,121,255,0.8)',
-    hoverBackColor = 'rgba(255,255,255,0.8)',
-    textColor = '#fff',
+    borderColor = "#fff",
+    hoverTextColor = "rgba(92,121,255,0.8)",
+    hoverBackColor = "rgba(255,255,255,0.8)",
+    textColor = "#fff",
     textSize = 14,
-    unit = ''
+    unit = ""
   } = option;
 
   return {
@@ -23,15 +23,15 @@ export default (option, data) => {
     },
     tooltip: {
       formatter: function (params) {
-        return [params.marker + params.data.name + '：' + (params.data.value || 0) + unit].join('');
+        return [params.marker + params.data.name + "：" + (params.data.value || 0) + unit].join("");
       }
     },
     series: [
       {
-        type: 'treemap',
-        left: 'center',
-        width: '90%',
-        height: '90%',
+        type: "treemap",
+        left: "center",
+        width: "90%",
+        height: "90%",
         breadcrumb: {
           show: false
         },
@@ -39,12 +39,12 @@ export default (option, data) => {
           normal: {
             label: {
               show: true,
-              formatter: '{b}'
+              formatter: "{b}"
             },
             borderWidth: borderWidth,
             borderColor: borderColor,
             strokeWidth: 2,
-            strokeColor: 'rgba(57, 111, 255)'
+            strokeColor: "rgba(57, 111, 255)"
           },
           emphasis: {
             label: {

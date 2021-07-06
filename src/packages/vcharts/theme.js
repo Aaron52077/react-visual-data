@@ -1,24 +1,24 @@
-import echarts from 'echarts';
+import echarts from "echarts";
 /**
  * 默认配置常量
  */
 const DEFAULT_COLORS = [
-  '#19d4ae',
-  '#5ab1ef',
-  '#fa6e86',
-  '#ffb980',
-  '#0067a6',
-  '#c4b4e4',
-  '#d87a80',
-  '#9cbbff',
-  '#d9d0c7',
-  '#87a997',
-  '#d49ea2',
-  '#5b4947',
-  '#7ba3a8'
+  "#19d4ae",
+  "#5ab1ef",
+  "#fa6e86",
+  "#ffb980",
+  "#0067a6",
+  "#c4b4e4",
+  "#d87a80",
+  "#9cbbff",
+  "#d9d0c7",
+  "#87a997",
+  "#d49ea2",
+  "#5b4947",
+  "#7ba3a8"
 ];
 
-const CONTRAST_COLOR = '#eee';
+const CONTRAST_COLOR = "#eee";
 
 const axisCommon = () => {
   return {
@@ -39,8 +39,8 @@ const axisCommon = () => {
     },
     splitLine: {
       lineStyle: {
-        type: 'dashed',
-        color: '#aaa'
+        type: "dashed",
+        color: "#aaa"
       }
     },
     splitArea: {
@@ -53,7 +53,7 @@ const axisCommon = () => {
 
 const DarkTheme = {
   color: DEFAULT_COLORS,
-  backgroundColor: 'transparent',
+  backgroundColor: "transparent",
   tooltip: {
     axisPointer: {
       lineStyle: {
@@ -63,7 +63,7 @@ const DarkTheme = {
         color: CONTRAST_COLOR
       },
       label: {
-        color: '#000'
+        color: "#000"
       }
     }
   },
@@ -85,9 +85,9 @@ const DarkTheme = {
     }
   },
   dataZoom: {
-    dataBackgroundColor: '#eee', // Data background color
-    fillerColor: 'rgba(200,200,200,0.2)', // Fill the color
-    handleColor: '#dd6b66' // Handle color
+    dataBackgroundColor: "#eee", // Data background color
+    fillerColor: "rgba(200,200,200,0.2)", // Fill the color
+    handleColor: "#dd6b66" // Handle color
   },
   timeline: {
     itemStyle: {
@@ -109,7 +109,7 @@ const DarkTheme = {
   valueAxis: axisCommon(),
   categoryAxis: axisCommon(),
   line: {
-    symbol: 'circle'
+    symbol: "circle"
   },
   graph: {
     color: DEFAULT_COLORS
@@ -118,9 +118,9 @@ const DarkTheme = {
     axisLine: {
       lineStyle: {
         color: [
-          [0.2, '#dd6b66'],
-          [0.8, '#759aa0'],
-          [1, '#ea7e53']
+          [0.2, "#dd6b66"],
+          [0.8, "#759aa0"],
+          [1, "#ea7e53"]
         ],
         width: 8
       }
@@ -128,10 +128,10 @@ const DarkTheme = {
   },
   candlestick: {
     itemStyle: {
-      color: '#FD1050',
-      color0: '#0CF49B',
-      borderColor: '#FD1050',
-      borderColor0: '#0CF49B'
+      color: "#FD1050",
+      color0: "#0CF49B",
+      borderColor: "#FD1050",
+      borderColor0: "#0CF49B"
     }
   }
 };
@@ -139,4 +139,4 @@ const DarkTheme = {
 DarkTheme.categoryAxis.splitLine.show = false;
 
 // register theme object
-echarts.registerTheme('dark', DarkTheme);
+echarts.registerTheme("dark", DarkTheme);

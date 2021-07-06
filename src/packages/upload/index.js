@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Upload, message, Button } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import { isEmpty, getBase64 } from '~utils/helper';
+import React, { useState, useEffect } from "react";
+import { Upload, message, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { isEmpty, getBase64 } from "~utils/helper";
 
 export default ({ name, value, options, schema, onChange }) => {
   const [fileList, setFileList] = useState([]);
   // 获取到文件名
   const fileName = (name) => {
-    let pos = name.lastIndexOf('/');
+    let pos = name.lastIndexOf("/");
     return name.substring(pos + 1);
   };
 
@@ -16,8 +16,8 @@ export default ({ name, value, options, schema, onChange }) => {
 
     setFileList([
       {
-        uid: '1',
-        status: 'done',
+        uid: "1",
+        status: "done",
         name: fileName(value),
         url: value
       }
@@ -25,38 +25,38 @@ export default ({ name, value, options, schema, onChange }) => {
   }, []);
 
   const renderProps = {
-    name: 'file',
+    name: "file",
     action: schema.action,
-    enctype: 'multipart/form-data',
+    enctype: "multipart/form-data",
     withCredentials: true,
-    listType: options?.listType || 'picture',
-    type: 'file',
+    listType: options?.listType || "picture",
+    type: "file",
     fileList: fileList,
     onChange: async (info) => {
       // 转化为base64格式数据，真实地址为info.file.response.url
       if (!info.file.url) {
         info.file.url = await getBase64(info.file.originFileObj);
       }
-      if (info.file.status === 'done') {
+      if (info.file.status === "done") {
         message.success(`${info.file.name} 文件上传成功`);
         setFileList([
           {
-            uid: '1',
-            status: 'done',
+            uid: "1",
+            status: "done",
             name: info.file.name,
             url: info.file.url
           }
         ]);
         onChange(name, info.file.url);
-      } else if (info.file.status === 'error') {
+      } else if (info.file.status === "error") {
         message.error(`${info.file.name} 文件上传失败`);
         setFileList([]);
-        onChange(name, '');
+        onChange(name, "");
       }
     },
     onRemove() {
       setFileList([]);
-      onChange(name, '');
+      onChange(name, "");
     }
   };
 

@@ -1,12 +1,12 @@
 /* eslint-disable */
-import React, { useMemo, useState } from 'react';
-import ColorPicker from 'rc-color-picker';
-import { Input } from 'antd';
-import 'rc-color-picker/assets/index.css';
-import { hexToRgb, rgbToHex, isRgba } from '../utils';
+import React, { useMemo, useState } from "react";
+import ColorPicker from "rc-color-picker";
+import { Input } from "antd";
+import "rc-color-picker/assets/index.css";
+import { hexToRgb, rgbToHex, isRgba } from "../utils";
 
 export default (props) => {
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState("");
   const [alpha, setAlpha] = useState(100);
   const { format } = props.schema;
 
@@ -17,25 +17,25 @@ export default (props) => {
   };
 
   const onInputChange = (e) => {
-    const value = e.target.value ?? '';
+    const value = e.target.value ?? "";
     setAlpha(100);
     props.onChange(props.name, value);
   };
 
   const onBlurChange = (e) => {
-    const realValue = e.target.value ?? '';
+    const realValue = e.target.value ?? "";
     if (isRgba(realValue) || /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(realValue)) {
       props.onChange(props.name, realValue);
     } else {
       setAlpha(100);
-      props.onChange(props.name, '');
+      props.onChange(props.name, "");
     }
   };
 
   const pickerColor = useMemo(() => {
-    if (!props.value || props.value === 'transparent') {
+    if (!props.value || props.value === "transparent") {
       setAlpha(100);
-      return '';
+      return "";
     }
     if (isRgba(props.value)) {
       const { opacity, color } = rgbToHex(props.value);

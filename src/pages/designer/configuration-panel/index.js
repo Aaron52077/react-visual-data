@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import { Tabs } from "antd";
 import { connect } from "react-redux";
 import cx from "classnames";
-import { SchemaRender } from "~renderer";
+import SchemaRender from "@/form-render";
 import PageLayout from "./page";
 import { useDesigner, useView } from "~hooks/useDesigner";
-import { getFieldConf, mergeFieldConfig, setLevelPath } from "~renderer/utils";
+import { getFieldConf, mergeFieldConfig, setLevelPath } from "../renderer/utils";
 import { screenToSchema } from "../schema";
 
 const { TabPane } = Tabs;

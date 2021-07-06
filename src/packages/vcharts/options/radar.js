@@ -1,4 +1,4 @@
-import { DEFAULT_COLORS } from '~packages/constants';
+import { DEFAULT_COLORS } from "~packages/constants";
 
 export default (option, data) => {
   const { indicators, series } = data;
@@ -7,26 +7,26 @@ export default (option, data) => {
   return {
     color: DEFAULT_COLORS,
     tooltip: {
-      trigger: 'item'
+      trigger: "item"
     },
     legend: {
       show: legendShow,
-      type: 'scroll',
+      type: "scroll",
       bottom: 15,
       data: series.map((item) => item.name)
     },
     radar: {
-      radius: '60%',
+      radius: "60%",
       indicator: indicators
     },
     series: [
       {
-        type: 'radar',
+        type: "radar",
         areaStyle: stack
           ? {
               normal: {
                 shadowBlur: 13,
-                shadowColor: 'rgba(0,0,0,.2)',
+                shadowColor: "rgba(0,0,0,.2)",
                 shadowOffsetX: 0,
                 shadowOffsetY: 10,
                 opacity: 1

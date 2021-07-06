@@ -1,13 +1,13 @@
-import { DEFAULT_COLORS } from '~packages/constants';
+import { DEFAULT_COLORS } from "~packages/constants";
 
 export default (option, data) => {
   const { series } = data;
   const {
-    sortType = 'pie',
+    sortType = "pie",
     isRoseType = false,
-    legendDirection = 'horizontal',
-    innerFontColor = '#FFFFFF',
-    outerFontColor = '#bcc9d4',
+    legendDirection = "horizontal",
+    innerFontColor = "#FFFFFF",
+    outerFontColor = "#bcc9d4",
     innerFontSize = 10,
     outerFontSize = 10,
     showLegend = true,
@@ -17,12 +17,12 @@ export default (option, data) => {
     labelLineLength = 20,
     labelLineLength2 = 30,
     swiperTimer = 3,
-    unit = ''
+    unit = ""
   } = option;
 
   let options, callback, recordTimeInterval;
   // 默认配置项
-  if (sortType === 'pie') {
+  if (sortType === "pie") {
     options = {
       color: DEFAULT_COLORS,
       grid: {
@@ -32,14 +32,14 @@ export default (option, data) => {
         containLabel: true
       },
       tooltip: {
-        trigger: 'item',
+        trigger: "item",
         formatter: function (params) {
-          return [params.marker + params.name + '：' + (params.value || 0) + unit].join('');
+          return [params.marker + params.name + "：" + (params.value || 0) + unit].join("");
         }
       },
       legend: {
         show: showLegend,
-        type: 'scroll',
+        type: "scroll",
         top: 0,
         orient: legendDirection,
         textStyle: {
@@ -49,10 +49,10 @@ export default (option, data) => {
       },
       series: [
         {
-          type: 'pie',
-          radius: isCirclePie ? ['40%', '55%'] : ['0%', '55%'],
-          roseType: isRoseType === true ? 'radius' : undefined,
-          center: ['50%', '50%'],
+          type: "pie",
+          radius: isCirclePie ? ["40%", "55%"] : ["0%", "55%"],
+          roseType: isRoseType === true ? "radius" : undefined,
+          center: ["50%", "50%"],
           clockwise: true,
           avoidLabelOverlap: true,
           hoverOffset: 15,
@@ -61,8 +61,8 @@ export default (option, data) => {
           },
           label: {
             show: showLabel,
-            position: 'outside',
-            formatter: '{a|{b}：{d}%}\n{hr|}',
+            position: "outside",
+            formatter: "{a|{b}：{d}%}\n{hr|}",
             rich: {
               hr: {
                 borderRadius: 3,
@@ -96,7 +96,7 @@ export default (option, data) => {
     };
   }
 
-  if (sortType === 'nestPie') {
+  if (sortType === "nestPie") {
     let legend1 = series.inner.map((v) => v.name);
     let legend2 = series.outer.map((v) => v.name);
 
@@ -109,14 +109,14 @@ export default (option, data) => {
         containLabel: true
       },
       tooltip: {
-        trigger: 'item',
+        trigger: "item",
         formatter: function (params) {
-          return [params.marker + params.name + '：' + (params.value || 0) + unit].join('');
+          return [params.marker + params.name + "：" + (params.value || 0) + unit].join("");
         }
       },
       legend: {
         show: showLegend,
-        type: 'scroll',
+        type: "scroll",
         top: 0,
         orient: legendDirection,
         textStyle: {
@@ -126,11 +126,11 @@ export default (option, data) => {
       },
       series: [
         {
-          type: 'pie',
-          radius: [0, '35%'],
+          type: "pie",
+          radius: [0, "35%"],
           itemStyle: {
             normal: {
-              borderColor: '#fff',
+              borderColor: "#fff",
               borderWidth: 2,
               innerFontColor
             }
@@ -139,7 +139,7 @@ export default (option, data) => {
             normal: {
               show: showLabel,
               color: innerFontColor,
-              position: 'inner',
+              position: "inner",
               fontSize: innerFontSize
             }
           },
@@ -151,9 +151,9 @@ export default (option, data) => {
           data: series.inner
         },
         {
-          name: '',
-          type: 'pie',
-          radius: ['45%', '55%'],
+          name: "",
+          type: "pie",
+          radius: ["45%", "55%"],
           data: series.outer,
           labelLine: {
             normal: {
@@ -170,13 +170,13 @@ export default (option, data) => {
               show: showLabel,
               formatter: (params) => {
                 return (
-                  '{icon|●}{name|' +
+                  "{icon|●}{name|" +
                   params.name +
-                  '}{percent|' +
+                  "}{percent|" +
                   params.percent.toFixed(1) +
-                  '%}{value|' +
+                  "%}{value|" +
                   params.value +
-                  '}'
+                  "}"
                 );
               },
               padding: [0, -130, 25, -130],
@@ -196,7 +196,7 @@ export default (option, data) => {
                 },
                 value: {
                   fontSize: outerFontSize,
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                   color: outerFontColor
                 }
               }
@@ -207,7 +207,7 @@ export default (option, data) => {
     };
   }
 
-  if (sortType === 'swiperPie') {
+  if (sortType === "swiperPie") {
     options = {
       color: DEFAULT_COLORS,
       grid: {
@@ -217,14 +217,14 @@ export default (option, data) => {
         containLabel: true
       },
       tooltip: {
-        trigger: 'item',
+        trigger: "item",
         formatter: function (params) {
-          return [params.marker + (params.value || 0) + unit].join('');
+          return [params.marker + (params.value || 0) + unit].join("");
         }
       },
       legend: {
         show: showLegend,
-        type: 'scroll',
+        type: "scroll",
         top: 0,
         orient: legendDirection,
         textStyle: {
@@ -236,13 +236,13 @@ export default (option, data) => {
       },
       series: [
         {
-          type: 'pie',
-          radius: ['55%', '75%'],
-          center: ['50%', '50%'],
-          seriesLayoutBy: 'row',
+          type: "pie",
+          radius: ["55%", "75%"],
+          center: ["50%", "50%"],
+          seriesLayoutBy: "row",
           label: {
             show: showLabel,
-            formatter: '{d}%'
+            formatter: "{d}%"
           },
           labelLine: {
             normal: {
@@ -256,17 +256,17 @@ export default (option, data) => {
           }
         },
         {
-          type: 'pie',
+          type: "pie",
           avoidLabelOverlap: false,
           label: {
             show: false,
-            formatter: '{b} \n {d}',
-            position: 'center',
+            formatter: "{b} \n {d}",
+            position: "center",
             rich: {
               d: {
                 fontSize: 14,
-                fontColor: '#fffffff',
-                fontWeight: 'normal'
+                fontColor: "#fffffff",
+                fontWeight: "normal"
               }
             }
           },
@@ -279,12 +279,12 @@ export default (option, data) => {
             label: {
               show: true,
               fontSize: 24,
-              fontWeight: 'bold'
+              fontWeight: "bold"
             }
           },
-          seriesLayoutBy: 'row',
-          radius: isCirclePie ? ['55%', '75%'] : ['0%', '50%'],
-          center: ['50%', '50%']
+          seriesLayoutBy: "row",
+          radius: isCirclePie ? ["55%", "75%"] : ["0%", "50%"],
+          center: ["50%", "50%"]
         }
       ]
     };
@@ -296,7 +296,7 @@ export default (option, data) => {
       clearInterval(recordTimeInterval);
       recordTimeInterval = setInterval(() => {
         echart.dispatchAction({
-          type: 'downplay',
+          type: "downplay",
           seriesIndex: 1,
           dataIndex: timer % dot.length
         });
@@ -304,7 +304,7 @@ export default (option, data) => {
         timer++;
 
         echart.dispatchAction({
-          type: 'highlight',
+          type: "highlight",
           seriesIndex: 1,
           dataIndex: timer % dot.length
         });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // High order component
 export default function fetcher(FieldComponent) {

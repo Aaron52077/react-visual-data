@@ -4,7 +4,7 @@ import copyTOClipboard from "copy-text-to-clipboard";
 import { connect } from "react-redux";
 import { useDesigner, useView } from "~hooks/useDesigner";
 import { uuid } from "~utils";
-import { generatorField, getFieldConf, getFieldOrderBy, orderBy } from "~renderer/utils";
+import { generatorField, getFieldConf, getFieldOrderBy, orderBy } from "../renderer/utils";
 import { IconFont, MonacoEditor } from "~components";
 import storage from "~utils/storage";
 

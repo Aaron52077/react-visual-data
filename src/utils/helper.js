@@ -61,19 +61,8 @@ export function isEmpty(value) {
   return false;
 }
 
-//  用于显示 html 文本
-export function escapeHtml(value) {
-  const entityMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-    "/": "&#x2F;"
-  };
-  return String(value).replace(/[&<>"'\/]/g, function (s) {
-    return entityMap[s];
-  });
+export function isObject(val) {
+  return toRawType(val) === "Object";
 }
 
 // 小数值转百分比

@@ -4,32 +4,32 @@
  * @param {*} opacity 透明度
  */
 export function hexToRgb(color, opacity) {
-  let newColor = 'rgba(';
+  let newColor = "rgba(";
   // 判断是三位还是六位
   if (color.length === 4) {
     let arry = [];
 
     for (let i = 1; i < color.length; i++) {
-      arry.push(parseInt('0x' + color[i] + color[i]));
+      arry.push(parseInt("0x" + color[i] + color[i]));
     }
 
     arry.forEach((item) => {
-      newColor += item + ', ';
+      newColor += item + ", ";
     });
 
-    newColor += opacity / 100 + ')';
+    newColor += opacity / 100 + ")";
     return newColor;
   } else {
     let arry = [];
 
     for (let i = 1; i < color.length; i += 2) {
-      arry.push(parseInt('0x' + color.slice(i, i + 2)));
+      arry.push(parseInt("0x" + color.slice(i, i + 2)));
     }
 
     arry.forEach((item) => {
-      newColor += item + ', ';
+      newColor += item + ", ";
     });
-    newColor += opacity / 100 + ')';
+    newColor += opacity / 100 + ")";
     return newColor;
   }
 }
@@ -39,9 +39,9 @@ export function hexToRgb(color, opacity) {
  */
 export function rgbToHex(rgba) {
   let str = rgba.slice(5, rgba.length - 1),
-    arry = str.split(','),
+    arry = str.split(","),
     opa = Number(arry[3].trim()) * 100,
-    strHex = '#',
+    strHex = "#",
     r = Number(arry[0].trim()),
     g = Number(arry[1].trim()),
     b = Number(arry[2].trim());
@@ -55,7 +55,7 @@ export function rgbToHex(rgba) {
  */
 export function isRgba(rgba) {
   let str = rgba.slice(5, rgba.length - 1),
-    arry = str.split(','),
+    arry = str.split(","),
     status = true,
     reg = /^rgba\(\d{1,3}(\,\s{0,1}\d{1,3}){2}\,\s{0,1}(0|(0(\.\d{1,2}))|1)\)$/;
 

@@ -72,8 +72,7 @@ module.exports = {
       "@": resolve("src"),
       "~components": resolve("src/components"),
       "~packages": resolve("src/packages"),
-      "~renderer": resolve("src/library/renderer"),
-      "~hooks": resolve("src/library/hooks"),
+      "~hooks": resolve("src/hooks"),
       "~utils": resolve("src/utils")
     }),
     disableEsLint(),

@@ -1,4 +1,4 @@
-import { DEFAULT_COLORS } from '~packages/constants';
+import { DEFAULT_COLORS } from "~packages/constants";
 
 /**
  * 将数字取整为10的倍数
@@ -31,12 +31,12 @@ export default (option, data) => {
     min = Math.min(...newData);
     max = formatInt(max);
     seriesData = series.data.map(function (item) {
-      return [item[1], item[0], item[2] || '-'];
+      return [item[1], item[0], item[2] || "-"];
     });
   }
   return {
     tooltip: {
-      trigger: 'item'
+      trigger: "item"
     },
     grid: {
       top: 20,
@@ -47,14 +47,14 @@ export default (option, data) => {
     },
     animation: false,
     xAxis: {
-      type: 'category',
+      type: "category",
       data: series.hours,
       splitArea: {
         show: true
       }
     },
     yAxis: {
-      type: 'category',
+      type: "category",
       data: series.days,
       splitArea: {
         show: true
@@ -63,17 +63,17 @@ export default (option, data) => {
     visualMap: {
       min: min ? min : 0,
       max: max ? max : 10,
-      type: 'piecewise',
-      orient: 'horizontal',
+      type: "piecewise",
+      orient: "horizontal",
       inRange: {
         color: DEFAULT_COLORS
       },
-      left: 'center',
+      left: "center",
       bottom: 0
     },
     series: [
       {
-        type: 'heatmap',
+        type: "heatmap",
         data: seriesData,
         label: {
           show: true

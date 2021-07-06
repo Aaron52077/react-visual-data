@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Statistic, Row, Col } from 'antd';
+import React, { useMemo } from "react";
+import { Statistic, Row, Col } from "antd";
 
 /**
  * 标题自定义
@@ -7,7 +7,7 @@ import { Statistic, Row, Col } from 'antd';
  * @param {style} 样式
  */
 const TitleName = ({ name, style }) => {
-  const { fontSize = 16, fontFamily = 'Microsoft Yahei', color = '' } = style;
+  const { fontSize = 16, fontFamily = "Microsoft Yahei", color = "" } = style;
 
   return (
     <span
@@ -28,12 +28,12 @@ const VIndicator = ({ options, schema }) => {
     cardPadding = 10,
     cardRadius = 10,
     subFontSize = 14,
-    prefix = '',
-    suffix = '',
-    fontFamily = 'Microsoft Yahei',
+    prefix = "",
+    suffix = "",
+    fontFamily = "Microsoft Yahei",
     fontSize = 16,
-    color = '',
-    subColor = '',
+    color = "",
+    subColor = "",
     precision = 0,
     cardBackground
   } = options;
@@ -57,7 +57,7 @@ const VIndicator = ({ options, schema }) => {
           <Col key={i.toString()} span={24 / colCount}>
             <div
               style={{
-                padding: '0 5px',
+                padding: "0 5px",
                 borderRadius: cardRadius,
                 background: cardBackground
               }}

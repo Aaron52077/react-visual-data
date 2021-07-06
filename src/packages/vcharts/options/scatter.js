@@ -1,8 +1,8 @@
-import { DEFAULT_COLORS } from '~packages/constants';
+import { DEFAULT_COLORS } from "~packages/constants";
 
 export default (option, data) => {
   const { series } = data;
-  const { symbol = 'circle', unit = '' } = option;
+  const { symbol = "circle", unit = "" } = option;
 
   return {
     color: DEFAULT_COLORS,
@@ -14,9 +14,9 @@ export default (option, data) => {
       containLabel: true
     },
     tooltip: {
-      position: 'top',
+      position: "top",
       formatter: function (params) {
-        return [params.marker + params.seriesName + '：' + (params.value || 0) + unit].join('');
+        return [params.marker + params.seriesName + "：" + (params.value || 0) + unit].join("");
       }
     },
     legend: {
@@ -27,14 +27,14 @@ export default (option, data) => {
     xAxis: {
       splitLine: {
         lineStyle: {
-          type: 'dashed'
+          type: "dashed"
         }
       }
     },
     yAxis: {
       splitLine: {
         lineStyle: {
-          type: 'dashed'
+          type: "dashed"
         }
       },
       scale: true
@@ -42,7 +42,7 @@ export default (option, data) => {
     series: series.map((item, index) => {
       return {
         name: item.name,
-        type: 'scatter',
+        type: "scatter",
         symbolSize: function (data) {
           return data / 4e2;
         },

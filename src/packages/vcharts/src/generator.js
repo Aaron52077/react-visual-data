@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { Vcharts } from '~components';
-import vchartsOption from '../options';
-import { echartBarAPI } from '@/api';
-import { isEmpty } from '~utils/helper';
+import React, { useState, useEffect, useMemo } from "react";
+import { connect } from "react-redux";
+import { Vcharts } from "~components";
+import vchartsOption from "../options";
+import { echartBarAPI } from "@/api";
+import { isEmpty } from "~utils/helper";
 
 function resoleOption(type) {
   let canRedefine = false;
@@ -37,7 +37,7 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
 
   useEffect(() => {
     let recordTimeInterval;
-    if (mode === 'preview' && isRefresh) {
+    if (mode === "preview" && isRefresh) {
       recordTimeInterval = setInterval(() => {
         echartBarAPI().then((res) => {
           setDataSource(res.data);
@@ -56,7 +56,7 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
       echartBarAPI().then((res) => {
         setDataSource(res.data);
         setStauts(true);
-        dispatch({ type: 'component/dependencies', data: [] });
+        dispatch({ type: "component/dependencies", data: [] });
       });
     } else {
       setStauts(false);
@@ -76,7 +76,7 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
           click: () => {
             if (value.dependence.length === 0) return;
             dispatch({
-              type: 'component/dependencies',
+              type: "component/dependencies",
               data: dependencies.concat(value.dependence)
             });
           }
@@ -85,9 +85,7 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
     );
   }
 
-  return (
-    <Vcharts refresh={stauts} options={getOption.callback(options, dataSource)} theme="dark" />
-  );
+  return <Vcharts refresh={stauts} options={getOption.callback(options, dataSource)} theme="dark" />;
 }
 
 export default connect((state) => ({

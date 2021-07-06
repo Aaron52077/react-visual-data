@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Designer } from "~renderer";
 import { Ctx, StoreCtx } from "~hooks/useDesigner";
 import { useDocumentTitle } from "~hooks/useDocumentTitle";
 import { useSet } from "~hooks/useSet";
-import { mergeFieldConfig, setLevelPath } from "~renderer/utils";
+import { Designer } from "./renderer";
+import { mergeFieldConfig, setLevelPath } from "./renderer/utils";
 import DesignerAside from "./aside-panel";
 import DesignerHeader from "./toollbar/header";
 import DesignerContent from "./canvas-graph";
@@ -35,7 +35,6 @@ function DataProvider(props) {
     redo: []
   });
 
-  // 其他无关状态
   const [view, setView] = useSet({
     layerCollapsed: false,
     settingCollapsed: false,
@@ -100,8 +99,8 @@ function DataProvider(props) {
           <DesignerAside />
           <DesignerContent {...state.page}>
             {state.components.length > 0
-              ? state.components.map((prop) => (
-                  <Designer value={prop} key={prop.uniqueId} onValueChange={onValueChange} />
+              ? state.components.map((prop, index) => (
+                  <Designer index={index} value={prop} key={prop.uniqueId} onValueChange={onValueChange} />
                 ))
               : null}
           </DesignerContent>

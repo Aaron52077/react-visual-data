@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { AutonContainer, Scrollbar } from "~components";
-import { DesignerParser } from "~renderer";
+import { DesignerParser } from "./renderer";
 import { useDocumentTitle } from "~hooks/useDocumentTitle";
 import storage from "~utils/storage";
 

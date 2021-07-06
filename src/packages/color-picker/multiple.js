@@ -1,8 +1,8 @@
-import React, { useState, createContext } from 'react';
-import { Button, Form, Table, Popconfirm } from 'antd';
-import { IconFont } from '~components';
-import { uuid } from '~utils';
-import ColorPicker from './index';
+import React, { useState, createContext } from "react";
+import { Button, Form, Table, Popconfirm } from "antd";
+import { IconFont } from "~components";
+import { uuid } from "~utils";
+import ColorPicker from "./index";
 
 const Compose = createContext();
 
@@ -26,7 +26,7 @@ export default ({ name, value, options, onChange }) => {
   const [dataColor, setDataColor] = useState(value || []);
 
   const handleCreate = () => {
-    let newData = [...dataColor, { key: uuid(8), id: uuid(10), color: '#23b7e5' }];
+    let newData = [...dataColor, { key: uuid(8), id: uuid(10), color: "#23b7e5" }];
     setDataColor(newData);
     onChangeValue(newData);
   };
@@ -43,8 +43,8 @@ export default ({ name, value, options, onChange }) => {
 
   const columns = [
     {
-      title: '颜色',
-      dataIndex: 'color',
+      title: "颜色",
+      dataIndex: "color",
       render: (value, record, index) => {
         return (
           <ColorPicker
@@ -55,23 +55,20 @@ export default ({ name, value, options, onChange }) => {
               onChangeValue(values);
             }}
             disabled={true}
-            schema={{ format: 'color' }}
+            schema={{ format: "color" }}
             value={value}
           />
         );
       }
     },
     {
-      title: '操作',
-      dataIndex: 'antion',
-      align: 'center',
+      title: "操作",
+      dataIndex: "antion",
+      align: "center",
       width: 50,
       render: (text, record, index) =>
         dataColor.length >= 1 ? (
-          <Popconfirm
-            title={`确定要删除第${index + 1}行字段模型?`}
-            onConfirm={() => handleDelete(record.id)}
-          >
+          <Popconfirm title={`确定要删除第${index + 1}行字段模型?`} onConfirm={() => handleDelete(record.id)}>
             <IconFont antd={true} type="DeleteOutlined" />
           </Popconfirm>
         ) : null
@@ -96,7 +93,7 @@ export default ({ name, value, options, onChange }) => {
         size="small"
         pagination={false}
       />
-      <Button type="dashed" onClick={handleCreate} style={{ width: '100%' }}>
+      <Button type="dashed" onClick={handleCreate} style={{ width: "100%" }}>
         <IconFont antd={true} type="PlusCircleOutlined" />
       </Button>
     </>

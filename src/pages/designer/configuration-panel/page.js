@@ -1,5 +1,5 @@
 import React from "react";
-import { SchemaRender } from "~renderer";
+import SchemaRender from "@/form-render";
 import { useDesigner } from "~hooks/useDesigner";
 import { DIMENSION } from "../constants";
 
