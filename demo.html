@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+      }
+      body {
+        margin: 0;
+      }
+      body,
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- 下面的注释的script（jquery、echarts世界地图、echarts GL、D3等），您可以根据需要自己引入 -->
+    <!--<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <script>
+      (function () {
+        var chart = echarts.init(document.querySelector("#container"));
+
+        function render(param) {
+          var data = param.data;
+          var config = param.config;
+
+          // Todo 您需要修改下面的这段代码，来实现您自定义的图表绘制
+          // 上面的 data 变量即图表的数据内容，您需要根据数据data来绘制图表
+          // 如果您使用的SQL方式绑定的数据，data是一个对象，其中有 rows 和 columns 两个属性
+          //  rows 即SQL查询的结果，如果您绑定了「自定义组件的字段」，则rows中只有你选择的字段，否则返回所有字段
+          //  columns 是您在SQL建模时对字段的描述（包括字段名和中文名称）
+          var option = {
+            tooltip: {
+              trigger: "item",
+              triggerOn: "mousemove"
+            },
+            series: [
+              {
+                type: "tree",
+                data: data,
+                top: "8%",
+                bottom: "4%",
+                layout: "radial",
+                symbol: "emptyCircle",
+                symbolSize: 7,
+                initialTreeDepth: 3,
+                animationDurationUpdate: 750
+              }
+            ]
+          };
+          chart.setOption(option);
+        }
+
+        // 以下内容不需要修改
+        // 字段说明：
+        //  path: 自定义图表所在页面地址
+        //  render：自定义图表是否渲染成功
+        //  error: 自定义图表渲染失败后的信息
+        // ---------------------------------------
+        // 作用：自定义图表渲染完成后通知外界
+        window.parent.postMessage(
+          {
+            path: window.location.href,
+            render: true
+          },
+          "*"
+        );
+
+        // 作用：监听传递给自定义图表的数据，然后进行图表的渲染
+        window.addEventListener("message", function (event) {
+          try {
+            render(event.data);
+          } catch (e) {
+            window.parent.postMessage(
+              {
+                path: window.location.href,
+                error: {
+                  message: e.message
+                }
+              },
+              "*"
+            );
+            throw e;
+          }
+        });
+
+        // 作用：用于监听图表的缩放
+        window.addEventListener("resize", function () {
+          try {
+            chart && chart.resize && chart.resize();
+          } catch (e) {
+            window.parent.postMessage(
+              {
+                path: window.location.href,
+                error: {
+                  message: e.message
+                }
+              },
+              "*"
+            );
+
+            throw e;
+          }
+        });
+        // ---------------------------------------
+
+        // 作用：用于获取下钻或联动的参数
+        // 1、主要用于当开启自定义图表下钻或者联动时，获取用于传递给下钻或联动图表的参数(当自定义图表无需下钻或者联动时，此段代码可以删除)
+        // 2、点击时可以获取点击图形的当前值
+        chart.on("click", function (params) {
+          // 由于postMessage传递时无法传递params中event属性的值，所以需要去掉(如果数据可以全量传递，无需此操作)
+          delete params.event;
+
+          window.parent.postMessage(
+            {
+              url: window.location.href,
+              data: params, // 自定义图表传递给下钻或联动图表的参数
+              isDD: true // 自定义图表触发下钻和联动的关键字(触发下钻和联动功能的必填字段-不可删除)
+            },
+            "*"
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
