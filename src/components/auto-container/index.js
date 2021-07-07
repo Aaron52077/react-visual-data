@@ -1,6 +1,5 @@
-import React, { useState, useLayoutEffect, forwardRef } from "react";
-import PropTypes from "prop-types";
-import { useAutoResize } from "~hooks/useAutoResize";
+import React, { useRef } from "react";
+import { onEvent, offEvent } from "~utils";
 
 import "./style.less";
 import { useEffect } from "react";
@@ -8,47 +7,95 @@ import { useEffect } from "react";
 /**
  * 根据屏幕尺寸缩放
  * @param zoom scaleX(等比例缩放高度铺满)、scaleY(等比例缩放宽度铺满)、cover(全屏铺满),
- * @param style 屏幕尺寸配置
+ * @param config 屏幕尺寸配置
  * par
  */
-const FullScreenContainer = forwardRef(({ children, className, style, zoom = "cover" }, ref) => {
-  const { domRef } = useAutoResize(ref);
-  const [scale, setScale] = useState("");
-  const { width, height } = style;
-  const { clientHeight, clientWidth } = document.body;
+const FullScreenContainer = ({ className, config, zoom = "cover", children }) => {
+  const domRef = useRef();
+
+  const resizeAuto = (width, height) => {
+    const cw = document.documentElement.clientWidth;
+    const ch = document.documentElement.clientHeight;
+    const ratioX = cw / width;
+    const ratioY = ch / height;
+    return {
+      transform: `scale(${ratioX}, ${ratioY})`
+    };
+  };
+
+  const resizeWidth = (width) => {
+    const ratio = document.documentElement.clientWidth / width;
+    return {
+      transform: `scale(${ratio})`
+    };
+  };
+
+  const resizeHeight = (width, height) => {
+    const cw = document.documentElement.clientWidth;
+    const ch = document.documentElement.clientHeight;
+    const ratio = ch / height;
+    const gap = (cw - width * ratio) / 2;
+    return {
+      left: `${gap.toFixed(3)}px`,
+      transform: `scale(${ratio})`
+    };
+  };
+
+  const resize = (config) => {
+    let styles = {};
+    switch (zoom) {
+      case "cover":
+        styles = resizeAuto(config.width, config.height);
+        break;
+      case "scaleX":
+        styles = resizeWidth(config.width);
+        break;
+      case "scaleY":
+        styles = resizeHeight(config.width, config.height);
+        break;
+      default:
+        break;
+    }
+
+    Object.assign(domRef.current.style, styles);
+  };
+
+  const initPageInfo = (config) => {
+    document.querySelector('meta[name="viewport"]').setAttribute("content", `width=${config.width}`);
+
+    Object.assign(domRef.current.style, {
+      width: `${config.width}px`,
+      height: `${config.height}px`
+    });
+
+    resize(config);
+  };
 
   useEffect(() => {
-    if (zoom === "scaleY") {
-      setScale(`scale(${clientHeight / height})`);
-    } else if (zoom === "scaleX") {
-      setScale(`scale(${clientWidth / width})`);
-    } else {
-      setScale(`scale(${clientWidth / width}, ${clientHeight / height})`);
-    }
-  });
+    initPageInfo(config);
 
-  useLayoutEffect(() => {
-    Object.assign(domRef.current.style, {
-      width: `${width}px`,
-      height: `${height}px`,
-      transform: scale
+    onEvent(window, "resize", () => {
+      resize(config);
     });
-    if (zoom === "scaleY") {
-      const clientLeft = +((clientWidth - (width * clientHeight) / height) / 2).toFixed(3);
-      domRef.current.style.left = `${clientLeft}px`;
-    }
-  });
+
+    return () => {
+      offEvent(window, "resize", () => {
+        resize(config);
+      });
+    };
+  }, []);
 
   return (
-    <div id="gc-designer-container" className={className} style={style} ref={domRef}>
+    <div
+      id="gc-designer-container"
+      className={className}
+      ref={(el) => {
+        domRef.current = el;
+      }}
+    >
       {children}
     </div>
   );
-});
-
-FullScreenContainer.propTypes = {
-  children: PropTypes.node,
-  style: PropTypes.object
 };
 
 export default FullScreenContainer;

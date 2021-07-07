@@ -4,7 +4,6 @@
   "private": true,
   "homepage": ".",
   "author": "Aaron52077",
-  "license": "MIT",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired --max-old-space-size=2048 build",

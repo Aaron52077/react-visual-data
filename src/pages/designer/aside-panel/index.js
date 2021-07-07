@@ -115,10 +115,14 @@ const FieldEnum = ({ value }) => {
       {displayField.map((node, idx) => {
         return (
           <Col span={12} key={`${idx}`}>
-            <div className="silder-item">
+            <div className="silder-item" draggable={true} onDragStart={(event) => handleDragStart(event, node.type)}>
               <Card
                 hoverable
-                cover={node.icon ? <img alt="AutoComplete" src={`./static/component/${node.icon}.png`} /> : null}
+                cover={
+                  node.icon ? (
+                    <img alt="AutoComplete" draggable={false} src={`./static/component/${node.icon}.png`} />
+                  ) : null
+                }
                 bodyStyle={{
                   padding: "10px 5px",
                   fontSize: 12

@@ -47,7 +47,7 @@ function PanelPreview(props) {
 
   return (
     <Scrollbar>
-      <AutonContainer style={{ width, height }} zoom={zoom}>
+      <AutonContainer config={{ width, height }} zoom={zoom}>
         <div className="bg-container" style={containerStyles} />
         <DesignerParser widgets={schemaConfig.components} />
       </AutonContainer>

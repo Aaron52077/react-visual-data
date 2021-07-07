@@ -97,14 +97,14 @@ function Darg({ value, tabBind, tabStore, selected, dispatch, onValueChange }) {
     dispatch({ type: "component/selected", data: value.uniqueId });
   };
 
-  const onMouseOver = (ev) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    if (hasSelected) return;
+  // todo: 鼠标移上根据实际情况使用
+  // const onMouseOver = (ev) => {
+  //   ev.preventDefault();
+  //   ev.stopPropagation();
+  //   if (hasSelected) return;
 
-    // TODO: 获取当前用户点击的key
-    dispatch({ type: "component/selected", data: value.uniqueId });
-  };
+  //   dispatch({ type: "component/selected", data: value.uniqueId });
+  // };
 
   const overwriteStyle = {
     width: converLayout(width),
@@ -206,7 +206,7 @@ function Darg({ value, tabBind, tabStore, selected, dispatch, onValueChange }) {
       onDragStop={onDragStopHandle}
       onResize={onResizeHandle}
       onResizeStop={onStopPropagation}
-      onMouseOver={onMouseOver}
+      // onMouseOver={onMouseOver}
       onClick={handleClick}
     >
       <div className={cx("grid-line", { "is-active": hasSelected })}>

@@ -23,21 +23,6 @@ export default [
         },
         components: [
           {
-            name: "边框4",
-            type: "border4",
-            data: {
-              title: "边框4",
-              width: 1882,
-              height: 1034,
-              left: 15,
-              top: 15,
-              background: "",
-              isLock: false,
-              isHidden: false
-            },
-            uniqueId: "1b884390-39fb-474b-a094-b904269610d3"
-          },
-          {
             name: "边框3",
             type: "border3",
             data: {
