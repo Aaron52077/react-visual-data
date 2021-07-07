@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Space, Button, Typography, Badge, message, Tooltip } from "antd";
+import { Link } from "react-router-dom";
 import copyTOClipboard from "copy-text-to-clipboard";
 import { connect } from "react-redux";
 import { useDesigner, useView } from "~hooks/useDesigner";
@@ -219,8 +220,8 @@ const FieldActionsConf = ({ selected, dispatch }) => {
           )}
         </div>
         <Space className="gc-design__hd--save">
-          <Button
-            href={"/#/workspace/preview/" + uuid()}
+          <Link
+            to={"/workspace/preview/" + uuid()}
             target="_blank"
             onClick={() => {
               storage.setLocal("schema_screen_config", {
@@ -228,10 +229,9 @@ const FieldActionsConf = ({ selected, dispatch }) => {
                 components: state.components
               });
             }}
-            icon={<IconFont antd={true} type="DesktopOutlined" />}
           >
-            预览
-          </Button>
+            <Button icon={<IconFont antd={true} type="DesktopOutlined" />}>预览</Button>
+          </Link>
           <Button icon={<IconFont antd={true} type="CodepenOutlined" />} onClick={toggleModal}>
             调试
           </Button>
