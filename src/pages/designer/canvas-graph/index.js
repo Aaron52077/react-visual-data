@@ -7,8 +7,8 @@ import { generatorField } from "../renderer/utils";
 import { useAutoResize } from "~hooks/useAutoResize";
 import { useView, useDesigner } from "~hooks/useDesigner";
 import { THICK, DIMENSION } from "../constants";
-import { round, deepMergeObj } from "~utils/helper";
-import { componentMarket } from "../data";
+import { round } from "~utils/helper";
+import { componentMarket } from "../configuration-value";
 
 /**
  * 设计器容器大小
@@ -16,7 +16,6 @@ import { componentMarket } from "../data";
 function Wrapper(props, ref) {
   let {
     pageSize,
-    customPageSize,
     backgroundMode,
     backgroundColor,
     backgroundImage,

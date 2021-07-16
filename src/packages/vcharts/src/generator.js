@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { Vcharts } from "~components";
+import DynamicDialog from "../..//dynamic-dialog";
 import vchartsOption from "../options";
 import { echartBarAPI } from "@/api";
 import { isEmpty } from "~utils/helper";
@@ -78,6 +79,25 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
             dispatch({
               type: "component/dependencies",
               data: dependencies.concat(value.dependence)
+            });
+          }
+        }}
+      />
+    );
+  }
+
+  // 开启下钻
+  if (value.drillDownOpen) {
+    return (
+      <Vcharts
+        refresh={stauts}
+        options={getOption.callback(options, dataSource)}
+        theme="dark"
+        onEvents={{
+          click: () => {
+            DynamicDialog({
+              title: "test",
+              content: "hello world!"
             });
           }
         }}

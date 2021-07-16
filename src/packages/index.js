@@ -26,6 +26,7 @@ import map from "./map";
  */
 import dynamicData from "./dynamic-data";
 import dependenceSelect from "./dependence";
+import dynamicActions from "./dynamic-actions";
 import background from "./background";
 
 /**
@@ -73,7 +74,8 @@ const widgets = {
   dynamicData,
   dependenceSelect,
   background,
-  colorGroup
+  colorGroup,
+  dynamicActions
 };
 
 /**

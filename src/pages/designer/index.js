@@ -81,7 +81,7 @@ function DataProvider(props) {
     props.dispatch({ type: "component/mode", data: "development" });
     props.dispatch({ type: "component/querys", data: pathToParam() });
     loadScript("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css", "css");
-    fetchData();
+    // fetchData();
     storageData();
   }, []);
 

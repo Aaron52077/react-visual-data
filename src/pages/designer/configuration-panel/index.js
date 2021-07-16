@@ -6,7 +6,7 @@ import SchemaRender from "@/form-render";
 import PageLayout from "./page";
 import { useDesigner, useView } from "~hooks/useDesigner";
 import { getFieldConf, mergeFieldConfig, setLevelPath } from "../renderer/utils";
-import { screenToSchema } from "../schema";
+import { screenToSchema } from "../configuration-schema";
 
 const { TabPane } = Tabs;
 
