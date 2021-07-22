@@ -8,8 +8,6 @@ import { useDesigner, useView } from "~hooks/useDesigner";
 import { getFieldConf, mergeFieldConfig, setLevelPath } from "../renderer/utils";
 import { screenToSchema } from "../configuration-schema";
 
-const { TabPane } = Tabs;
-
 const FieldSetConf = ({ selected }) => {
   const { state, setState } = useDesigner();
   const { view } = useView();
@@ -67,7 +65,7 @@ const FieldSetConf = ({ selected }) => {
         }}
       >
         {currentConf.configs.map((item) => (
-          <TabPane tab={item.name} key={item.key}>
+          <Tabs.TabPane tab={item.name} key={item.key}>
             {state.tabsKey === item.key && (
               <SchemaRender
                 cname={currentConf.cname}
@@ -77,7 +75,7 @@ const FieldSetConf = ({ selected }) => {
                 onChange={onValueChange}
               />
             )}
-          </TabPane>
+          </Tabs.TabPane>
         ))}
       </Tabs>
     </div>

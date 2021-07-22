@@ -1,4 +1,3 @@
-import echarts from "echarts";
 /**
  * 默认配置常量
  */
@@ -138,5 +137,4 @@ const DarkTheme = {
 
 DarkTheme.categoryAxis.splitLine.show = false;
 
-// register theme object
-echarts.registerTheme("dark", DarkTheme);
+export { DarkTheme };

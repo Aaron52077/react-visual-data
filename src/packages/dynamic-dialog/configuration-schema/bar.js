@@ -144,31 +144,31 @@ export default [
             }
           }
         }
-      },
-      {
-        name: "下钻",
-        key: "drill",
-        schema: {
-          type: "object",
-          properties: {
-            drillDownOpen: {
-              title: "开启下钻",
-              type: "boolean",
-              component: "switch",
-              labelWidth: 60
-            },
-            drillDown: {
-              type: "array",
-              title: "下钻后展示的图表类型",
-              description:
-                "在本图表中点击并触发下钻即可编辑下钻图表，传递到下钻图表中的上层图表信息及查询条件可以在下钻图表的控制面板中点击「调试」进行查看。",
-              component: "dynamicActions",
-              displayType: "block",
-              hidden: "{{rootValue.drillDownOpen === false}}"
-            }
-          }
-        }
       }
+      // {
+      //   name: "下钻",
+      //   key: "drill",
+      //   schema: {
+      //     type: "object",
+      //     properties: {
+      //       drillDownOpen: {
+      //         title: "开启下钻",
+      //         type: "boolean",
+      //         component: "switch",
+      //         labelWidth: 60
+      //       },
+      //       drillDown: {
+      //         type: "array",
+      //         title: "下钻后展示的图表类型",
+      //         description:
+      //           "在本图表中点击并触发下钻即可编辑下钻图表，传递到下钻图表中的上层图表信息及查询条件可以在下钻图表的控制面板中点击「调试」进行查看。",
+      //         component: "dynamicActions",
+      //         displayType: "block",
+      //         hidden: "{{rootValue.drillDownOpen === false}}"
+      //       }
+      //     }
+      //   }
+      // }
     ]
   },
   {

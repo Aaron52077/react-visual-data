@@ -78,10 +78,11 @@ function DataProvider(props) {
   };
 
   useEffect(() => {
+    // 初始化数据
     props.dispatch({ type: "component/mode", data: "development" });
     props.dispatch({ type: "component/querys", data: pathToParam() });
     loadScript("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css", "css");
-    // fetchData();
+    fetchData();
     storageData();
   }, []);
 
@@ -95,7 +96,7 @@ function DataProvider(props) {
     <Ctx.Provider value={{ state, setState }}>
       <StoreCtx.Provider value={{ view, setView }}>
         <DesignerHeader />
-        <section className="gc-design__bd">
+        <section className="gc-design__bd" id="designer">
           <DesignerAside />
           <DesignerContent {...state.page}>
             {state.components.length > 0

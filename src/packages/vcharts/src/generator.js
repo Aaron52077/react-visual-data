@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { Vcharts } from "~components";
-import DynamicDialog from "../..//dynamic-dialog";
+import { DynamicDialog, DynamicContent } from "../../dynamic-dialog";
 import vchartsOption from "../options";
 import { echartBarAPI } from "@/api";
 import { isEmpty } from "~utils/helper";
 
+// TODO: 当前type配置项是否有效
 function resoleOption(type) {
   let canRedefine = false;
   let callback = vchartsOption[type];
@@ -27,7 +28,7 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
   const { dataConfig, isRefresh, refreshTime } = value;
   const { mode, dependencies, drilldowns, dispatch } = rest;
 
-  let getOption = useMemo(() => resoleOption(type), [type]);
+  const getOption = useMemo(() => resoleOption(type), [type]);
 
   useEffect(() => {
     setDataSource(dataConfig.data);
@@ -109,8 +110,9 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
             });
 
             DynamicDialog({
-              title: "test",
-              content: "hello world!"
+              container: "#designer",
+              title: value.title,
+              content: <DynamicContent value={value.drillDown[0]} />
             });
           }
         }}

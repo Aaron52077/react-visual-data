@@ -17,7 +17,7 @@
 
 ```
 ├── config-overrides.js
-├── package-lock.json
+├── yarn-lock.json
 ├── package.json
 ├── public
 │   ├── config.js
@@ -27,15 +27,17 @@
 │   └── static
 ├── README.md
 ├── src
+│   ├── __mocks__
 │   ├── api
-│   ├── App.js
 │   ├── components
-│   ├── index.js
+│   ├── form-render
+│   ├── hooks
 │   ├── layouts
-│   ├── library
-│   ├── materials
+│   ├── packages
 │   ├── pages
-│   ├── polyfills.js
+│   ├── router
+│   ├── store
 │   ├── styles
-│   └── __mocks__
+│   ├── utils
+│   └── index.js // main入口
 ```
