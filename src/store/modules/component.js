@@ -14,6 +14,7 @@ const initState = {
   selected: "-",
   fieldType: "component",
   dependencies: [],
+  drilldown: [],
   api: [],
   querys: {}
 };
@@ -28,6 +29,7 @@ export default handleActions(
     "component/fieldType": (state, action) => ({ ...state, fieldType: action.data }),
     "component/querys": (state, action) => ({ ...state, querys: action.data }),
     "component/dependencies": (state, action) => ({ ...state, dependencies: action.data }),
+    "component/drilldown": (state, action) => ({ ...state, drilldown: action.data }),
     "component/api": (state, action) => ({ ...state, api: action.data }),
     "component/resetState": () => {
       return initState;

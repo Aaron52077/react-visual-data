@@ -25,7 +25,8 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
   const [dataSource, setDataSource] = useState({});
   const [stauts, setStauts] = useState(false);
   const { dataConfig, isRefresh, refreshTime } = value;
-  const { mode, dependencies, dispatch } = rest;
+  const { mode, dependencies, drilldowns, dispatch } = rest;
+
   let getOption = useMemo(() => resoleOption(type), [type]);
 
   useEffect(() => {
@@ -94,7 +95,19 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
         options={getOption.callback(options, dataSource)}
         theme="dark"
         onEvents={{
-          click: () => {
+          click: (param) => {
+            dispatch({
+              type: "component/drilldown",
+              data: drilldowns.concat([
+                {
+                  name: param.name,
+                  value: param.value,
+                  category: param.seriesName,
+                  _default: param.name
+                }
+              ])
+            });
+
             DynamicDialog({
               title: "test",
               content: "hello world!"
@@ -110,5 +123,6 @@ function GeneratorVCharts({ uniqueId, type, value, options, onChange, ...rest })
 
 export default connect((state) => ({
   mode: state.component.mode,
-  dependencies: state.component.dependencies
+  dependencies: state.component.dependencies,
+  drilldowns: state.component.drilldown
 }))(GeneratorVCharts);

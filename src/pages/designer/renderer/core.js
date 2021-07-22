@@ -35,7 +35,7 @@ function AlignLine() {
 }
 
 // TODO：ui和组件拔插模式
-function Darg({ value, tabBind, tabStore, selected, dispatch, onValueChange }) {
+function DargField({ value, tabBind, tabStore, selected, dispatch, onValueChange }) {
   const { width, height, background, left, top, isHidden, isLock, ...rest } = value.data;
   const [locations, setLocations] = useState({ left: left, top: top });
   const [show, setShow] = useState(true);
@@ -46,7 +46,8 @@ function Darg({ value, tabBind, tabStore, selected, dispatch, onValueChange }) {
     [`animate__${rest.animateType}`]: rest.animateType,
     [`animate__${rest.animateSpeed}`]: rest.animateSpeed,
     [`animate__${rest.animateRepeat}`]: rest.animateRepeat,
-    [`animate__delay-${rest.animateTime}s`]: rest.animateTime
+    [`animate__delay-${rest.animateTime}s`]: rest.animateTime,
+    "is-hidden": !show
   });
 
   const hasSelected = useMemo(() => {
@@ -226,4 +227,4 @@ export default connect((state) => ({
   selected: state.component.selected,
   tabBind: state.tab.tabBind,
   tabStore: state.tab.tabStore
-}))(Darg);
+}))(DargField);
