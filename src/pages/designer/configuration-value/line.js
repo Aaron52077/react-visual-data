@@ -42,7 +42,6 @@ export default [
       ...BASE_CONF,
       config: {
         unit: "",
-        smooth: false,
         symbol: "circle",
         axisLineColorX: "#463e3e",
         splitLineColorY: "#5B5B5B",
@@ -83,8 +82,6 @@ export default [
       ...BASE_CONF,
       config: {
         unit: "",
-        smooth: false,
-        symbol: "circle",
         axisLineColorX: "#463e3e",
         splitLineColorY: "#5B5B5B",
         axisLabelColorY: "#ffffff",
