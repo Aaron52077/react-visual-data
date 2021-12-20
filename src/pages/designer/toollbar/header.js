@@ -27,6 +27,7 @@ const FieldActionsConf = ({ selected, dispatch }) => {
       }
     });
     setState({
+      tabsKey: 'base',
       components: [],
       undo: [],
       redo: []

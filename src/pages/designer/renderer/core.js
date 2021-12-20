@@ -39,7 +39,7 @@ function DragField({ value, tabBind, tabStore, selected, dispatch, onValueChange
   const { width, height, background, left, top, isHidden, isLock, ...rest } = value.data;
   const [locations, setLocations] = useState({ left: left, top: top });
   const [show, setShow] = useState(true);
-  const { setState } = useDesigner();
+  const { state, setState } = useDesigner();
   const { view } = useView();
 
   const classNames = cx("drag-shape-wrap animate__animated", {
@@ -96,8 +96,7 @@ function DragField({ value, tabBind, tabStore, selected, dispatch, onValueChange
     ev.preventDefault();
     ev.stopPropagation();
     if (hasSelected) return;
-
-    setState({ tabsKey: "base" });
+    setState({ tabsKey: state.tabsKey || "base" });
     // TODO: 获取当前用户点击的key
     dispatch({ type: "component/selected", data: value.uniqueId });
   };
