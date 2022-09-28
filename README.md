@@ -3,7 +3,7 @@
 #### 介绍
 
 🎉 基于 reactjs 开发的可视化大屏设计器项目 https://wuli-admin.gitee.io/react-visual-data/#/dashboard
- vue3版本 https://wuli-admin.gitee.io/element-design
+ [vue3版本](https://wuli-admin.gitee.io/vite-vue-pro/#/)
 
 #### 参与贡献
 
